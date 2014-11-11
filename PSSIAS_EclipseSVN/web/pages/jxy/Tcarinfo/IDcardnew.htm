@@ -1,0 +1,198 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>IDcard.htm</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/xml; charset=utf-8" />
+    <link href="${ctx}/styles/tb.css" rel="stylesheet" type="text/css">
+
+  </head>
+  
+  <body>
+ 
+  <OBJECT
+	  classid="clsid:E6E0A751-541A-4855-9A8D-35EB7122C950"                   
+	  codebase="IDcardnew.cab"
+	  width=330
+	  height=212
+	  align=center
+	  hspace=0
+	  vspace=0
+	  id=idcard
+	  name=rdcard		 
+>
+</OBJECT>
+
+
+
+
+<input type="button" value="开始读卡" name="beginread" style="display:none"><input type="button" value="停止读卡" name="endread" style="display:none">
+<input type="button" value="手动读卡" name="handread" style="display:none"><input type="button" value="数据显示" name="typeinfo" style="display:none">&nbsp;
+
+  </body>
+ 	<SCRIPT language=VBScript><!--
+
+sub hideocx_onclick()
+	//rdcard.visible=false
+end sub
+
+sub showocx_onclick()
+	//rdcard.visible=true
+end sub
+
+
+
+sub handread_onclick()
+ str = rdcard.ReadCard
+//Document.Form1.RETSTR.Value = str
+window.parent.tcard.name.value = rdcard.NameA
+window.parent.tcard.name.value = rdcard.NameL
+window.parent.tCard.sex.value = rdcard.Sex
+//Document.Form1.Sex2.value = SynIDCard1.SexL
+window.parent.tcard.bdate.value = rdcard.Born
+//Document.Form1.Born2.value = SynIDCard1.BornL
+window.parent.setNationValue(rdcard.Nation)
+//Document.Form1.Nation2.value = SynIDCard1.NationL
+window.parent.tcard.address.value = rdcard.Address
+window.parent.tCard.idCode.value = rdcard.CardNo
+//Document.Form1.Activity.Value = SynIDCard1.Activity
+//Document.Form1.Activity2.value = SynIDCard1.ActivityL
+//Document.Form1.Police.Value = SynIDCard1.Police
+window.parent.tcard.file.value = rdcard.PhotoName
+window.parent.tcard.xzqh.value=mid(cstr(rdcard.CardNo),1,6)
+//window.parent.tcard.memo.value=rdcard.ReadSAMID
+
+end sub
+
+sub beginread_onclick11()
+
+	rdcard.readcard2
+	if rdcard.bHaveCard then
+		window.parent.tCard.idCode.value=cstr(rdcard.CardNo)
+    	window.parent.tCard.sex.value=cstr(rdcard.Sex)
+        window.parent.setNationValue(cstr(rdcard.Nation))
+		window.parent.tcard.bdate.value=mid(cstr(rdcard.Born),1,4)+"-"+mid(cstr(rdcard.Born),5,2)+"-"+mid(cstr(rdcard.Born),7,2)
+        window.parent.tcard.address.value=cstr(rdcard.Address)
+        window.parent.tcard.name.value=cstr(rdcard.NameL)
+        window.parent.tcard.file.value = cstr(rdcard.PhotoPath)
+        window.parent.tcard.xzqh.value = mid(cstr(rdcard.CardNo),1,6)
+	
+        rdcard.bHaveCard=false
+    end if
+   // window.parent.tcard.tResult.value=cstr(idcard.sResultMsg)
+    
+end sub
+
+sub endread_onclick()
+	rdcard.endread
+
+end sub
+
+sub handread_onclick11()
+
+	rdcard.readcard
+	if rdcard.bHaveCard then
+
+		window.parent.tCard.idCode.value=cstr(rdcard.CardNo)
+    	window.parent.tCard.sex.value=cstr(rdcard.Sex)
+        window.parent.setNationValue(cstr(rdcard.Nation))
+		window.parent.tcard.bdate.value=mid(cstr(rdcard.Born),1,4)+"-"+mid(cstr(rdcard.Born),5,2)+"-"+mid(cstr(rdcard.Born),7,2)
+        window.parent.tcard.address.value=cstr(rdcard.Address)
+        window.parent.tcard.name.value=cstr(rdcard.NameL)
+        window.parent.tcard.file.value = cstr(rdcard.PhotoPath)
+        window.parent.tcard.xzqh.value = mid(cstr(rdcard.CardNo),1,6)
+	
+        rdcard.bHaveCard=false
+    end if
+   // window.parent.tcard.tResult.value=cstr(idcard.sResultMsg)
+end sub
+
+sub window_onload11()
+	if rdcard.bHaveCard then
+		window.parent.tCard.idCode.value=cstr(rdcard.CardNo)
+    	window.parent.tCard.sex.value=cstr(rdcard.Sex)
+        window.parent.setNationValue(cstr(rdcard.Nation))
+		window.parent.tcard.bdate.value=mid(cstr(rdcard.Born),1,4)+"-"+mid(cstr(rdcard.Born),5,2)+"-"+mid(cstr(rdcard.Born),7,2)
+        window.parent.tcard.address.value=cstr(rdcard.Address)
+        window.parent.tcard.name.value=cstr(rdcard.NameL)
+        window.parent.tcard.file.value = cstr(rdcard.PhotoPath)
+        window.parent.tcard.xzqh.value = mid(cstr(rdcard.CardNo),1,6)
+        rdcard.bHaveCard=false
+    end if
+  //  window.parent.tcard.tResult.value=cstr(idcard.sResultMsg)
+end sub
+sub typeinfo_onclick()
+	call window_onload()
+	settimeout "typeinfo_onclick",300
+end sub
+sub getstatus_onclick()
+   // window.parent.tcard.tResult.value=cstr(idcard.sResultMsg)
+end sub
+
+sub window_onUnload()
+  //rdcard.DeleteOutputFile
+end sub
+
+
+<!-- hiden for old browser
+' 端口设置
+
+SUB window_onload()
+  
+  rdcard.Port =1001
+  rdcard.Init
+ 
+
+END SUB
+
+
+
+SUB SetPortBtn_OnClick()
+  Dim str 
+  SynIDCard1.Port = Document.Form1.Port.Value
+  str = "端口设置为：" + Document.Form1.Port.Value
+  MsgBox str
+END SUB
+' 初始化设置
+SUB InitBtn_OnClick()
+  Dim str 
+  str = SynIDCard1.Init
+  MsgBox str
+END SUB
+' 读IC卡信息
+SUB ReadCardBtn_OnClick()
+  Dim str, strArray
+  str = ""
+  str = SynIDCard1.ReadCard
+Document.Form1.RETSTR.Value = str
+Document.Form1.NameA.Value = SynIDCard1.NameA
+Document.Form1.Name2.value = SynIDCard1.NameL
+Document.Form1.Sex.Value = SynIDCard1.Sex
+Document.Form1.Sex2.value = SynIDCard1.SexL
+Document.Form1.Born.Value = SynIDCard1.Born
+Document.Form1.Born2.value = SynIDCard1.BornL
+Document.Form1.Nation.Value = SynIDCard1.Nation
+Document.Form1.Nation2.value = SynIDCard1.NationL
+Document.Form1.Address.Value = SynIDCard1.Address
+Document.Form1.CardNo.value = SynIDCard1.CardNo
+Document.Form1.Activity.Value = SynIDCard1.Activity
+Document.Form1.Activity2.value = SynIDCard1.ActivityL
+Document.Form1.Police.Value = SynIDCard1.Police
+Document.Form1.PhotoName.value = SynIDCard1.PhotoName
+
+END SUB
+SUB ReadSAMIDBtn_OnClick()
+  Dim str
+  str = ""
+  str = SynIDCard1.ReadSAMID
+  MsgBox str
+END SUB
+//end hiden-->
+
+
+
+
+--></SCRIPT>
+</html>

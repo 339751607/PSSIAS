@@ -1,0 +1,225 @@
+<!--
+-------------------------------------------
+版权声明：
+    第二代公民身份证B/S阅读控件
+    (c) 版权所有   深圳华视电子读写设备有限公司 
+    版本：V3.0.3.3
+    
+    作者：吴为龙
+    http://www.chinaidcard.com
+    tel: 0755-2695 5558    
+    2008.02.25
+    
+历史发布记录：
+    V3.0.3.1  2007.05.16
+--------------------------------------------
+-->
+ 
+ 
+<HTML>
+<head>
+ 
+<script language="JavaScript"> 
+<!--
+function HideActiveX() {
+   //CVR_IDCard.Visible=false; 
+   ClearIDCard();
+  // ClearForm(); 
+  // document.all['ReadResult'].value ="等待验证";
+   return true;
+}
+ 
+function ClearIDCard() {
+   CVR_IDCard.Name="";
+   CVR_IDCard.NameL="";
+   CVR_IDCard.Sex="";   
+   //CVR_IDCard.SexL="";   
+   CVR_IDCard.Nation="";
+   //CVR_IDCard.NationL="";
+   CVR_IDCard.Born="";
+   //CVR_IDCard.BornL="";
+   CVR_IDCard.Address="";
+   CVR_IDCard.CardNo="";
+   CVR_IDCard.Police="";
+   CVR_IDCard.Activity="";
+   CVR_IDCard.NewAddr="";
+  
+   return true;
+}
+ 
+function ClearForm() {
+  
+        window.parent.document.getElementById("personid").value= "";
+    	window.parent.document.getElementById("sex").value="";
+    	window.parent.document.getElementById("folk").value = "";
+		window.parent.document.getElementById("birth").value="";
+        window.parent.document.getElementById("npaddress").value="";
+        window.parent.document.getElementById("empname").value="";
+        window.parent.document.getElementById("file").value = "";
+        window.parent.document.getElementById("npcode").value = "";
+      
+   return true;
+}
+ 
+function FillForm() {
+  var pName=CVR_IDCard.NameL; //var pNameL=CVR_IDCard.NameL;
+  var pSex=CVR_IDCard.Sex;   //var pSexL=CVR_IDCard.SexL;
+  var pNation=CVR_IDCard.Nation;  //var pNationL=CVR_IDCard.NationL;
+  var pBorn=CVR_IDCard.BornL;      //var pBornL=CVR_IDCard.BornL;
+  var pAddress=CVR_IDCard.Address;
+  var pCardNo=CVR_IDCard.CardNo;
+  var pPolice=CVR_IDCard.Police;
+  var pActivity=CVR_IDCard.Activity;
+  var pNewAddr=CVR_IDCard.NewAddr;  
+  var pActivityLFrom=CVR_IDCard.ActivityLFrom; 
+  var pActivityLTo=CVR_IDCard.ActivityLTo; 
+  var pPhotoBuffer=CVR_IDCard.GetPhotoBuffer; 
+ // var pSAMID=CVR_IDCard.SAMID;
+  var provValue = pCardNo.substr(0,2)+"0000";
+  var xzqhValue = pCardNo.substr(0,6);
+  
+        window.parent.document.getElementById("personid").value= pCardNo;
+    	window.parent.document.getElementById("sex").value=pSex;
+        window.parent.setNationValue(pNation);
+		window.parent.document.getElementById("birth").value=pBorn;
+        window.parent.document.getElementById("npaddress").value=pAddress;
+        window.parent.document.getElementById("empname").value=pName;
+        window.parent.document.getElementById("prov2").value = provValue;
+        window.parent.changeprov();
+        window.parent.document.getElementById("npcode").value = xzqhValue;
+       
+          var file1_type=window.parent.document.getElementById("file");
+          file1_type.focus(); 
+          var   WshShell=new  ActiveXObject("WScript.Shell"); 
+          WshShell.sendKeys( CVR_IDCard.PhotoPath+pCardNo+'.jpg');
+ 
+ 
+ 
+  return true;
+}
+ 
+ 
+function ReadIDCard() {   
+  // CVR_IDCard.PhotoPath=document.all['PhotoPath'].value;
+  // CVR_IDCard.PhotoPath= window.parent.tcard.file.value;
+ 
+   CVR_IDCard.PhotoPath= "c:\\";   
+ 
+   //   CVR_IDCard.PhotoPath= "";
+ 
+   CVR_IDCard.TimeOut=3;  
+   ClearIDCard(); 
+   ClearForm(); 
+   //document.all['ReadResult'].value ="请放卡...";
+   var strReadResult=CVR_IDCard.ReadCard();     
+   FillForm();  
+  // document.all['ReadResult'].value ="返回值:"+strReadResult;
+   //alert(strReadResult);  
+   //if (strReadResult=="0"){
+   	//if (confirm("需要查询黑名单吗？")) 
+   	//{ 
+   	  //  var windowX = (window.screen.width - 640) / 2 ;
+		//var windowY = (window.screen.height - 100) / 2 ;
+		//var newWin=window.open("asp/SearchBlacklist.asp?CardNo="+document.all['CardNo'].value+"&Name="+document.all['Name'].value,"newwindow", "top="+windowY+",left="+windowX+",width=640,height=100"); 
+ 		//newWin.moveTo(windowX,windowY);
+   	    //window.location="asp/SearchBlacklist.asp?CardNo="+document.all['CardNo'].value;
+   	//}   	
+   //} 
+ 
+   return true;
+}
+ 
+function DoStopRead() {
+   CVR_IDCard.DoStopRead; 
+   ClearIDCard(); 
+   ClearForm();
+  // document.all['ReadResult'].value ="用户已取消读卡"
+   return true;
+}
+ 
+function DoCheckReader() {
+   var State=CVR_IDCard.GetState; 
+ 
+    alert(State);
+  // document.all['ReadResult'].value =State;   
+  // var pSAMID=CVR_IDCard.SAMID;
+ // alert(pSAMID);
+   return true;
+}
+ 
+function Save_IDCard() {   
+  var pName=CVR_IDCard.Name; 
+  var pSex=CVR_IDCard.Sex;
+  var pNation=CVR_IDCard.Nation;
+  var pBorn=CVR_IDCard.Born;
+  var pAddress=CVR_IDCard.Address;
+  var pCardNo=CVR_IDCard.CardNo;
+  var pPolice=CVR_IDCard.Police;
+  var pActivity=CVR_IDCard.Activity;
+  var pNewAddr=CVR_IDCard.NewAddr;
+  var pActivityLFrom=CVR_IDCard.ActivityLFrom; 
+  var pActivityLTo=CVR_IDCard.ActivityLTo; 
+  var pPhotoBuffer=CVR_IDCard.GetPhotoBuffer; 
+ 
+  if (pName == "") {    
+      ClearForm();
+     // alert('读卡内容为空，无法保存数据！请先读卡，再保存。'); 
+      return false;
+  }
+  var provValue = pCardNo.substr(0,2)+"0000";
+  var xzqhValue = pCardNo.substr(0,6);
+  
+        window.parent.document.getElementById("personid").value= pCardNo;
+    	window.parent.document.getElementById("sex").value=pSex;
+        window.parent.setNationValue(pNation);
+		window.parent.document.getElementById("birth").value=pBorn;
+        window.parent.document.getElementById("npaddress").value=pAddress;
+        window.parent.document.getElementById("empname").value=pName;
+        window.parent.document.getElementById("prov2").value = provValue;
+        window.parent.changeprov2();
+        window.parent.document.getElementById("npcode").value = xzqhValue;
+ 
+  //相片文件默认保存在 CVR_IDCard.PhotoPath
+ 
+  ClearIDCard(); 
+  return true;
+}
+ 
+ 
+//-->
+</script>
+ 
+<title>IDcard.htm</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/xml; charset=utf-8" />
+ 
+</head>
+ 
+<body onLoad="HideActiveX()" topmargin="0" bgcolor="#D2F0FF">
+<center>  
+<OBJECT
+	  classid="clsid:10946843-7507-44FE-ACE8-2B3483D179B7"
+	  codebase="CVR100new.cab#version=3,0,3,3"
+	  id="CVR_IDCard"
+          name="CVR_IDCard"
+	  width=119
+	  height=136
+	  align=center
+	  hspace=0
+	  vspace=0 	 	  
+>
+</OBJECT>   
+</center>
+<center>  
+<form name="MyForm" action="" method=post onSubmit="return Save_IDCard()">
+ 		   <input type="button" name="ReadCard"  value="读身份证" onClick="return ReadIDCard()">
+           <input type="button" name="StopRead"  value="停止读卡" onClick="return DoStopRead()">          
+           <input type="button" name="StopRead1"  value="检测设备" onClick="return DoCheckReader()">    
+          
+          <input type="hidden" name="ReadResult" style="display:none" value="等待验证" size="32">      
+      </form>
+   </center>             
+</body>
+</HTML>
+

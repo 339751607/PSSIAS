@@ -1,0 +1,195 @@
+<HTML>
+	<head>
+<script language="JavaScript"> 
+var flagbz ="0";
+</script>
+
+		<title>IDcard.htm</title>
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="this is my page">
+		<meta http-equiv="content-type" content="text/xml; charset=utf-8" />
+
+	</head>
+
+	<body topmargin="0" bgcolor="#D2F0FF">
+		<center>
+			<OBJECT classid="clsid:10EC554B-357B-4188-9E5E-AC5039454D8B"
+				id="objIDCard" width="0" height="0"></OBJECT>
+
+				<br>
+				请刷身份证，验证身份......
+				
+			<table cellpadding="0" cellspacing="0"  id="myTable"   align="center"  border="0">
+				<FORM NAME="IDScanRecog">
+					<INPUT type="hidden" name="CardMainID" id="FrameworkID" value="2">
+					<INPUT type="hidden" name="ImgSizeType" value="2">
+					<INPUT type="hidden" name="ImgPath" value="c:\\temp\\test.jpg">
+					<INPUT type="hidden" name="HeadPath" value="c:\\temp\\test_head.jpg">
+				<tr>
+				</tr>
+				<tr>
+					<td>
+						<INPUT type="button" name="BtnLoadKena0" value="加载识别"
+							onClick=LoadRecogKenal()>
+					</td>
+					<td>
+						<INPUT type="button" name="BtnFreeKena1" value="释放识别"
+							onClick=FreeRecogKenal()>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<INPUT type="button" name="BtnLoadKena3" value="开始扫描"
+							onClick="onScan()">
+					</td>
+					<td>
+						<INPUT type="button" name="BtnFreeKena4" value=" 取  消 "
+							onClick=FreeRecogKenal()>
+					</td>
+				</tr>
+			</table>
+
+		</center>
+	</body>
+</HTML>
+
+<SCRIPT LANGUAGE="JavaScript">
+
+hiddentable();
+
+function hiddentable(){
+    var loginway = window.parent.document.getElementById("loginway").value ;
+    if("1" == loginway){
+		var myTable= document.getElementById("myTable"); 
+		myTable.style.display ="none";
+	}
+}
+
+
+//加载核心
+function onScan(){
+        RecognizeImg();
+}     
+
+ function GetRadioValue(RadioName){
+		    var obj;    
+		    obj=document.getElementsByName(RadioName);
+		    if(obj!=null){
+		        var i;
+		        for(i=0;i<obj.length;i++){
+		            if(obj[i].checked){
+		                return obj[i].value;            
+		            }
+		        }
+		    }
+            return "0";
+        }
+     
+function LoadRecogKenal()
+{
+   
+    if(!objIDCard.IsLoaded())
+    {
+       var strDllPath = "";
+       var nRet = objIDCard.InitIDCard("53174805367982401356",0);
+
+       if(nRet==0)
+       { 
+           alert("识别核心加载成功");
+       }
+       else
+       {
+         alert("识别核心加载失败\r\n返回值："+nRet);
+       }
+    }
+    else
+    {
+          alert("核心已经加载");
+    }
+ 
+}
+//释放核心
+function FreeRecogKenal()
+{
+    objIDCard.FreeIdcard();
+}
+//采用方法1识别
+function RecognizeImg()
+{
+    if(objIDCard.IsLoaded())
+    {
+        //采集图像
+        var nResult = objIDCard.AcquireImage(document.IDScanRecog.ImgSizeType.value);
+        if(nResult!=0)
+       {
+          
+           var strError = "采集图像失败\r\n返回值：";
+           strError += nResult;
+           alert(strError);
+           return;
+       }
+       //调用识别接口识别
+         nResult = objIDCard.Recog(document.IDScanRecog.CardMainID.value); 
+        if(nResult<=0)
+        {
+         
+           var strError = "识别失败\r\n返回值：";
+           strError += nResult;
+           alert(strError);
+           return;
+        }  
+       
+        IdcardSetResult();
+    }
+    else
+    {
+        alert("识别核心未加载，请先成功加载识别核心");
+    }
+   
+}
+
+//二代证识别
+function IdcardSetResult()
+{
+     var nFieldNum = objIDCard.GetRecogFieldNum();
+    var  idcard_obj = objIDCard.GetRecogResult(6);
+
+    window.parent.document.getElementById("idcard").value = idcard_obj ;
+ 	window.parent.authentication();
+       
+      return true;
+    
+}
+
+
+function FrameworkMethods(idcard_obj){
+    window.parent.document.getElementById("idcard").value = idcard_obj ;
+ 	window.parent.authentication();
+    return true;
+}
+
+//显示识别结果
+function DisplayResult()
+{
+
+    var nFieldNum = objIDCard.GetRecogFieldNum();
+     var strResult = "识别成功\r\n"; 
+     alert(nFieldNum);  
+     if(nFieldNum>0)
+     {  
+          for(var i=1;i<=nFieldNum;++i) 
+         {
+             strResult += objIDCard.GetFieldName(i);
+             strResult += ":";
+             strResult += objIDCard.GetRecogResult(i);
+             strResult += "\r\n";
+         }
+     }
+     alert(strResult); 
+}
+
+</SCRIPT>
+
+
+

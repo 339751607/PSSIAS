@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="filedownload" extends="struts-default" namespace="/filedownload">
+
+        <default-action-ref name="download"/>
+
+        <action name="download" class="com.dyneinfo.zazh.action.FileDownloadAction">
+            <param name="inputPath">/userFiles/download/clock.gif</param>
+			<result name="success" type="stream">
+                <param name="contentType">image/gif</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">filename="clock.gif"</param>
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
+		<action name="downloadDBgas"
+        	class="com.dyneinfo.gas.action.GasFileDownloadDBAction">
+        	<!--     <param name="inputPath">/download/aaa.txt</param> -->
+        	<!-- 初始文件名    <param name="fileName">aaa.txt</param>-->
+        	<result name="success" type="stream">
+        		<param name="contentType">${contentTypeName}</param>
+        		<param name="inputName">inputStream</param>
+        		<!-- 使用经过转码的文件名作为下载文件名，downloadFileName属性    
+        			对应action类中的方法 getDownloadFileName() -->
+        		<param name="contentDisposition">
+        			attachment;filename="${downloadFileName}"
+        		</param>
+        		<param name="bufferSize">4096</param>
+        	</result>
+        </action>
+        <action name="downloadDB"
+        	class="com.dyneinfo.zazh.action.FileDownloadDBAction">
+        	<!--     <param name="inputPath">/download/aaa.txt</param> -->
+        	<!-- 初始文件名    <param name="fileName">aaa.txt</param>-->
+        	<result name="success" type="stream">
+        		<param name="contentType">${contentTypeName}</param>
+        		<param name="inputName">inputStream</param>
+        		<!-- 使用经过转码的文件名作为下载文件名，downloadFileName属性    
+        			对应action类中的方法 getDownloadFileName() -->
+        		<param name="contentDisposition">
+        			attachment;filename="${downloadFileName}"
+        		</param>
+        		<param name="bufferSize">4096</param>
+        	</result>
+        </action>
+        <action name="jxyDownloadDB"
+        	class="com.dyneinfo.jxy.action.FileDownloadDBAction">
+        	<!--     <param name="inputPath">/download/aaa.txt</param> -->
+        	<!-- 初始文件名    <param name="fileName">aaa.txt</param>-->
+        	<result name="success" type="stream">
+        		<param name="contentType">${contentTypeName}</param>
+        		<param name="inputName">inputStream</param>
+        		<!-- 使用经过转码的文件名作为下载文件名，downloadFileName属性    
+        			对应action类中的方法 getDownloadFileName() -->
+        		<param name="contentDisposition">
+        			attachment;filename="${downloadFileName}"
+        		</param>
+        		<param name="bufferSize">4096</param>
+        	</result>
+        </action>
+        <action name="downloadHelp" class="com.dyneinfo.zazh.action.FileDownloadAction">
+            <param name="inputPath">/userFiles/download/help.zip</param>
+			<result name="success" type="stream">
+                <param name="contentType">application/zip</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">filename="help.zip"</param>
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
+
+        <action name="downloadUSBdriver" class="com.dyneinfo.zazh.action.FileDownloadAction">
+            <param name="inputPath">/userFiles/download/USBdriver.rar</param>
+            <result name="success" type="stream">
+                <param name="contentType">application/rar</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">filename="USBdriver.rar"</param>
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
+          <action name="downloadScanTools" class="com.dyneinfo.filedownload.FileDownloadAction">
+            <param name="inputPath">/userFiles/download/ScanTools.rar</param>
+            <result name="success" type="stream">
+                <param name="contentType">application/rar</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">filename="ScanTools.rar"</param>
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
+
+    </package>
+</struts>

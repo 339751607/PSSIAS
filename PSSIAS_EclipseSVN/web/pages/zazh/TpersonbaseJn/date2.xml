@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chart caption='中文 Revenue' numVDivLines="10" numDivLines="10" 
+canvasBorderColor="FFFFFF" lineThickness='1'
+anchorBgColor="0BBF59" xAxisName='Month' yAxisName='Revenue' 
+yAxisMinValue='0' yAxisMaxValue='10' formatNumberScale='0' showDivLinues ='0' showLegend="0"
+showToolTip="1" showValues='1'  divLineDecimalPrecision='0' labelDisplay='ROTATE' slantLabels='0' 
+showFCMenuItem='1' >
+    
+    <set label='Jan' value='4' displayValue="aaa" alpha='aaaaaaaaaa'     />
+    <set label='Feb' value='9' displayValue="bbb"/>
+    <set label='Mar' value='7' displayValue="ccc" />
+    <set label='Apr' value='5' displayValue="ddd"/>
+    <set label='May' value='8' displayValue="eee" />
+    <set label='Jun' value='5' displayValue="fff" />
+    <set label='Jul' value='6' displayValue="ggg" link="javascript:alert('http://www.baidu.com')"/>
+    <set label='Aug' value='6' displayValue="hhh"/>
+    <set label='Sep' value='6' displayValue="iii"/>
+    <set label='Oct' value='4' toolText="kkkkk" displayValue="abc"  
+                       link="javascript:alert('http://www.baidu.com')"/>
+    <set label='Nov' value='5' />
+    <set label='Dec' value='3' color="009933" />
+   
+    <trendLines>
+      <line startValue='7' color='FF0000' displayvalue='Target' /> 
+    </trendLines>
+    <application>
+      <apply toObject='CAPTION' styles='MyFirstFontStyle'/>
+    </application>
+   
+    <styles>
+      <definition>
+            <style name='MyFirstFontStyle' letterSpacing='3'type='font' font='Verdana' size='12' borderColor="FF0000" isHTML='1' />
+            <style name='MyXScaleAnim' type='ANIMATION' duration='0.7' start='0' param="_xScale" />
+            <style name='MyYScaleAnim' type='ANIMATION' duration='0.7' start='0' param="_yscale" />
+            <style name='MyAlphaAnim' type='ANIMATION' duration='0.7' start='0' param="_alpha" />
+      </definition>
+      <application>
+            <apply toObject='DATAVALUES' styles='MyFirstFontStyle'/> 
+            <apply toObject='DIVLINES' styles='MyXScaleAnim,MyAlphaAnim' />
+            <apply toObject='HGRID' styles='MyYScaleAnim,MyAlphaAnim' />
+      </application>
+    </styles>
+</chart>

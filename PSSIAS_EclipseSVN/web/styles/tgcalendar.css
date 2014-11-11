@@ -1,0 +1,104 @@
+div.tgcalendar {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+table.tgcalTable {
+	border: 0px solid #c0c0c0;
+    background-color: white;
+    color: #000000;
+}
+
+div#tgcalSmall table.tgcalTable {
+    width: 100%;
+}
+
+div#tgcalBig table.tgcalTable {
+    width: 100%;
+}
+
+table.tgcalTable td{
+	font-size:smaller ;	
+	margin:0 auto;
+	text-align:center;
+	vertical-align: top;
+}
+
+tr.calendarHeader {
+    color: #000000;
+}
+
+a.tgcalPrevious, a.tgcalPrevious:hover, a.tgcalNext, a.tgcalNext:hover{
+	text-decoration: none;
+}
+
+a.tgcalPrevious{
+	 background: url(../images/tgcal-previous.gif) no-repeat center center;
+}
+
+a.tgcalNext{
+	 background: url(../images/tgcal-next.gif) no-repeat center center;
+}
+
+th.tgcalTitle{
+	font-weight: bold;
+	text-align: center;
+}
+
+tr.tgcalWeekDays{
+	background-color: orange;
+	border: 1px solid red;
+}
+
+td.tgcalWeekDay{
+	font-weight: bold;
+}
+
+td.tgcalDayIn{
+	background-color: #FFF2BF;
+	text-align: center;
+}
+	
+td.tgcalDayOut{
+    color: #808080;
+}
+
+td#tgcalToday{
+	font-weight: bold;
+	text-align: center;	
+	background-color: green;
+}
+
+td#tgcalSelected{
+	font-weight: bold;	
+	border: 1px solid red;
+	color: red;
+	background-color: transparent;
+}
+
+td.tgcalEvent{
+	font-weight: bold;
+	text-align: center;
+	border: 1px solid #c0c0c0;
+}
+
+td.tgcalEventjw{
+	font-weight: bold;
+	text-align: center;
+	border: 1px solid #c0c0c0;
+	background-color: #C1F7FF;
+}
+
+a.tgcalDayLink, a.tgcalDayLink:visited, a.tgcalEventLink, a.tgcalEventLink:visited{
+	color: black;
+	text-decoration: underline;
+}
+
+a.tgcalDayLink:hover, a.tgcalEventLink:hover {
+    color: green; 
+    text-decoration: underline;
+}
+
+img.tgCalIcon{
+	vertical-align: bottom;
+}

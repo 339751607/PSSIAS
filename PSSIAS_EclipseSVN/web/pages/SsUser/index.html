@@ -1,0 +1,209 @@
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<!--Ext 样式表  -->
+	<link type="text/css" rel="stylesheet" href="../../widgets/ext-3.0.0/resources/css/ext-all.css"/>
+	<link type="text/css" rel="stylesheet" href="../../styles/icons.css"/>
+	<link type="text/css" rel="stylesheet" href="../../styles/ext_patch.css"/>
+	<!--Ext 类库  -->
+    <script type="text/javascript" src="../../widgets/ext-3.0.0/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="../../widgets/ext-3.0.0/ext-all.js"/></script>
+	<script type="text/javascript" src="../../widgets/ext-3.0.0/ext-all-debug.js"></script>
+	<script type="text/javascript" src="../../widgets/ext-3.0.0/src/locale/ext-lang-zh_CN.js"></script>
+	<!--Ext 扩展  -->
+	<script type="text/javascript" src="../../extclient/SearchField.js"></script>
+	<script type="text/javascript" src="../../extclient/appbase.js"></script>
+	<script type="text/javascript" src="../../extclient/gridToExcel.js"></script>
+	<script type="text/javascript" src="../../extclient/RowExpander.js"></script>
+	<!--ExtSsUser界面  -->
+	<script src="./ssuser.js"></script>
+	<script type="text/javascript">
+		Ext.onReady(function(){
+Ext.QuickTips.init();
+Ext.form.Field.prototype.msgTarget = 'side';
+Ext.grid.dummyData = [
+['3m Co',71.72,0.02,0.03,'9/1 12:00am'],
+['Alcoa Inc',29.01,0.42,1.47,'9/1 12:00am'],
+['American Express Company',52.55,0.01,0.02,'9/1 12:00am'],
+['American International Group, Inc.',64.13,0.31,0.49,'9/1 12:00am'],
+['AT&T Inc.',31.61,-0.48,-1.54,'9/1 12:00am'],
+['Caterpillar Inc.',67.27,0.92,1.39,'9/1 12:00am'],
+['Citigroup, Inc.',49.37,0.02,0.04,'9/1 12:00am'],
+['Exxon Mobil Corp',68.1,-0.43,-0.64,'9/1 12:00am'],
+
+['Walt Disney Company (The) (Holding Company)',29.89,0.24,0.81,'9/1 12:00am']
+];
+var privilegename=null;
+var getForm=function()
+{
+privilegename=new Ext.form.TextField({
+fieldLabel:"权限名称",
+name:"privilegename",
+allowBlank:false
+});
+var privilegeurl=new Ext.form.TextField({
+fieldLabel:"权限URL",
+name:"privilegeurl",
+allowBlank:false
+});
+var privilegeupper=new Ext.form.TextField({
+fieldLabel:"权限上级",
+name:"privilegeupper",
+allowBlank:false
+});
+var privilegesort=new Ext.form.NumberField({
+fieldLabel:"权限排序",
+name:"privilegesort",
+allowBlank:false
+});
+var privilegeForm = new Ext.form.FormPanel({
+baseCls: 'x-plain',
+bodyStyle:'padding:5px 5px 0',
+labelWidth: 65, 
+defaults: {width: 210},
+defaultType: 'textfield',
+border:false,
+//frame:true,
+//tbar:[{text:'增加',tooltip:'增加权限',handler:function(){getAddWindow();}},'-',{text:'修改',tooltip:'修改权限',handler:function(){getUpdateWindow();}},'-',{text:'删除',tooltip:'删除权限'}],
+items: [privilegename,privilegeurl,privilegeupper,privilegesort]
+});
+return privilegeForm;
+}
+var sm = new Ext.grid.CheckboxSelectionModel(); 
+var nu=new Ext.grid.RowNumberer();
+//做一个读取器 
+var reader = new Ext.data.ArrayReader({},[
+{name: 'company'},
+{name: 'price', type: 'float'},
+{name: 'change', type: 'float'},
+{name: 'pctChange', type: 'float'}
+]);
+var ds=new Ext.data.Store({
+reader:reader,
+data: Ext.grid.dummyData
+});
+//定义一个分页
+var tbar=new Ext.PagingToolbar({ 
+pageSize:12,
+store: ds, 
+displayInfo: true 
+});
+//创建列模型 
+var cm = new Ext.grid.ColumnModel([
+nu,
+sm,
+{header: "Company", width: 120, sortable: true, dataIndex: 'company'},
+{header: "Price", width: 70, sortable: true, renderer: Ext.util.Format.usMoney, dataIndex: 'price'},
+{header: "Change", width: 70, sortable: true, dataIndex: 'change'},
+{header: "% Change", width: 70, sortable: true, dataIndex: 'pctChange'}
+]);
+var grid = new Ext.grid.GridPanel({
+id:'grid',
+store:ds,
+cm:cm,
+viewConfig:{ 
+forceFit:true 
+},
+border:false,
+width:480,
+modal:true,
+autoHeight:true,
+frame:true,
+//tbar:[{text:'增加',tooltip:'增加权限',handler:function(){getAddWindow();}},'-',{text:'修改',tooltip:'修改权限',handler:function(){getUpdateWindow();}},'-',{text:'删除',tooltip:'删除权限'}],
+loadMask : true,
+autoScroll:true,
+iconCls:'icon-grid',
+items:[getForm()]
+});
+var getUpdateWindow=function(){
+var privilegeUpdateForm=getForm();
+var resets=function(){
+privilegeUpdateForm.form.reset();
+}
+var sumits=function(){
+if(privilegeUpdateForm.form.isValid()){
+alert(getForm.searthForm());
+}
+}
+var updateWindow = new Ext.Window({
+title: '修改权限',
+width: 350,
+height:200,
+minWidth: 300,
+minHeight: 200,
+layout: 'fit',
+plain:true,
+modal:true,
+bodyStyle:'padding:5px;',
+buttonAlign:'center',
+items: privilegeUpdateForm,
+buttons: [{
+text: '修改',
+handler:sumits
+},{
+text: '重置',
+handler:resets
+}]
+});
+updateWindow.show();
+};
+var getAddWindow=function()
+{
+/*var addWindow = new Ext.Window({
+title: '增加权限',
+width: 350,
+height:200,
+minWidth: 300,
+minHeight: 200,
+layout: 'fit',
+plain:true,
+modal:true,
+bodyStyle:'padding:5px;',
+buttonAlign:'center',
+items: getForm(),
+buttons: [{
+text: '提交'
+//handler:sumits
+},{
+text: '重置'
+//handler:resets
+}]
+});
+addWindow.show();*/
+panel.insert(2,grid);
+grid.renderTo="b";
+}
+var windowGrid = new Ext.Window({
+title: '权限管理',
+width: 800,
+closable:false,
+height:410,
+border:false,
+minWidth: 300,
+minHeight: 300,
+layout: 'fit',
+autoScroll:true,
+tbar:[{text:'增加',tooltip:'增加权限',handler:function(){getAddWindow();}},'-',{text:'修改',tooltip:'修改权限',handler:function(){getUpdateWindow();}},'-',{text:'删除',tooltip:'删除权限'}],
+items: [grid]
+});
+windowGrid.show(); 
+/* var panel=new Ext.Panel({
+title:"容器组件",
+width:500,
+tbar:[{text:'增加',tooltip:'增加权限',handler:function(){getAddWindow();}},'-',{text:'修改',tooltip:'修改权限',handler:function(){getUpdateWindow();}},'-',{text:'删除',tooltip:'删除权限'}],
+autoHeight:true,
+//split:true,
+frame:true,
+border:false,
+items:[getForm()],
+renderTo:'a'
+});
+//panel.render(document.body);*/
+}) 
+
+
+	</script>
+</head>
+<body>
+</body>
+</html>

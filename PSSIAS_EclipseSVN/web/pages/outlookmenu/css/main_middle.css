@@ -1,0 +1,90 @@
+body{
+  
+  text-align:center;	
+}
+#initpanel{
+  margin:0px;
+  padding:0px;
+  width:1013px;
+  /*height:96%;*/
+
+}
+#initpanel #left_old{
+  /*border:1px solid #3f3f3f;*/
+  /*background:#ffffff;*/
+  height:440px;
+  width:300px;
+  margin:5px 0px 0px 3px;
+  float:left;
+}
+#initpanel #left #left_color_old{
+  /*margin:1px 1px 1px 1px;*/
+  /*filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#EFF8FA', endColorStr='#B8DDEC', gradientType='0');*/
+  width:100%;
+  height:100%;
+}
+#initpanel #left{
+  float:left;
+  border:0px;
+  margin:0px 0px 0px 0px;
+  
+}
+#initpanel #left #left_color #left_case_info{
+	margin:1px 0px 0px 0px;
+	padding:0px;
+}
+#initpanel #left #left_color #left_police_info{
+	margin:1px 0px 0px 0px;
+	padding:0px;
+}
+#initpanel #left #left_color #left_notice{
+	margin:1px 0px 0px 0px;
+	padding:0px;
+}
+#initpanel #right{
+    float:left;
+	margin:1px 0px 0px 1px;
+	padding:0px;
+
+	
+}
+
+.right_works{
+   margin:0px 0px 0px 0px;
+   padding:0px 1px 0px 0px;
+   vertical-align:top;
+}
+.right_news{
+   margin:0px 0px 0px 0px;
+   padding:2px 0px 0px 0px;
+   vertical-align:top;
+}
+.right_cal{
+   margin:0px 0px 0px 0px;
+   padding:0px 0px 0px 1px;
+   vertical-align:top;
+}
+.right_chat{
+   margin:0px 0px 0px 0px;
+   padding:0px 0px 0px 0px;
+   vertical-align:top;
+}
+.content{
+   padding:0px 0px 0px 0px;	
+}
+#inti_bottom{
+	margin:5px 0px 0px 0px;
+	padding:0px 0px 0px 0px;
+    width:1012px;
+    background:url("marquee.gif") repeat-x left;
+	height:22px;
+	border-top:1px solid #646464; 
+	border-left:1px solid #646464;
+	border-right:1px solid #646464;
+	border-bottom:1px solid #484848;
+}
+#inti_bottom_color{
+    margin:0px;
+    padding:4px 0px 0px 0px;
+    font-size:12px;	
+}

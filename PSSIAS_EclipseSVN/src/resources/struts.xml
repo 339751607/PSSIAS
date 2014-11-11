@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<!-- 
+修改说明:
+	1.修改pakcage的namespace属性,因为URL访问规则是: /namesapce/Entity/method.do 
+	2.根据你的包结构修改action节点的class属性 
+ -->
+ 
+<struts>
+    <constant name="struts.devMode" value="false" />
+    <!-- struts的URL扩展名 -->
+ 	<constant name="struts.action.extension" value="do" />
+ 	
+ 	<!-- 允许访问静态成员变量 -->
+ 	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+ 	
+    <constant name="struts.custom.i18n.resources" value="i18n/messages"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.enable.SlashesInActionNames" value="true" />
+
+     <include file="struts-filedownload.xml" />
+     
+	<package name="custom-default" extends="struts-default">
+        <result-types>
+            <result-type name="direct" class="cn.org.rapid_framework.struts2.dispatcher.DirectResult"/>
+        </result-types>
+        <default-interceptor-ref name="paramsPrepareParamsStack"/>
+  	</package>
+    <package name="jxy" namespace="/jxy" extends="custom-default">
+		
+		<!-- 通过URL访问的路径是 /namesapce/Entity/method.do -->
+		<action name="*/*" method="{2}" class="com.dyneinfo.jxy.action.{1}Action">
+		    <result name="*" type="direct">通过Action直接返回，这一行无需修改</result>
+		</action>
+		
+								
+    </package>  	
+  	  	<package name ="dyneinfohotel" namespace ="/pages/hotel" extends ="custom-default">
+  		<action name="*/*" method="{2}" class="com.dyneinfo.hotel.action.{1}Action">
+		    <result name="*" type="direct">通过Action直接返回，这一行无需修改</result>
+		</action>
+  	</package>
+  	<package name ="dyneinfo" namespace ="/pages/gas" extends ="custom-default">
+  		<action name="*/*" method="{2}" class="com.dyneinfo.gas.action.{1}Action">
+		    <result name="*" type="direct">通过Action直接返回，这一行无需修改</result>
+		</action>
+  	</package>
+  	
+    <package name="fjy" namespace="/pages/fjy" extends="custom-default">
+		
+		<!-- 通过URL访问的路径是 /namesapce/Entity/method.do -->
+		<action name="*/*" method="{2}" class="com.dyneinfo.fjy.action.{1}Action">
+		    <result name="*" type="direct">通过Action直接返回，这一行无需修改</result>
+		</action>
+    </package>
+    
+    <package name="pmdd" namespace="/pages/pmdd" extends="custom-default">
+		<!-- 通过URL访问的路径是 /namesapce/Entity/method.do -->
+		<action name="*/*" method="{2}" class="com.dyneinfo.pmdd.action.{1}Action">
+		    <result name="*" type="direct">通过Action直接返回，这一行无需修改</result>
+		</action>
+    </package>
+    
+     <package name="ylcs" namespace="/pages/ylcs" extends="custom-default">
+		<!-- 通过URL访问的路径是 /namesapce/Entity/method.do -->
+		<action name="*/*" method="{2}" class="com.dyneinfo.ylcs.action.{1}Action">
+		    <result name="*" type="direct">通过Action直接返回，这一行无需修改</result>
+		</action>
+    </package>
+    
+    
+  	<package name ="dyneinfozazh" namespace ="/pages/zazh" extends ="custom-default">
+  		<action name="*/*" method="{2}" class="com.dyneinfo.zazh.action.{1}Action">
+		    <result name="*" type="direct">通过Action直接返回，这一行无需修改</result>
+		</action>
+  	</package>
+  	<!-- 修改为你自己的namespace -->
+    <package name="default" namespace="/pages" extends="custom-default">
+		<!-- 通过URL访问的路径是 /namesapce/Entity/method.do -->
+		<action name="*/*" method="{2}" class="com.dyneinfo.zazh.action.{1}Action">
+		    <result name="*" type="direct">通过Action直接返回，这一行无需修改</result>
+		</action>
+    </package>
+    
+</struts>

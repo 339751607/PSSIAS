@@ -1,0 +1,994 @@
+﻿<!--
+-------------------------------------------
+版权声明：
+    第二代公民身份证B/S阅读控件
+    (c) 版权所有   深圳华视电子读写设备有限公司 
+    版本：V3.0.3.3
+    
+    作者：吴为龙
+    http://www.chinaidcard.com
+    tel: 0755-2695 5558    
+    2008.02.25
+    
+历史发布记录：
+    V3.0.3.1  2007.05.16
+--------------------------------------------
+-->
+ 
+ 
+<HTML>
+<head>
+ 
+<script language="JavaScript"> 
+<!--
+function HideActiveX() {
+   //CVR_IDCard.Visible=false; 
+   ClearIDCard();
+  // ClearForm(); 
+  // document.all['ReadResult'].value ="等待验证";
+   return true;
+}
+ 
+function ClearIDCard() {
+   CVR_IDCard.Name="";
+   CVR_IDCard.NameL="";
+   CVR_IDCard.Sex="";   
+   //CVR_IDCard.SexL="";   
+   CVR_IDCard.Nation="";
+   //CVR_IDCard.NationL="";
+   CVR_IDCard.Born="";
+   //CVR_IDCard.BornL="";
+   CVR_IDCard.Address="";
+   CVR_IDCard.CardNo="";
+   CVR_IDCard.Police="";
+   CVR_IDCard.Activity="";
+   CVR_IDCard.NewAddr="";
+  
+   return true;
+}
+ 
+function ClearForm() {
+   // document.all['Name'].value = ""; 
+   // document.all['Sex'].value = ""; 
+   // document.all['Nation'].value = ""; 
+   // document.all['Born'].value = ""; 
+   // document.all['Address'].value = ""; 
+   // document.all['CardNo'].value = ""; 
+   // document.all['Police'].value = ""; 
+   // document.all['Activity'].value = ""; 
+   // document.all['NewAddr'].value = "";    
+   // document.all['ActivityLFrom'].value = ""; 
+   // document.all['ActivityLTo'].value = ""; 
+   // document.all['PhotoBuffer'].value = ""; 
+ 
+       
+        window.parent.document.getElementById("delicredcode").value= "";
+        window.parent.document.getElementById("deliname").value="";
+       
+      
+   return true;
+}
+ 
+function FillForm() {
+  var pName=CVR_IDCard.NameL; //var pNameL=CVR_IDCard.NameL;
+  var pSex=CVR_IDCard.Sex;   //var pSexL=CVR_IDCard.SexL;
+  var pNation=CVR_IDCard.Nation;  //var pNationL=CVR_IDCard.NationL;
+  var pBorn=CVR_IDCard.BornL;      //var pBornL=CVR_IDCard.BornL;
+  var pAddress=CVR_IDCard.Address;
+  var pCardNo=CVR_IDCard.CardNo;
+  var pPolice=CVR_IDCard.Police;
+  var pActivity=CVR_IDCard.Activity;
+  var pNewAddr=CVR_IDCard.NewAddr;  
+  var pActivityLFrom=CVR_IDCard.ActivityLFrom; 
+  var pActivityLTo=CVR_IDCard.ActivityLTo; 
+  var pPhotoBuffer=CVR_IDCard.GetPhotoBuffer; 
+ // var pSAMID=CVR_IDCard.SAMID;
+  var provValue = pCardNo.substr(0,2)+"0000";
+  var xzqhValue = pCardNo.substr(0,6);
+  
+  window.parent.document.getElementById("delicredcode").value= pCardNo;
+  window.parent.document.getElementById("deliname").value=pName;
+       
+ 
+ 
+  return true;
+}
+ 
+ 
+function ReadIDCard() {   
+  // CVR_IDCard.PhotoPath=document.all['PhotoPath'].value;
+  // CVR_IDCard.PhotoPath= window.parent.tcard.file.value;
+ 
+   CVR_IDCard.PhotoPath= "c:\\";   
+ 
+   //   CVR_IDCard.PhotoPath= "";
+ 
+   CVR_IDCard.TimeOut=3;  
+   ClearIDCard(); 
+   ClearForm(); 
+   //document.all['ReadResult'].value ="请放卡...";
+   var strReadResult=CVR_IDCard.ReadCard;     
+   FillForm();  
+  // document.all['ReadResult'].value ="返回值:"+strReadResult;
+   //alert(strReadResult);  
+   //if (strReadResult=="0"){
+   	//if (confirm("需要查询黑名单吗？")) 
+   	//{ 
+   	  //  var windowX = (window.screen.width - 640) / 2 ;
+		//var windowY = (window.screen.height - 100) / 2 ;
+		//var newWin=window.open("asp/SearchBlacklist.asp?CardNo="+document.all['CardNo'].value+"&Name="+document.all['Name'].value,"newwindow", "top="+windowY+",left="+windowX+",width=640,height=100"); 
+ 		//newWin.moveTo(windowX,windowY);
+   	    //window.location="asp/SearchBlacklist.asp?CardNo="+document.all['CardNo'].value;
+   	//}   	
+   //} 
+ 
+   return true;
+}
+ 
+function DoStopRead() {
+   CVR_IDCard.DoStopRead; 
+   ClearIDCard(); 
+   ClearForm();
+  // document.all['ReadResult'].value ="用户已取消读卡"
+   return true;
+}
+ 
+function DoCheckReader() {
+   var State=CVR_IDCard.GetState; 
+ 
+    alert(State);
+  // document.all['ReadResult'].value =State;   
+  // var pSAMID=CVR_IDCard.SAMID;
+ // alert(pSAMID);
+   return true;
+}
+ 
+function Save_IDCard() {   
+  var pName=CVR_IDCard.Name; 
+  var pSex=CVR_IDCard.Sex;
+  var pNation=CVR_IDCard.Nation;
+  var pBorn=CVR_IDCard.Born;
+  var pAddress=CVR_IDCard.Address;
+  var pCardNo=CVR_IDCard.CardNo;
+  var pPolice=CVR_IDCard.Police;
+  var pActivity=CVR_IDCard.Activity;
+  var pNewAddr=CVR_IDCard.NewAddr;
+  var pActivityLFrom=CVR_IDCard.ActivityLFrom; 
+  var pActivityLTo=CVR_IDCard.ActivityLTo; 
+  var pPhotoBuffer=CVR_IDCard.GetPhotoBuffer; 
+ 
+  if (pName == "") {    
+      ClearForm();
+     // alert('读卡内容为空，无法保存数据！请先读卡，再保存。'); 
+      return false;
+  }
+  var provValue = pCardNo.substr(0,2)+"0000";
+  var xzqhValue = pCardNo.substr(0,6);
+  
+        window.parent.document.getElementById("delicredcode").value= pCardNo;
+    	
+        window.parent.document.getElementById("deliname").value=pName;
+       
+ 
+  //相片文件默认保存在 CVR_IDCard.PhotoPath
+ 
+  ClearIDCard(); 
+  return true;
+}
+ 
+ 
+//-->
+</script>
+ 
+<title>IDcard.htm</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/xml; charset=utf-8" />
+  
+ 
+</head>
+ 
+<body  topmargin="0" bgcolor="#EDF1FF">
+<center>  
+<!-- 
+<OBJECT
+	  classid="clsid:10946843-7507-44FE-ACE8-2B3483D179B7"
+	  codebase="CVR100.cab#version=3,0,3,3"
+	  id="CVR_IDCard"
+          name="CVR_IDCard"
+	  width=119
+	  height=126
+	  align=center
+	  hspace=0
+	  vspace=0 	 	  
+>
+</OBJECT>  
+ --> 
+</center>
+<center>  
+
+<table cellpadding="0" cellspacing="0" border="0">
+<!-- 
+				<tr>
+					<form name="MyForm" action="" method=post
+						onSubmit="return Save_IDCard()">
+						<td>
+							<input type="button" name="ReadCard" value="读身份证"
+								onClick="return ReadIDCard()">
+						</td>
+						<td>
+							<input type="button" name="StopRead" value="停止读卡"
+								onClick="return DoStopRead()">
+						</td>
+					</form>
+				</tr>
+			</table>
+			
+			<br>
+			 -->
+			<OBJECT classid="clsid:10EC554B-357B-4188-9E5E-AC5039454D8B"
+				id="objIDCard" width="0" height="0"></OBJECT>
+		
+			<table cellpadding="0" cellspacing="0" border="0">
+				<FORM NAME="IDScanRecog">
+					<INPUT type="hidden" name="CardMainID" value="2">
+					<INPUT type="hidden" name="ImgSizeType" value="2">
+					<INPUT type="hidden" name="ImgPath" value="c:\\test.jpg">
+					<INPUT type="hidden" name="HeadPath" value="c:\\test_head.jpg">
+
+					<tr>
+
+						<td colspan="2">
+							<font color="blue">&nbsp;&nbsp;&nbsp;&nbsp;扫描仪证件识别</font>
+						</td>
+
+
+					</tr>
+					<tr>
+						<td>
+							<INPUT type="button" name="BtnLoadKena0" value="加载识别"
+								onClick=LoadRecogKenal()>
+						</td>
+						<td>
+							<INPUT type="button" name="BtnFreeKena1" value="释放识别"
+								onClick=FreeRecogKenal()>
+						</td>
+					</tr>
+					<tr>
+
+						<td colspan="2">
+							<INPUT type="radio" name="scan_type" value="1">
+							一代身份证
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<INPUT type="radio" name="scan_type" value="2">
+							二代身份证
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<INPUT type="radio" name="scan_type" value="3">
+							驾驶证
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<INPUT type="radio" name="scan_type" value="4">
+							行驶证
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<INPUT type="radio" name="scan_type" value="7">
+							军官证
+						</td>
+					</tr>
+					<!--  
+					<tr>
+						<td colspan="2">
+							<INPUT type="radio" name="scan_type" value="4">
+							护照
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<INPUT type="radio" name="scan_type" value="5">
+							签证
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<INPUT type="radio" name="scan_type" value="6">
+							台湾居民往来大陆通行证
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<INPUT type="radio" name="scan_type" value="7">
+							户口本
+						</td>
+					</tr>
+					-->
+					<tr>
+						<td>
+							<INPUT type="button" name="BtnLoadKena3" value="开始扫描"
+								onClick="onScan()">
+						</td>
+						<td>
+							<INPUT type="button" name="BtnFreeKena4" value=" 取  消 "
+								onClick=FreeRecogKenal()>
+						</td>
+					</tr>
+				</FORM>
+			</table>
+		
+
+
+
+
+
+
+
+		</center>
+	</body>
+</HTML>
+
+<SCRIPT LANGUAGE="JavaScript">
+//加载核心
+
+       
+     var idcard_obj = window.parent.document.getElementById("delicredcode");
+     var name_obj   = window.parent.document.getElementById("deliname");
+     //车牌号
+     var carid_obj   = window.parent.document.getElementById("carid");
+     var carid1_obj   = window.parent.document.getElementById("carid1");
+     //车辆类型
+     var cartype_obj   = window.parent.document.getElementById("cartype");
+     // 车辆品牌
+      var brand_obj   = window.parent.document.getElementById("brand");
+      //发动机号enginecode
+      var enginecode_obj   = window.parent.document.getElementById("enginecode");
+      //车主
+      var carowner_obj = window.parent.document.getElementById("carowner");
+      //车辆识别代号
+      var clsbcode_obj = window.parent.document.getElementById("clsbcode");
+      var deliaddress_obj = window.parent.document.getElementById("deliaddress");
+function onScan(){
+    var scan_type_value = GetRadioValue("scan_type");
+    if(scan_type_value == "1"){
+    	 RecognizeImgEx();
+    }
+    else if (scan_type_value == "2"){
+        RecognizeImg();
+    }
+    else if (scan_type_value == "3"){
+        RecognizeImg_jsz();
+    }
+    else if (scan_type_value == "4"){
+        RecognizeImg_xsz();
+    }
+    else if (scan_type_value == "5"){
+        RecognizeImg_qz();
+    }
+    else if (scan_type_value == "6"){
+        RecognizeImg_twjmj();
+    }
+    else if (scan_type_value == "7"){
+        RecognizeImg_jgz();
+    }
+    else {
+        alert("请选择证件类型。");
+    }            
+}     
+
+ function GetRadioValue(RadioName){
+		    var obj;    
+		    obj=document.getElementsByName(RadioName);
+		    if(obj!=null){
+		        var i;
+		        for(i=0;i<obj.length;i++){
+		            if(obj[i].checked){
+		                return obj[i].value;            
+		            }
+		        }
+		    }
+            return "0";
+        }
+     
+function LoadRecogKenal()
+{
+   // document.IDScanRecog.result.innerText = "";
+    if(!objIDCard.IsLoaded())
+    {
+       var strDllPath = "";
+       var nRet = objIDCard.InitIDCard("53174805367982401356",0);
+                                        
+
+       //document.IDScanRecog.result.innerText = "";
+       if(nRet==0)
+       { 
+          //document.IDScanRecog.result.innerText = "识别核心加载成功";
+           alert("识别核心加载成功");
+       }
+       else
+       {
+         //document.IDScanRecog.result.innerText = "识别核心加载失败\r\n返回值：";
+         //document.IDScanRecog.result.innerText += nRet;
+         alert("识别核心加载失败\r\n返回值："+nRet);
+       }
+    }
+    else
+    {
+         // document.IDScanRecog.result.innerText = "核心已经加载";
+          alert("核心已经加载");
+    }
+ 
+}
+//释放核心
+function FreeRecogKenal()
+{
+    objIDCard.FreeIdcard();
+    //document.IDScanRecog.result.innerText = "";
+}
+//采用方法1识别
+function RecognizeImg()
+{
+    if(objIDCard.IsLoaded())
+    {
+        //采集图像
+        var nResult = objIDCard.AcquireImage(document.IDScanRecog.ImgSizeType.value);
+        if(nResult!=0)
+       {
+          
+           var strError = "采集图像失败\r\n返回值：";
+           strError += nResult;
+           alert(strError);
+           //document.IDScanRecog.result.innerText = strError;
+           return;
+       }
+       //调用识别接口识别
+         nResult = objIDCard.Recog(document.IDScanRecog.CardMainID.value); 
+        if(nResult<=0)
+        {
+         
+           var strError = "识别失败\r\n返回值：";
+           strError += nResult;
+           alert(strError);
+           //document.IDScanRecog.result.innerText = strError;
+           return;
+        }  
+       
+        
+       
+        //保存图像
+        // objIDCard.SaveImage(document.IDScanRecog.ImgPath.value);
+        //保存头像
+        // objIDCard.SaveHeadImage(document.IDScanRecog.HeadPath.value);
+        
+        IdcardSetResult();
+    }
+    else
+    {
+        alert("识别核心未加载，请先成功加载识别核心");
+    }
+   
+}
+
+//二代证识别
+function IdcardSetResult()
+{
+     var nFieldNum = objIDCard.GetRecogFieldNum();
+     idcard_obj.value= objIDCard.GetRecogResult(6);
+     name_obj.value=objIDCard.GetRecogResult(1);
+     deliaddress_obj.value=objIDCard.GetRecogResult(5);
+    // photoBuffer_obj.value = objIDCard.EncodeToBase64(document.IDScanRecog.HeadPath.value);
+      
+    
+}
+//采用方法2识别(一代证)
+function RecognizeImgEx()
+{
+
+   if(objIDCard.IsLoaded())
+   {
+    //采集图像，此按照一代证大小采集图像
+    var nResult = objIDCard.AcquireImage(1);
+    if(nResult!=0)
+    {
+       var strError = "采集图像失败\r\n返回值：";
+       strError += nResult;
+       alert(strError);
+       return;
+    }
+    //设置要识别的证件类型,在此以二代证为例
+    //objIDCard.SetRecogID(2,1);
+    //如果要实现多种证件自动分类识别，通过以下方法添加其他证种，在此添加一代证为例，实现一二代证的自动区分和识别。
+    //objIDCard.AddRecogID(1,1);
+    //调用识别接口识别Recog
+    nResult = objIDCard.Recog(1); 
+    if(nResult<=0)
+    {
+       var strError = "识别失败\r\n返回值：";
+       strError += nResult;
+       alert(strError);
+       return;
+    }  
+     //显示识别结果
+     
+     //保存图像
+    // objIDCard.SaveImage(document.IDScanRecog.ImgPath.value);
+     //保存头像
+     //objIDCard.SaveHeadImage(document.IDScanRecog.HeadPath.value);   
+     
+     ydzSetResult();
+   }
+   else
+   {
+        alert("识别核心未加载，请先成功加载识别核心");   
+   }
+
+}
+
+//一代证识别
+function ydzSetResult()
+{
+     var nFieldNum = objIDCard.GetRecogFieldNum();
+     idcard_obj.value= objIDCard.GetRecogResult(6);
+     name_obj.value=objIDCard.GetRecogResult(1);
+     deliaddress_obj.value=objIDCard.GetRecogResult(5);
+    // photoBuffer_obj.value =  objIDCard.EncodeToBase64(document.IDScanRecog.HeadPath.value);
+
+      
+    
+}
+
+//采用方法3识别(驾驶证)
+function RecognizeImg_jsz()
+{
+
+   if(objIDCard.IsLoaded())
+   {
+    //采集图像，此按照一代证大小采集图像
+    var nResult = objIDCard.AcquireImage(1);
+    if(nResult!=0)
+    {
+       var strError = "采集图像失败\r\n返回值：";
+       strError += nResult;
+       alert(strError);
+       return;
+    }
+
+    //调用识别接口识别Recog
+    nResult = objIDCard.Recog(16); 
+    if(nResult<=0)
+    {
+       var strError = "识别失败\r\n返回值：";
+       strError += nResult;
+       alert(strError);
+       return;
+    }  
+     //保存图像
+     //objIDCard.SaveImage(document.IDScanRecog.ImgPath.value);
+     //保存头像
+     //objIDCard.SaveHeadImage(document.IDScanRecog.HeadPath.value);   
+     
+     idcard_obj.value= objIDCard.GetRecogResult(1);
+     name_obj.value=objIDCard.GetRecogResult(2);
+     deliaddress_obj.value=objIDCard.GetRecogResult(4);
+     //photoBuffer_obj.value =  objIDCard.EncodeToBase64(document.IDScanRecog.HeadPath.value);
+     
+     //DisplayResult();
+   }
+   else
+   {
+        alert("识别核心未加载，请先成功加载识别核心");   
+   }
+
+}
+
+
+//采用方法4识别(行驶证)
+function RecognizeImg_xsz()
+{
+   if(objIDCard.IsLoaded())
+   {
+    //采集图像，此按照一代证大小采集图像
+    var nResult = objIDCard.AcquireImage(1);
+    if(nResult!=0)
+    {
+       var strError = "采集图像失败\r\n返回值：";
+       strError += nResult;
+       alert(strError);
+       return;
+    }
+    //调用识别接口识别Recog
+    nResult = objIDCard.Recog(32); 
+    if(nResult<=0)
+    {
+       var strError = "识别失败\r\n返回值：";
+       strError += nResult;
+       alert(strError);
+       return;
+    }  
+	//车牌号
+	var arr=objIDCard.GetRecogResult(1);
+	if(arr.length > 1){
+	var result = arr.substr(0, 1); 
+	carid1_obj.value=result;
+	var res=arr.substr(1);
+	carid_obj.value=res;
+	}
+	//车主
+	carowner_obj.value=objIDCard.GetRecogResult(3);
+	 //车辆类型
+	
+	// 车辆品牌
+	brand_obj.value=objIDCard.GetRecogResult(5);
+	//发动机号码
+     enginecode_obj.value=objIDCard.GetRecogResult(7);
+     clsbcode_obj.value=objIDCard.GetRecogResult(6);
+
+   }
+   else
+   {
+        alert("识别核心未加载，请先成功加载识别核心");   
+   }
+
+}
+
+//采用方法4识别(护照)
+function RecognizeImg_hz()
+{
+  //alert('护照');
+   if(objIDCard.IsLoaded())
+   {
+    //采集图像，此按照一代证大小采集图像
+    var nResult = objIDCard.AcquireImage(21);
+    if(nResult!=0)
+    {
+       var strError = "采集图像失败\r\n返回值：";
+       strError += nResult;
+       alert(strError);
+       return;
+    }
+     //调用识别接口识别Recog
+    //设置要识别的证件类型,在此以二代证为例
+    //objIDCard.SetRecogID(4096,257);
+    //如果要实现多种证件自动分类识别，通过以下方法添加其他证种，在此添加一代证为例，实现一二代证的自动区分和识别。
+    //objIDCard.AddRecogID(4096,258);
+    //objIDCard.AddRecogID(4096,259);
+   
+    //调用识别接口识别
+    nResult = objIDCard.Recog(4096); 
+    if(nResult<=0)
+    {
+       var strError = "识别失败\r\n返回值：";
+       strError += nResult;
+       alert(strError);
+       return;
+    }  
+     //保存图像
+    // objIDCard.SaveImage(document.IDScanRecog.ImgPath.value);
+     //保存头像
+    // objIDCard.SaveHeadImage(document.IDScanRecog.HeadPath.value);   
+     
+     idcard_obj.value= objIDCard.GetRecogResult(1);
+     name_obj.value=objIDCard.GetRecogResult(3);
+    // photoBuffer_obj.value = objIDCard.EncodeToBase64(document.IDScanRecog.HeadPath.value);
+     
+     //DisplayResult();
+   }
+   else
+   {
+        alert("识别核心未加载，请先成功加载识别核心");   
+   }
+
+}
+
+//采用方法5识别(签证)
+function RecognizeImg_qz()
+{
+	 if(objIDCard.IsLoaded())
+   {
+    //采集图像，此按照一代证大小采集图像
+    var nResult = objIDCard.AcquireImage(21);
+    if(nResult!=0)
+    {
+       var strError = "采集图像失败\r\n返回值：";
+       strError += nResult;
+       alert(strError);
+       return;
+    }
+    //调用识别接口识别Recog
+    //设置要识别的证件类型,在此以二代证为例
+    //objIDCard.SetRecogID(2048,1);
+    //如果要实现多种证件自动分类识别，通过以下方法添加其他证种，在此添加一代证为例，实现一二代证的自动区分和识别。
+    //objIDCard.AddRecogID(2048,2);
+    //objIDCard.AddRecogID(2048,3);
+    //objIDCard.AddRecogID(2048,4);
+    //objIDCard.AddRecogID(2048,5);
+    nResult = objIDCard.Recog(2048); 
+    if(nResult<=0)
+    {
+       var strError = "识别失败\r\n返回值：";
+       strError += nResult;
+       alert(strError);
+       return;
+    }  
+     //保存图像
+     //objIDCard.SaveImage(document.IDScanRecog.ImgPath.value);
+     //保存头像
+     //objIDCard.SaveHeadImage(document.IDScanRecog.HeadPath.value);   
+     
+     idcard_obj.value= objIDCard.GetRecogResult(1);
+     name_obj.value=objIDCard.GetRecogResult(3);
+    // photoBuffer_obj.value = objIDCard.EncodeToBase64(document.IDScanRecog.HeadPath.value);
+   	 //DisplayResult();
+   }
+   else
+   {
+        alert("识别核心未加载，请先成功加载识别核心");   
+   }
+
+}
+
+//采用方法6识别(台湾居民往来大陆通行证
+function RecognizeImg_twjmj()
+{
+	 if(objIDCard.IsLoaded())
+   {
+    //采集图像，此按照一代证大小采集图像
+    var nResult = objIDCard.AcquireImage(3);
+    if(nResult!=0)
+    {
+       var strError = "采集图像失败\r\n返回值：";
+       strError += nResult;
+       alert(strError);
+       return;
+    }
+    //调用识别接口识别Recog
+    
+    //设置要识别的证件类型,在此以二代证为例
+    objIDCard.SetRecogID(512,1);
+    //如果要实现多种证件自动分类识别，通过以下方法添加其他证种，在此添加一代证为例，实现一二代证的自动区分和识别。
+    objIDCard.AddRecogID(512,2);
+    objIDCard.AddRecogID(512,3);
+    nResult = objIDCard.Recog(512); 
+    if(nResult<=0)
+    {
+       var strError = "识别失败\r\n返回值：";
+       strError += nResult;
+       alert(strError);
+       return;
+    }  
+     //保存图像
+     //objIDCard.SaveImage(document.IDScanRecog.ImgPath.value);
+     //保存头像
+     //objIDCard.SaveHeadImage(document.IDScanRecog.HeadPath.value);   
+     
+     idcard_obj.value= objIDCard.GetRecogResult(13);
+     name_obj.value=objIDCard.GetRecogResult(2);
+    // photoBuffer_obj.value =  objIDCard.EncodeToBase64(document.IDScanRecog.HeadPath.value);
+   	 //DisplayResult();
+   }
+   else
+   {
+        alert("识别核心未加载，请先成功加载识别核心");   
+   }
+}
+
+//采用方法7识别 军官证
+function RecognizeImg_jgz()
+{
+
+ if(objIDCard.IsLoaded())
+    {
+        //采集图像
+        var nResult = objIDCard.AcquireImage(4);
+        if(nResult!=0)
+       {
+           var strError = "采集图像失败\r\n返回值：";
+           strError += nResult;
+           document.IDScanRecog.result.innerText = strError;
+           return;
+       }
+       //调用识别接口识别
+        
+       //设置要识别的证件类型
+       //0表示添加次主类型的所有子模板
+       objIDCard.SetIDCardType(7,0);
+       
+       //识别
+       nResult = objIDCard.RecogIDCard(); 
+        if(nResult<=0)
+        {
+           //alert("识别失败");
+           var strError = "识别失败\r\n返回值：";
+           strError += nResult;
+           document.IDScanRecog.result.innerText = strError;
+           return;
+        }  
+        //显示识别结果
+        
+     idcard_obj.value= objIDCard.GetRecogResult(1);
+     name_obj.value=objIDCard.GetRecogResult(2);
+        //保存图像
+        objIDCard.SaveImage(document.IDScanRecog.ImgPath.value);
+        //保存头像
+         objIDCard.SaveHeadImage(document.IDScanRecog.HeadPath.value);
+    }
+    else
+    {
+        document.IDScanRecog.result.innerText = "识别核心未加载，请先成功加载识别核心";
+    }
+}
+
+//显示识别结果
+function DisplayResult()
+{
+    var nFieldNum = objIDCard.GetRecogFieldNum();
+     //document.IDScanRecog.result.innerText = "";   
+     var strResult = "识别成功\r\n"; 
+     alert(nFieldNum);  
+     if(nFieldNum>0)
+     {  
+          for(var i=1;i<=nFieldNum;++i) 
+         {
+             strResult += objIDCard.GetFieldName(i);
+             strResult += ":";
+             strResult += objIDCard.GetRecogResult(i);
+             strResult += "\r\n";
+         }
+     }
+     alert(strResult); 
+}
+
+
+//获取当前SDK的版本信息
+function GetSDKVersion()
+{
+   if(objIDCard.IsLoaded())
+   {
+     document.IDScanRecog.result.innerText = objIDCard.GetVersionInfo(); 
+   }
+   else
+   {
+     document.IDScanRecog.result.innerText = "识别核心未加载，请先成功加载识别核心";
+   }
+
+}
+//判断设备是否在线
+function DeviceIsOnLine()
+{
+   if(objIDCard.IsLoaded())
+   {
+      if(objIDCard.CheckDeviceOnline()==1)
+      {
+        document.IDScanRecog.result.innerText = "在线";
+      }
+      else
+      {
+        document.IDScanRecog.result.innerText = "离线";
+      }
+   }
+   else
+   {
+     document.IDScanRecog.result.innerText = "识别核心未加载，请先成功加载识别核心";
+   }
+}
+//获取设备名称
+function GetDeviceName()
+{
+   if(objIDCard.IsLoaded())
+   {
+        document.IDScanRecog.result.innerText = objIDCard.GetCurrentDevice();
+   }
+   else
+   {
+     document.IDScanRecog.result.innerText = "识别核心未加载，请先成功加载识别核心";
+   }
+}
+//获取设备按钮状态
+function GetDeviceBtnStatus()
+{
+   if(objIDCard.IsLoaded())
+   {
+        var nBtnStatus = objIDCard.GetButtonDownType();
+        if(nBtnStatus==0)
+        {
+           document.IDScanRecog.result.innerText = "无";
+        }
+        else if(nBtnStatus==1)
+        {
+           document.IDScanRecog.result.innerText = "左键";
+        }
+        else if(nBtnStatus==2)
+        {
+           document.IDScanRecog.result.innerText = "右键";
+        }
+   }
+   else
+   {
+     document.IDScanRecog.result.innerText = "识别核心未加载，请先成功加载识别核心";
+   }
+}
+//设置采集属性
+function SetCollecttionPropety()
+{
+    if(objIDCard.IsLoaded())
+    {
+        var nLightType = 1;//设置采集的是可见光图像
+        var nImgType = 1;   //设置采集的是彩色图像
+        var nResult = objIDCard.SetAcquireImageType(nLightType,nImgType);
+        if(nResult)
+        {
+            document.IDScanRecog.result.innerText = "采集设置成功";
+        }
+        else
+        {
+            document.IDScanRecog.result.innerText = "采集设置失败";
+        }
+    }
+    else
+    {
+       document.IDScanRecog.result.innerText = "识别核心未加载，请先成功加载识别核心";
+    }
+}
+
+//设置图像大小
+function SetImageSize()
+{
+    if(objIDCard.IsLoaded())
+    {
+        var nWidth = 180; 
+        var nHeight = 180;
+        var nResult = objIDCard.SetUserDefinedImageSize(nWidth,nHeight);
+        if(nResult)
+        {
+            document.IDScanRecog.result.innerText = "采集设置成功";
+            //扫描看下效果
+            objIDCard.AcquireImage(20);     //保存图像
+            objIDCard.SaveImage(document.IDScanRecog.ImgPath.value);
+        }
+        else
+        {
+            document.IDScanRecog.result.innerText = "采集设置失败";
+        }
+    }
+    else
+    {
+       document.IDScanRecog.result.innerText = "识别核心未加载，请先成功加载识别核心";
+    }
+}
+//设置扫描的分辨率
+function SetScanResolution()
+{
+    if(objIDCard.IsLoaded())
+    {
+        var nResolutionX = 180; 
+        var nResolutionY = 180;
+        var nResult = objIDCard.SetAcquireImageResolution(nResolutionX,nResolutionY);
+        if(nResult)
+        {
+            document.IDScanRecog.result.innerText = "采集设置成功";
+            //扫描看下效果
+            objIDCard.AcquireImage(2);     //保存图像
+            objIDCard.SaveImage(document.IDScanRecog.ImgPath.value);
+        }
+        else
+        {
+            document.IDScanRecog.result.innerText = "采集设置失败";
+        }
+    }
+    else
+    {
+       document.IDScanRecog.result.innerText = "识别核心未加载，请先成功加载识别核心";
+    }
+}
+
+</SCRIPT>
+ 
+
+

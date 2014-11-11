@@ -1,0 +1,131 @@
+<!--
+-------------------------------------------
+版权声明：
+    第二代公民身份证B/S阅读控件
+    (c) 版权所有   深圳华视电子读写设备有限公司 
+    版本：V3.0.3.3
+    
+    作者：吴为龙
+    http://www.chinaidcard.com
+    tel: 0755-2695 5558    
+    2008.02.25
+    
+历史发布记录：
+    V3.0.3.1  2007.05.16
+--------------------------------------------
+-->
+ 
+ 
+<HTML>
+<head>
+ 
+<script language="JavaScript"> 
+<!--
+function HideActiveX() {
+   ClearIDCard();
+   return true;
+}
+ 
+function ClearIDCard() {
+   CVR_IDCard.Name="";
+   CVR_IDCard.NameL="";
+   CVR_IDCard.Sex="";   
+   CVR_IDCard.Nation="";
+   CVR_IDCard.Born="";
+   CVR_IDCard.Address="";
+   CVR_IDCard.CardNo="";
+   CVR_IDCard.Police="";
+   CVR_IDCard.Activity="";
+   CVR_IDCard.NewAddr="";
+   return true;
+}
+ 
+function ClearForm() {
+        window.parent.document.getElementById("name").value= "";
+    	window.parent.document.getElementById("sex").value="";
+    	window.parent.document.getElementById("nation").value = "";
+		window.parent.document.getElementById("bdate").value="";
+        window.parent.document.getElementById("idName").value="";
+        window.parent.document.getElementById("idCode").value="";
+        window.parent.document.getElementById("xzqh").value="";
+        window.parent.document.getElementById("address").value = "";
+        window.parent.document.getElementById("pPhotoBuffer").value = "";
+      
+   return true;
+}
+ 
+function FillForm() {
+  var pName=CVR_IDCard.NameL; //var pNameL=CVR_IDCard.NameL;
+  var pSex=CVR_IDCard.Sex;   //var pSexL=CVR_IDCard.SexL;
+  var pNation=CVR_IDCard.Nation;  //var pNationL=CVR_IDCard.NationL;
+  var pBorn=CVR_IDCard.BornL;      //var pBornL=CVR_IDCard.BornL;
+  var pAddress=CVR_IDCard.Address;
+  var pCardNo=CVR_IDCard.CardNo;
+  
+  var pPhotoBuffer=CVR_IDCard.GetPhotoBuffer; 
+  var xzqhValue = pCardNo.substr(0,6);
+        window.parent.document.getElementById("idCode").value= pCardNo;
+    	window.parent.document.getElementById("sex").value=pSex;
+    	window.parent.document.getElementById("nation").value=pNation;
+		window.parent.document.getElementById("bdate").value=pBorn;
+        window.parent.document.getElementById("address").value=pAddress;
+        window.parent.document.getElementById("name").value=pName;
+        window.parent.document.getElementById("idName").value="11";
+        
+        window.parent.document.getElementById("xzqh").value = xzqhValue;
+        window.parent.document.getElementById("pPhotoBuffer").value = pPhotoBuffer;
+ 
+  return true;
+}
+ 
+function ReadIDCard() {   
+   CVR_IDCard.PhotoPath= "c:\\";   
+ 
+   CVR_IDCard.TimeOut=3;  
+   ClearIDCard(); 
+   ClearForm(); 
+   var strReadResult=CVR_IDCard.ReadCard;
+   if(strReadResult == 0){
+	   FillForm();  
+   } 
+   return true;
+}
+ 
+function DoStopRead() {
+   CVR_IDCard.DoStopRead; 
+   ClearIDCard(); 
+   ClearForm();
+   return true;
+}
+</script>
+ 
+<title>IDcard.htm</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/xml; charset=utf-8" />
+ 
+</head>
+ 
+<body onLoad="HideActiveX()" topmargin="0" bgcolor="#FFFFFF">
+<center>  
+<OBJECT
+	  classid="clsid:10946843-7507-44FE-ACE8-2B3483D179B7"
+	  codebase="CVR100.cab#version=3,0,3,3"
+	  id="CVR_IDCard"
+          name="CVR_IDCard"
+	  width=119
+	  height=136
+	  align=center
+	  hspace=0
+	  vspace=0 	 	  
+>
+</OBJECT>   
+</center>
+<center>  
+   <input type="button" name="ReadCard" value="读身份证" onClick="return ReadIDCard()">
+   <input type="button" name="StopRead" value="停止读卡" onClick="return DoStopRead()">
+   <input type="hidden" name="ReadResult" style="display:none" value="等待验证" size="32">      
+</center>             
+</body>
+</HTML>
+

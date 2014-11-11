@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+		- Sample namespace-based configuration - - $Id:
+		applicationContext-security.xml 3019 2008-05-01 17:51:48Z luke_t $
+	-->
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.1.xsd 
+                        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+	<global-method-security secured-annotations="enabled">
+		<!--
+			AspectJ pointcut expression that locates our "post" method and
+			applies security that way <protect-pointcut expression="execution(*
+			bigbank.*Service.post*(..))" access="ROLE_TELLER"/>
+		-->
+	</global-method-security>
+	
+	  <http auto-config="false"   access-denied-page="/accessDenied.jsp"  entry-point-ref="authenticationProcessingFilterEntryPoint">
+       <intercept-url pattern="/scripts/**" filters="none" />
+        <intercept-url pattern="/images/**" filters="none" />
+		<intercept-url pattern="/styles/**" filters="none" />
+		<intercept-url pattern="/widgets/**" filters="none" />
+		<intercept-url pattern="/extclient/**" filters="none" />
+		<logout invalidate-session="true" logout-success-url="/logout.jsp" />
+		<remember-me />
+	</http>
+	<beans:bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<beans:property name="basename" value="/WEB-INF/classes/i18n/messages" />
+	</beans:bean>
+	<authentication-manager alias="authenticationManager" />
+
+
+
+ <!-- 用户登录 UserAuthenticationProcessingFilter  start -->
+	<beans:bean id="authenticationProcessingFilter"
+		class="org.security.web.filter.UserAuthenticationProcessingFilter">
+		<custom-filter position="AUTHENTICATION_PROCESSING_FILTER" />
+		<beans:property name="defaultTargetUrl" value="/pages/outlookmenu/welcome.jsp" />
+		<beans:property name="authenticationFailureUrl" value="/login.jsp?login_error=1" />
+		<beans:property name="filterProcessesUrl" value="/j_spring_security_check" />
+		<beans:property name="alwaysUseDefaultTargetUrl" value="true" />
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+	    <beans:property name="loginHistoryManager" ref="loginHistoryManager" />
+		<!-- <beans:property name="thotelBsUserManager" ref="thotelBsUserManager" />-->
+		<beans:property name="exceptionMappings">
+			<beans:value>
+                org.springframework.security.AuthenticationException=/login.jsp?login_error=5
+                org.springframework.security.concurrent.ConcurrentLoginException=/login.jsp?login_error=6
+                org.springframework.security.DisabledException=/login.jsp?login_error=1
+                org.springframework.security.AccountExpiredException=/login.jsp?login_error=2
+                org.springframework.security.LockedException=/login.jsp?login_error=3
+                org.springframework.security.CredentialsExpiredException=/login.jsp?login_error=4
+            </beans:value>
+		</beans:property>
+	</beans:bean>
+	<!--
+		入口 authenticationProcessingFilterEntryPoint 同上http entry-point-ref 相同
+	-->
+	<beans:bean id="authenticationProcessingFilterEntryPoint"
+		class="org.springframework.security.ui.webapp.AuthenticationProcessingFilterEntryPoint">
+		<beans:property name="loginFormUrl" value="/login.jsp" />
+		<beans:property name="forceHttps" value="false" />
+	</beans:bean>
+	
+	<!-- 用户登录 UserAuthenticationProcessingFilter  end -->
+	
+	<authentication-provider user-service-ref="userDetailsService">
+		  <password-encoder hash="md5" />
+	</authentication-provider>
+	<beans:bean id="userDetailsService"
+		class="org.security.userdetails.jdbc.MySecurityJdbcDaoImpl">
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>
+	
+	
+	    <beans:bean id="filterSecurityInterceptor"
+        class="org.springframework.security.intercept.web.FilterSecurityInterceptor" autowire="byType">
+        <custom-filter before="FILTER_SECURITY_INTERCEPTOR" />
+        <beans:property name="objectDefinitionSource" ref="filterInvocationDefinitionSource" />
+    </beans:bean>
+
+    <beans:bean id="filterInvocationDefinitionSource"
+        class="org.security.userdetails.jdbc.JdbcFilterInvocationDefinitionSourceFactoryBean">
+        <beans:property name="dataSource" ref="dataSource"/>
+        <beans:property name="resourceQuery" value=" select au.authorityvalue, r.rolename from ss_role r, SS_ROLE_AUTHORITY ra, ss_authority au where au.authorityid = ra.authorityid and r.roleid = ra.roleid order by au.authorityid"/>
+    </beans:bean>
+	
+	 
+	 <beans:bean id="resourceDetailsMonitor" class="org.security.resourcedetails.ResourceDetailsMonitor">
+        <beans:property name="filterSecurityInterceptor" ref="_filterSecurityInterceptor"/>
+        <beans:property name="delegatingMethodDefinitionSource" ref="_delegatingMethodDefinitionSource"/>
+        <beans:property name="dataSource" ref="dataSource" />    
+    </beans:bean>
+
+ 
+
+    <beans:bean id="messageService" class="org.security.resourcedetails.MessageServiceImpl"/>
+    
+   <!-- Automatically receives AuthenticationEvent messages -->
+	   <!-- Automatically receives AuthenticationEvent messages -->
+	<beans:bean id="loggerListener"
+		class="org.springframework.security.event.authentication.LoggerListener" />
+</beans:beans>

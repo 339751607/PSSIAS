@@ -1,0 +1,208 @@
+<!--
+-------------------------------------------
+版权声明：
+    第二代公民身份证B/S阅读控件
+    (c) 版权所有   深圳华视电子读写设备有限公司 
+    版本：V3.0.3.3
+    
+    作者：吴为龙
+    http://www.chinaidcard.com
+    tel: 0755-2695 5558    
+    2008.02.25
+    
+历史发布记录：
+    V3.0.3.1  2007.05.16
+--------------------------------------------
+-->
+ 
+ 
+<HTML>
+<head>
+ 
+<script language="JavaScript"> 
+<!--
+function HideActiveX() {
+   //CVR_IDCard.Visible=false; 
+   ClearIDCard();
+  // ClearForm(); 
+  // document.all['ReadResult'].value ="等待验证";
+   return true;
+}
+ 
+function ClearIDCard() {
+   CVR_IDCard.Name="";
+   CVR_IDCard.NameL="";
+   CVR_IDCard.Sex="";   
+   //CVR_IDCard.SexL="";   
+   CVR_IDCard.Nation="";
+   //CVR_IDCard.NationL="";
+   CVR_IDCard.Born="";
+   //CVR_IDCard.BornL="";
+   CVR_IDCard.Address="";
+   CVR_IDCard.CardNo="";
+   CVR_IDCard.Police="";
+   CVR_IDCard.Activity="";
+   CVR_IDCard.NewAddr="";
+  
+   return true;
+}
+ 
+function ClearForm() {
+   // document.all['Name'].value = ""; 
+   // document.all['Sex'].value = ""; 
+   // document.all['Nation'].value = ""; 
+   // document.all['Born'].value = ""; 
+   // document.all['Address'].value = ""; 
+   // document.all['CardNo'].value = ""; 
+   // document.all['Police'].value = ""; 
+   // document.all['Activity'].value = ""; 
+   // document.all['NewAddr'].value = "";    
+   // document.all['ActivityLFrom'].value = ""; 
+   // document.all['ActivityLTo'].value = ""; 
+   // document.all['PhotoBuffer'].value = ""; 
+
+      
+   return true;
+}
+ 
+function FillForm() {
+  var pName=CVR_IDCard.NameL; //var pNameL=CVR_IDCard.NameL;
+  var pSex=CVR_IDCard.Sex;   //var pSexL=CVR_IDCard.SexL;
+  var pNation=CVR_IDCard.Nation;  //var pNationL=CVR_IDCard.NationL;
+  var pBorn=CVR_IDCard.BornL;      //var pBornL=CVR_IDCard.BornL;
+  var pAddress=CVR_IDCard.Address;
+  var pCardNo=CVR_IDCard.CardNo;
+  var pPolice=CVR_IDCard.Police;
+  var pActivity=CVR_IDCard.Activity;
+  var pNewAddr=CVR_IDCard.NewAddr;  
+  var pActivityLFrom=CVR_IDCard.ActivityLFrom; 
+  var pActivityLTo=CVR_IDCard.ActivityLTo; 
+  var pPhotoBuffer=CVR_IDCard.GetPhotoBuffer; 
+ // var pSAMID=CVR_IDCard.SAMID;
+
+ window.parent.document.getElementById("idcard").value = pCardNo;
+ window.parent.authentication();
+ 
+  return true;
+}
+ 
+ 
+function ReadIDCard() {   
+
+   CVR_IDCard.PhotoPath= "c:\\";   
+ 
+
+   CVR_IDCard.TimeOut=3;  
+   ClearIDCard(); 
+   ClearForm(); 
+   //document.all['ReadResult'].value ="请放卡...";
+   var strReadResult=CVR_IDCard.ReadCard;     
+   FillForm();  
+ 
+ 
+   return true;
+}
+ 
+function DoStopRead() {
+   CVR_IDCard.DoStopRead; 
+   ClearIDCard(); 
+   ClearForm();
+  // document.all['ReadResult'].value ="用户已取消读卡"
+   return true;
+}
+ 
+function DoCheckReader() {
+   var State=CVR_IDCard.GetState; 
+ 
+    alert(State);
+
+   return true;
+}
+ 
+function Save_IDCard() {   
+  var pName=CVR_IDCard.Name; 
+  var pSex=CVR_IDCard.Sex;
+  var pNation=CVR_IDCard.Nation;
+  var pBorn=CVR_IDCard.Born;
+  var pAddress=CVR_IDCard.Address;
+  var pCardNo=CVR_IDCard.CardNo;
+  var pPolice=CVR_IDCard.Police;
+  var pActivity=CVR_IDCard.Activity;
+  var pNewAddr=CVR_IDCard.NewAddr;
+  var pActivityLFrom=CVR_IDCard.ActivityLFrom; 
+  var pActivityLTo=CVR_IDCard.ActivityLTo; 
+  var pPhotoBuffer=CVR_IDCard.GetPhotoBuffer; 
+ 
+  if (pName == "") {    
+      ClearForm();
+     // alert('读卡内容为空，无法保存数据！请先读卡，再保存。'); 
+      return false;
+  }
+
+        
+ 
+  //相片文件默认保存在 CVR_IDCard.PhotoPath
+ 
+  ClearIDCard(); 
+  return true;
+}
+ 
+ 
+//-->
+</script>
+ 
+<title>IDcard.htm</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/xml; charset=utf-8" />
+ 
+</head>
+ 
+<body onLoad="HideActiveX()" topmargin="0" >
+<center>  
+<OBJECT
+	  classid="clsid:10946843-7507-44FE-ACE8-2B3483D179B7"
+	  codebase="CVR100.cab#version=3,0,3,3"
+	  id="CVR_IDCard"
+      name="CVR_IDCard"
+      style="display:none;"
+	  width=119
+	  height=136
+	  align=center
+	  hspace=0
+	  vspace=0 	 	  
+>
+</OBJECT>
+<br>
+请刷身份证，验证身份......
+</center>
+<center>  
+<form name="MyForm" action="" method=post onSubmit="return Save_IDCard()">
+	<div id="myTable">
+ 		   <input type="button" name="ReadCard" id="FrameworkID"  value="验证身份" onClick="return ReadIDCard()">
+           <input type="button" name="StopRead" value="停止验证" onClick="return DoStopRead()">
+          <input type="hidden" name="ReadResult" style="display:none" value="等待验证" size="32">     
+          </div> 
+      </form>
+   </center>
+</body>
+</HTML>
+<script type="text/javascript">
+hiddentable();
+
+function hiddentable(){
+    var loginway = window.parent.document.getElementById("loginway").value ;
+    if("1" == loginway){
+		var myTable= document.getElementById("myTable"); 
+		myTable.style.display ="none";
+	}
+}
+
+function FrameworkMethods(idcard_obj){
+    window.parent.document.getElementById("idcard").value = idcard_obj ;
+ 	window.parent.authentication();
+    return true;
+}
+
+</script>
+

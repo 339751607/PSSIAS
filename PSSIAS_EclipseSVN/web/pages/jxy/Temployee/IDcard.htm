@@ -1,0 +1,121 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>IDcard.htm</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/xml; charset=utf-8" />
+    <link href="${ctx}/styles/tb.css" rel="stylesheet" type="text/css">
+
+  </head>
+  
+  <body>
+  
+  <OBJECT
+	  classid="clsid:37ACE3E4-3034-4555-BCB0-FB7E07EDDCA1"                   
+	  codebase="IDcard.cab"
+	  width=330
+	  height=212
+	  align=center
+	  hspace=0
+	  vspace=0
+	  id=idcard
+	  name=rdcard		 
+>
+</OBJECT>
+
+
+
+
+<input type="button" value="开始读卡" name="beginread" ><input type="button" value="停止读卡" name="endread" >
+<input type="button" value="手动读卡" name="handread" ><input type="button" value="数据显示" name="typeinfo" style="display:none">&nbsp;
+
+  </body>
+ 	<SCRIPT language=VBScript><!--
+
+sub hideocx_onclick()
+	rdcard.visible=false
+end sub
+
+sub showocx_onclick()
+	rdcard.visible=true
+end sub
+
+sub beginread_onclick()
+
+	rdcard.readcard2
+	if rdcard.bHaveCard then
+		window.parent.inputForm.personid.value=cstr(rdcard.CardNo)
+    	window.parent.inputForm.sex.value=cstr(rdcard.Sex)
+        //window.parent.setNationValue(cstr(rdcard.Nation))
+		window.parent.inputForm.birth.value=mid(cstr(rdcard.Born),1,4)+"-"+mid(cstr(rdcard.Born),5,2)+"-"+mid(cstr(rdcard.Born),7,2)
+        window.parent.inputForm.npaddress.value=cstr(rdcard.Address)
+       // window.parent.inputForm.empname.value=cstr(rdcard.NameL)
+        window.parent.inputForm.prov.value = mid(cstr(rdcard.Born),1,2)+"0000"
+        window.parent.changeprov()
+        window.parent.inputForm.npcode.value = mid(cstr(rdcard.CardNo),1,6)
+        window.parent.inputForm.prov2.value = mid(cstr(rdcard.Born),1,2)+"0000"
+        window.parent.changeprov2()
+        window.parent.inputForm.nativeplace.value = mid(cstr(rdcard.CardNo),1,6)
+        rdcard.bHaveCard=false
+    end if
+    
+end sub
+
+sub endread_onclick()
+	rdcard.endread
+
+end sub
+
+sub handread_onclick()
+
+	rdcard.readcard
+	if rdcard.bHaveCard then
+
+		window.parent.inputForm.personid.value=cstr(rdcard.CardNo)
+    	window.parent.inputForm.sex.value=cstr(rdcard.Sex)
+        //window.parent.setNationValue(cstr(rdcard.Nation))
+		window.parent.inputForm.birth.value=mid(cstr(rdcard.Born),1,4)+"-"+mid(cstr(rdcard.Born),5,2)+"-"+mid(cstr(rdcard.Born),7,2)
+        window.parent.inputForm.npaddress.value=cstr(rdcard.Address)
+       // window.parent.inputForm.empname.value=cstr(rdcard.NameL)
+        window.parent.inputForm.prov.value = mid(cstr(rdcard.Born),1,2)+"0000"
+        window.parent.changeprov()
+        window.parent.inputForm.npcode.value = mid(cstr(rdcard.CardNo),1,6)
+        window.parent.inputForm.prov2.value = mid(cstr(rdcard.Born),1,2)+"0000"
+        window.parent.changeprov2()
+        window.parent.inputForm.nativeplace.value = mid(cstr(rdcard.CardNo),1,6)
+        rdcard.bHaveCard=false
+    end if
+end sub
+
+sub window_onload()
+	if rdcard.bHaveCard then
+		window.parent.inputForm.personid.value=cstr(rdcard.CardNo)
+    	window.parent.inputForm.sex.value=cstr(rdcard.Sex)
+        //window.parent.setNationValue(cstr(rdcard.Nation))
+		window.parent.inputForm.birth.value=mid(cstr(rdcard.Born),1,4)+"-"+mid(cstr(rdcard.Born),5,2)+"-"+mid(cstr(rdcard.Born),7,2)
+        window.parent.inputForm.npaddress.value=cstr(rdcard.Address)
+        //window.parent.inputForm.empname.value=cstr(rdcard.NameL)
+        window.parent.inputForm.prov.value = mid(cstr(rdcard.Born),1,2)+"0000"
+        window.parent.changeprov()
+        window.parent.inputForm.npcode.value = mid(cstr(rdcard.CardNo),1,6)
+        window.parent.inputForm.prov2.value = mid(cstr(rdcard.Born),1,2)+"0000"
+        window.parent.changeprov2()
+        window.parent.inputForm.nativeplace.value = mid(cstr(rdcard.CardNo),1,6)
+        rdcard.bHaveCard=false
+    end if
+end sub
+sub typeinfo_onclick()
+	call window_onload()
+	settimeout "typeinfo_onclick",300
+end sub
+sub getstatus_onclick()
+end sub
+
+sub window_onUnload()
+  rdcard.DeleteOutputFile
+end sub
+
+--></SCRIPT>
+</html>

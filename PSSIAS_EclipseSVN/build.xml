@@ -1,0 +1,141 @@
+﻿<!--
+  All rights reserved.
+  author: badqiu
+{ $Id: build.xml,v 1.4 2007/05/15 07:48:36 baichao_qiu Exp $ }
+-->
+
+<!-- ======================================================================= -->
+<!-- build file -->
+<!-- ======================================================================= -->
+<project name="PSSIAS" basedir="." default="war">
+	<tstamp></tstamp>
+	
+	
+
+	 
+	<property environment="env"/>
+	<property file="build.properties" />
+	
+	<!--版本控制信息-->
+	<property name="version" value="v1.0.0"></property>
+	<property name="version.message" value="version:${version} build:${cctimestamp}"/>
+	<property name="version.file" value="version.txt"></property>
+	<target name="generate_version">
+		<echo file="${dir.src.web}/${version.file}" append="no" message="${version.message}"/>
+	</target>
+	
+	<!-- 主要路径修改START -->
+	<path id="lib.classpath">
+		<fileset dir="${dir.src.web}/WEB-INF/lib">
+			<include name="**/*.jar"/>
+		</fileset>
+		<fileset dir="${tomcat.home}">
+			<include name="lib/*.jar"/>
+			<include name="common/lib/*.jar"/>
+		</fileset>
+	</path>
+	
+	<path id="dirs.java.src"><!--//.java路径-->
+		<pathelement path="java_src"/>
+	  	<pathelement path="src"/>
+	</path>
+	<path id="dirs.test.src">
+		  	<pathelement path="src/javacommon"/>
+		</path>
+	  		
+	<!-- 主要路径修改END -->
+		
+	<target name="prepare" depends="clean">
+		<echo message="tomcat.home=${tomcat.home}"/>
+		<echo message="version.message=${version.message}" />
+		<mkdir dir="${dir.dist}"/>
+		<mkdir dir="${dir.dist.java}"/>
+		
+		<!--<mkdir dir="${dir.dist.test}"/>-->
+		<mkdir dir="${dir.dist}/${dir.src.web}"/>
+	</target>
+	
+	<target name="clean">
+		
+		<delete dir="${dir.dist}"></delete>
+	</target>
+			
+	<target name="war" depends="compile-src">
+		<war destfile="${dir.dist}/${context.path}.war" webxml="${dir.src.web}/WEB-INF/web.xml" >
+			<classes dir="${dir.dist.java}" includes="**/*"></classes>
+			<fileset dir="${dir.src.web}" includes="**/*">
+				<exclude name="WEB-INF/classes/**/*"/>
+			</fileset>
+			<fileset dir="${dir.dist}/${dir.src.web}" includes="**/*" />
+		</war>
+	</target>
+
+	<target name="compile-src" depends="prepare">
+		
+		<javac 
+			nowarn="yes" target="${compile.version}" source="${compile.version}" encoding="${encoding}"
+			destdir="${dir.dist.java}" debug="true"
+			classpathref="lib.classpath">
+			<src refid="dirs.java.src"/>
+			
+		</javac>
+		
+		
+		<copy todir="${dir.dist.java}">
+			
+			<fileset dir="src/sys_src" excludes="**/*.java"/>
+			<fileset dir="src/javacommon" excludes="**/*.java"/>
+			<fileset dir="java_src" excludes="**/*.java"></fileset>
+			<fileset dir="src/resources" excludes="**/*.java"></fileset>
+			
+			
+		</copy>
+		
+	</target>
+	
+
+	<target name="compile-all" description="compile java src and java test source">
+		<antcall target="compile-src"/>
+		<antcall target="compile-test"/>
+	</target>
+		
+	<target name="jar" depends="test">
+		<jar jarfile="${dir.dist}/${jar.name}">
+			<fileset dir="${dir.dist.java}">
+				<include name="META-INF/**"/>
+				<include name="**"/>
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="jar.source" depends="">
+		<jar jarfile="${dir.dist}/${ant.project.name}-${version}-source.jar">
+			<fileset dir="src" >
+				<include name="**/*.java"/>
+			</fileset>
+		</jar>
+	</target>
+					
+	<!-- 运行前请将junit.jar加入ant runtime classpath
+	      打开Window>>Perferences>>Ant>>Runtime>>Classpath里加入junit.jar-->
+	<target name="test" depends="compile-all">
+		<delete dir="${dir.test.report}" failonerror="no"/>
+		<mkdir dir="${dir.test.report}"/>
+		<junit printsummary="yes" fork="yes" haltonfailure="yes" dir="${basedir}"  maxmemory="256M">
+			
+			<classpath>
+				<path refid="lib.classpath"/>
+				<pathelement path="${dir.dist.java}"/>
+			</classpath>
+				
+			<formatter type="plain"/>
+			<formatter type="xml"/>
+			<formatter type="brief"/>
+			
+		</junit>
+		
+		<antcall target="test-report"></antcall>
+	</target>
+	
+
+</project>

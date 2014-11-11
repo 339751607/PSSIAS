@@ -1,0 +1,376 @@
+body,div,form {
+	font-size: 12pt;
+	margin: 0;
+	padding: 0;
+}
+fieldset{
+	font-size:14px;
+	margin:2px 2px 0px 2px;
+}
+.select {
+ width:155px;
+}
+
+/* link color */
+a,a:link {color: #006699; text-decoration:none;}
+a:visited {color: #006699;text-decoration:none;}
+a:hover {color: #bc2931; text-decoration:underline;}
+a:active {color: #bc2931;}
+
+/* for button: <input type=submit class=stdButton /> */
+.stdButton {
+	background-color:buttonface;
+	border:1px solid #CCCCCC;
+	cursor:pointer;
+	font-family:Verdana;
+	font-size:9pt;
+	height:22px;
+}
+
+/* formTable */
+.formTable {
+	border-collapse:collapse;
+	width:100%;
+	margin:0px; 
+}
+
+.formTable .tdLabel{   
+	border:1px solid #CCC;
+	height: 25px;
+	width: 150px;
+	font-weight:bold;
+	vertical-align: top;
+	text-align: right;
+}
+
+.formTable td{   
+	border:1px solid #CCC;
+}
+
+
+.formTable span.required{   
+	color:red;
+	font-weight:bold;
+}
+
+/* END formTable */
+
+/* queryPanel for list.jsp */
+.queryPanel .tdLabel{   
+	vertical-align: top;
+	text-align: right;
+}
+
+/* Messages */
+div.error, div.message {
+	border: 1px solid black;
+	padding: 4px;
+    background: #ffffcc;
+    color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    margin: 10px auto;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+div.error {
+	border: 2px solid red;
+}
+
+
+/*********new*********/
+.tb_all{
+  background:#EDF1FF;
+  border:1px solid #3889BB;
+  border-collapse:collapse;
+  margin:5px 0px 0px 0px;
+  width:100%;
+}
+.tb_all_ggcx{
+  background:#e0e5ff;
+  border:1px solid #92a8f7;
+  border-collapse:collapse;
+  margin:10px 0px 0px 0px;
+  width:100%;
+}
+.tb_all2{
+  background:#e0e5ff;
+  border-collapse:collapse;
+  margin:0px 0px 0px 0px;
+  
+}
+.tb_all form{
+  margin:1px;
+}
+/*--------------------------标题渐变样式-------------------*/
+.tb_title {
+	border-bottom: 1px solid #c0c0c0;
+	/*background:url("images/title_bg.gif") repeat-x left top;*/
+	height: 30px;
+	background-color:#FFFFFF;
+    FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#ffffff,endColorStr=#CDEAFA);/*IE6*/
+    background:-moz-linear-gradient(top,#ffffff,#CDEAFA);/*非IE6的其它*/
+    background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#CDEAFA));
+	text-align: center;
+	padding: 0px 0px 0px 0px;
+	font-size: 16px;
+	font-family: '微软雅黑';
+	font-weight: bold;
+	color: #263e98;
+}
+
+/*------------------------列名颜色样式-----------------------*/
+.crosscolor_td {
+	text-align:right;
+	letter-spacing:2px;
+	font-size:15px;
+	font-family:"宋体";
+	width: 19%;
+}
+
+/*------------------------逐行颜色样式-----------------------*/
+
+.crosscolor_tr {
+	/*background-color: expression(( this . sectionRowIndex % 2 == 0) ?
+		"#F9F9F9" : "#ffffff" );*/
+	*background-color: expression(( this . sectionRowIndex % 2 == 0) ?
+		"#EDF1FF" : "#ffffff" );
+	height: 25px;
+	font-family: "微软雅黑", "Verdana", "Arial", "Helvetica";
+	font-size: 11pt;
+	text-align:left;
+}
+
+.crosscolor_tr td {
+	padding: 0px 0px 0px 0px;
+	margin: 0 0px 0 0px;
+	border:1px solid #92a8f7;
+	word-wrap:break-word;
+	word-break:break-all;
+}
+
+.crosscolor_tr input {
+	margin: 0 0 0 0px;
+	height: 20px;
+
+}
+
+
+.crosscolor_tr select {
+	border-right: #000000 1px solid;
+	border-top: #ffffff 1px solid;
+	border-left: #ffffff 1px solid;
+	color: #263e98;
+	border-bottom: #000000 1px solid;
+	background-color: #ffffff;
+	float: left;
+	margin: 0 0 0 0px;
+	padding: 0px;
+	height: 18px;
+	line-height: 18px;
+}
+.crosscolor_tr td .list{
+	margin-left: -8px;
+}
+
+.tr_tb {
+	background-color: expression(( this . sectionRowIndex % 2 == 0) ?
+		"#f8f9ff" : "#FFFFFF" );
+	height: 27px;
+	font-family: "微软雅黑", "Verdana", "Arial", "Helvetica";
+	font-size: 12pt;
+}
+
+.td_tb {
+	padding: 0px 0px 0px 7px;
+	text-align: right;
+	margin: 0 0px 0 0px;
+	border:1px solid #c0c0c0;
+}
+
+.td_input {
+	padding: 0px 0px 0px 7px;
+	margin: 0 0px 0 0px;
+	border:1px solid #c0c0c0;
+}
+
+.td_select {
+	padding: 0px 0px 0px 7px;
+	margin: 0 0px 0 0px;
+	border:1px solid #c0c0c0;
+}
+/*------------------------底部按钮样式-----------------------*/
+.tb_bottom { 
+	height: 23px;
+	border-top: 0px solid #535e70;
+	background:url("images/bottom_bg.gif") repeat-x left top;
+    text-align: center;
+	font-size: 10px;
+	font-weight: bold;
+	margin: 0 auto;
+	padding: 0;
+}
+.tb_tr {
+	background-color: expression(( this . sectionRowIndex % 2 == 0) ?
+		"#F1F7FA" : "#FEFEFF" );
+	height: 27px;
+	font-family: "微软雅黑", "Verdana", "Arial", "Helvetica";
+	font-size: 12pt;
+}
+.tb_td {
+	text-align: right;
+	padding-right:10px;
+	font-weight:bold;
+	border:1px solid #c0c0c0;
+}
+.tb_tr td{
+	padding-left:10px;
+	border:1px solid #c0c0c0;
+}
+.tb_bottom input {
+	width: 60px;
+	height: 23px;
+	font-size: 10pt;
+	color: #003366;
+	margin: 0 10px 0 0;
+	padding: 2px 0 0 0;
+	font-weight: bold;
+	cursor: hand;
+}
+
+.tb_bottom a {
+	font-size: 14px;
+}
+.tb_middle { 
+	/*background:url("bottom_bg.gif") repeat-x left top;*/
+	text-align: center;
+	padding: 2px 0;
+}
+.td_middle {
+	background-color: expression(( this . sectionRowIndex % 2 == 0) ?
+		"#F1F7FA" : "#FEFEFF" );
+	height: 27px;
+	font-family: "微软雅黑", "Verdana", "Arial", "Helvetica";
+	font-size: 12pt;
+	text-align: center;
+}
+.tb_middle form {
+	margin: 0px;
+	padding: 0px;
+}
+.tb_middle{
+  background:url("images/bottom_bg.gif") repeat-x left top;
+  height:27px;
+  border-top:1px solid #535e70;
+  text-align:center;
+  padding:2px;
+  border:1px solid #535e70;
+  margin:10px 0px 0px 0px;
+}
+.tb_middle form{
+  margin:0px;
+  padding:0px;
+}
+.head_title{
+  background:#263e98;
+  color:#ffffff;
+  font-size:10pt;
+  height:20px;
+  text-align:center;
+}
+.td_head{
+ background:#7986d3;
+ color:#e4e8ff;
+ font-size:10pt;
+}
+.list td
+{
+border:0px;
+font-size:10pt;
+text-align: left;
+}
+.list input
+{
+border:1px solid #7F9DB9;
+}
+.list2 td
+{
+border:0px;
+font-size:10pt;
+color: #263e98;
+font-family: "微软雅黑";
+font-weight:bold;
+text-align: left;
+}
+.list2 input 
+{
+border:0px;
+}
+.date_td td
+{
+	width:300px;
+}
+
+#container div{margin-top:5px;}
+#select_city h3{float:left;}
+#select_city span{float:left;text-align:left;font-size:13px;font-weight:bold;}
+#addrinfo { float: left; width:40px; }
+#main_city div,#all_province div{width:600px;clear:left;}
+#main_city h4,#all_province h4{float:left;display:inline;font-size:16px;}
+#main_city div span,#all_province div span{float:left;margin:0 10px;cursor:pointer;font-size:12px;}
+#float_lay{width:400px;border:1px #d1d1d1 solid;position:absolute;background:#fff;z-index:999;display:none;}
+#float_lay span{width:130px;font-size:12px;text-align:left;float:left;}
+#result span{font-size:12px;text-align:left;float:left}
+#container p{margin-top: 4px}
+#result p{margin-top: 4px}
+#float_lay p{margin-top: 4px}
+
+#tabbg
+{
+	
+    width: 900px;
+    margin: 100px auto 0 auto;
+    font-family: Arial, Helvetica;
+    font-size: small;
+	background: #444;
+}
+
+#tabs{
+  text-align:left;
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#tabs li{
+  float: left;
+  margin: 0 .5em 0 0;
+}
+
+#tabs a{
+  position: relative;
+  padding-top:0.3em;
+  padding-right:3.5em;
+  padding-bottom:0.7em;
+  padding-left:1em;
+  float: left;
+  color: #444;
+  background:url(../images/tab.png) no-repeat !important;
+}
+#content
+{
+	
+    border:1px solid #CCC;
+    margin-top:-6px;
+	height: 20px;
+	position: relative;
+	z-index: 2;	
+}
+
+#content h2, #content h3, #content p
+{
+    margin: 0 0 15px 0;
+}

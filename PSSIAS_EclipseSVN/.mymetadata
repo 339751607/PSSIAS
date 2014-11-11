@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="PSSIAS"
+  id="myeclipse.1404105920359"
+  context-root="/zazh"
+  j2ee-spec="1.4"
+  archive="PSSIAS.war">
+  <attributes>
+    <attribute name="webrootdir" value="/web" />
+  </attributes>
+</project-module>
+
