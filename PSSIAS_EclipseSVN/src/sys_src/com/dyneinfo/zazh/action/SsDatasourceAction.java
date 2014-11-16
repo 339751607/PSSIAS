@@ -107,7 +107,7 @@ public class SsDatasourceAction extends BaseStruts2Action implements Preparable,
 	}
 	public String loginfo() {
 		HttpServletRequest request = ServletActionContext.getRequest();
-		
+		net.sf.json.JSONArray jsonArray = null;
         SecurityContext sc = SecurityContextHolder.getContext();
         Authentication auth = sc.getAuthentication();
         MyUserDetails ud = null;
@@ -147,6 +147,9 @@ public class SsDatasourceAction extends BaseStruts2Action implements Preparable,
             + " order by code ";
 	    List compList = ssDatasourceManager.getLogInfoForMap(sql);
 	    request.setAttribute("compList", compList);
+	    jsonArray = net.sf.json.JSONArray.fromObject(compList);
+	    request.setAttribute("jsonStr1", jsonArray.toString());
+	    
 	    
 	    //采录数据数统计
         sql = " select code, called, nvl(inCount, 0) incount, 0 inCount1" 
@@ -171,6 +174,9 @@ public class SsDatasourceAction extends BaseStruts2Action implements Preparable,
 	        + " order by code ";
         List dataList = ssDatasourceManager.getLogInfoForMap(sql);
 	    request.setAttribute("dataList", dataList);
+	    
+	    jsonArray = net.sf.json.JSONArray.fromObject(dataList);
+	    request.setAttribute("jsonStr2", jsonArray.toString());
 	    
 	    //统计报警数
 	    sql = " select code, called, nvl(inCount, 0) incount, nvl(inCount1, 0) inCount1 "
@@ -206,6 +212,9 @@ public class SsDatasourceAction extends BaseStruts2Action implements Preparable,
 	    
 	    List alermList = ssDatasourceManager.getLogInfoForMap(sql);
 	    request.setAttribute("alermList", alermList);
+	    
+	     jsonArray = net.sf.json.JSONArray.fromObject(alermList);
+	    request.setAttribute("jsonStr3", jsonArray.toString());
 	    
 	    String days = DictHelpImpl.getInitData("NOUPLOADDATE");
 	    int intDay = 3;
@@ -254,6 +263,9 @@ public class SsDatasourceAction extends BaseStruts2Action implements Preparable,
 	    
 	    List uploadList = ssDatasourceManager.getLogInfoForMap(sql);
 	    request.setAttribute("uploadList", uploadList);
+	    jsonArray = net.sf.json.JSONArray.fromObject(uploadList);
+	    request.setAttribute("jsonStr4", jsonArray.toString());
+	    
         
 		return LOGINFO_JSP;
 	}
