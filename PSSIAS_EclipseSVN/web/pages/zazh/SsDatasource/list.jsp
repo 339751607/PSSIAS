@@ -1,6 +1,7 @@
 <%@page import="com.dyneinfo.zazh.model.*" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/commons/taglibs.jsp" %>
+<script type="text/javascript" src="jscharts.js"></script>
 <%
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
 %>
@@ -16,6 +17,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body onload="quickSelectInit()" >
 <%@ include file="/commons/messages.jsp" %>
 
+<div id="graph2">Loading...</div>
+<script type="text/javascript">
+	
+	var myData = new Array(['Asia', 437, 520], ['Europe', 322, 390], ['North America', 233, 286], ['Latin America', 110, 162], ['Africa', 34, 49], ['Middle East', 20, 31], ['Aus/Oceania', 19, 22]);
+	var myChart = new JSChart('graph2', 'bar');
+	myChart.setDataArray(myData);
+	myChart.setTitle('Internet usage by World Region (millions of users)');
+	myChart.setTitleColor('#8E8E8E');
+	myChart.setAxisNameX('');
+	myChart.setAxisNameY('');
+	myChart.setAxisNameFontSize(16);
+	myChart.setAxisNameColor('#999');
+	myChart.setAxisValuesAngle(30);
+	myChart.setAxisValuesColor('#777');
+	myChart.setAxisColor('#B5B5B5');
+	//myChart.setAxisWidth(1);
+	myChart.setBarValuesColor('#2F6D99');
+	myChart.setAxisPaddingTop(60);
+	myChart.setAxisPaddingBottom(60);
+	myChart.setAxisPaddingLeft(45);
+	myChart.setTitleFontSize(11);
+	myChart.setBarColor('#2D6B96', 1);
+	myChart.setBarColor('#9CCEF0', 2);
+//	myChart.setBarBorderWidth(2);
+	myChart.setBarSpacingRatio(50);
+	//myChart.setBarOpacity(0.9);
+	//myChart.setFlagRadius(6);
+	myChart.setTooltip(['North America', 'Click me', 1], callback);
+	myChart.setTooltipPosition('nw');
+	myChart.setTooltipOffset(3);
+	myChart.setLegendShow(true);
+	myChart.setLegendPosition('right top');
+	myChart.setLegendForBar(1, '2005');
+	myChart.setLegendForBar(2, '2010');
+	myChart.setSize(616, 321);
+	//myChart.setGridColor('#C6C6C6');
+	myChart.draw();
+	
+	function callback() {
+		alert('User click');
+	}
+	
+</script>
 <div class="queryPanel">
     <s:form action="/pages/zazh/SsDatasource/list.do"  theme="simple" style="display: inline;" method="post">
 	    <table width="100%" border="1" bordercolor="#7c8ca7" align="center"  cellPadding="0" cellSpacing="0" class="tb_all">

@@ -108,7 +108,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function queryCity2()
 	{
 		var provinceId = spider("s_burcode").value;
+		var testPrototype = spiderF("s_burcode");
 		alert(provinceId);
+		alert("$F('s_burcode')="+testPrototype);
 		menu.queryProvinceById(provinceId,cityCallback2);
 	}
 	

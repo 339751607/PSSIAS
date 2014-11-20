@@ -56,6 +56,8 @@ a:hover {
 		<table width="100%" cellpadding="0" cellspacing="0">
 			<tr>
 				<td>
+					<div style="float: right; margin: 8px 10px 0px 6px;font-size: 13px;">	系统用户总数&nbsp;：&nbsp;<c:out value="${usertotal}"></c:out>&nbsp;个，
+					&nbsp; &nbsp; 当前在线数&nbsp;：&nbsp;<c:out value="${usercount}"></c:out>&nbsp;个</div>
 					<DIV style="float: left; margin: 8px 0px 0px 6px; font-size: 13px;">
 					   <span> 部门：<authz:authentication property="principal.deptName"/>&nbsp;&nbsp;&nbsp;
 						操作员：<authz:authentication property="principal.userXm" />

@@ -41,9 +41,6 @@ public class SsDatasourceManager extends BaseManager<SsDatasource,Long>{
 	public SsDatasource getDataSouceByBusinessCode(String businessCode) {
 		return ssDatasourceDao.getDataSouceByBusinessCode(businessCode);
 	}
-	public Number getCountForSQL(String sql) {
-		return ssDatasourceDao.getCountForSQL(sql);
-	}
 	public List getLogInfoForMap(String sql) {
 		return ssDatasourceDao.getLogInfoForMap(sql);
 	}

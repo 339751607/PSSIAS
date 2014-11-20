@@ -124,12 +124,6 @@ public class SsDatasourceDao extends BaseSpringJdbcDao<SsDatasource,Long>{
 			return null;
 		}
 	}
-	public Number getCountForSQL(String sql) {
-		
-		int count = getSimpleJdbcTemplate().queryForInt(sql);
-		
-		return count;
-	}
 	public List getLogInfoForMap(String sql ) {
 		
 		List mapList = getJdbcTemplate().query(sql, new MapRowMapper());

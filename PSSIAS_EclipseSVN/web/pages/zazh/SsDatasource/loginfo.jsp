@@ -50,10 +50,6 @@ if(alermList != null && alermList.size()>0){
 	 } 
 }
 %>
-	<input type="hidden" id="inputTxtTotal" value="<%=baojingTotal %>" />
-	<input type="hidden" id="inputTxtTotal1" value="<%=weichuliTotal1 %>" />
-	
-	
 	
 
 <script type="text/javascript">

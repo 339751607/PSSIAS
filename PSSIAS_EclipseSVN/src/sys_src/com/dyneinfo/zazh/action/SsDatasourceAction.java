@@ -123,13 +123,6 @@ public class SsDatasourceAction extends BaseStruts2Action implements Preparable,
 			}
 		}	
 		
-		//用户总数
-		String sql="SELECT COUNT(*) FROM SS_USER WHERE ENABLED='1' ";
-		int userTotal = ssDatasourceManager.getCountForSQL(sql).intValue();
-        request.setAttribute("usertotal", userTotal);	    
-	    //在线用户数
-        SessionUserCount userCount = new SessionUserCount();
-	    request.setAttribute("usercount", userCount.getCount());
 	    
 	    String deptWhere = " 1=1 ";
 	    //分局用户
@@ -141,7 +134,7 @@ public class SsDatasourceAction extends BaseStruts2Action implements Preparable,
 	    	deptWhere += " AND cp.stacode = '" + deptid + "' ";
 	    }
 	    //企业数统计
-	    sql = " select code, called, nvl(inCount,0) incount, 0 inCount1 "
+	    String sql = " select code, called, nvl(inCount,0) incount, 0 inCount1 "
             + " from ss_datasource t1, (select BUSINESSCODE, count(1) inCount from t_companyinfo cp WHERE " + deptWhere + " group by BUSINESSCODE) t2 "
             + " where isvalid = '1' and code<>'000'  and t1.code = t2.BUSINESSCODE(+) "
             + " order by code ";
