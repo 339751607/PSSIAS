@@ -120,16 +120,16 @@
                    
   function changeprov()
 	{
-		var provinceId = $("prov").value;
-		var provincename = $("prov").options[$("prov").options.selectedIndex].text;
-		var nativeplace = $("s_nativeplace").value;
-		var xzqh = $("fsdw").value;
+		var provinceId = spider("prov").value;
+		var provincename = spider("prov").options[spider("prov").options.selectedIndex].text;
+		var nativeplace = spider("s_nativeplace").value;
+		var xzqh = spider("fsdw").value;
 		if(nativeplace==""){
-			$("s_nativeplace").value = provincename;
-			$("fsdw").value = provinceId;
+			spider("s_nativeplace").value = provincename;
+			spider("fsdw").value = provinceId;
 		}else{
-			$("s_nativeplace").value = nativeplace+","+provincename;
-			$("fsdw").value = xzqh+","+provinceId;
+			spider("s_nativeplace").value = nativeplace+","+provincename;
+			spider("fsdw").value = xzqh+","+provinceId;
 		}
 	}
 	</script>

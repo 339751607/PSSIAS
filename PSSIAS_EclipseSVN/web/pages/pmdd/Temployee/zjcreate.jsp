@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			                      <%=Temployee.ALIAS_FOLK%>
 		                  </td>
 			              <td>
-						           <mytag:select property="%{model.folk}"    name="folk"   notEmpty="false"  dictName="nation"/>
+						           <mytag:select property="%{model.folk}"    name="folk"   notEmpty="false"  dictName="T_DIC_NATION"/>
 		                  </td>
                    </tr>
 		           <tr class="crosscolor_tr">
@@ -425,7 +425,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//查询所属城市
 	function queryCity()
 	{
-		var provinceId = $("prov").value;
+		var provinceId = spider("prov").value;
 		provinceId = provinceId.substr(0,2);
 		menu.queryXzqhById(provinceId,cityCallback);
 
@@ -454,7 +454,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//查询所属城市
 	function queryCity2()
 	{
-		var provinceId = $("prov2").value;
+		var provinceId = spider("prov2").value;
 		provinceId = provinceId.substr(0,2);
 		menu.queryXzqhById(provinceId,cityCallback2);
 	}

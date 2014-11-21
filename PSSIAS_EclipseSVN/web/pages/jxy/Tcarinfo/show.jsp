@@ -147,7 +147,7 @@ if(request.getAttribute("demo") != null)
 	<body>
 		<%@ include file="/commons/messages.jsp"%>
         
-		<s:form action="/jxy/Tcarinfo/list.do"  method="get" theme="simple">
+		<s:form action="/pages/jxy/Tcarinfo/list.do"  method="get" theme="simple">
 			<s:hidden name="enrolid" id="enrolid" value="%{model.enrolid}" />
 			<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 				<tr>
@@ -188,7 +188,7 @@ if(request.getAttribute("demo") != null)
 					<td rowspan="5"  align="center" width="25%">
 					     
 									<img
-							src='${ctx}/jxy/Tcarinfo/showPic.do?enrolid=<s:property value="%{model.enrolid}" />'
+							src='${ctx}/pages/jxy/Tcarinfo/showPic.do?enrolid=<s:property value="%{model.enrolid}" />'
 							onerror="this.src='${ctx}/images/noCar.gif'"  alt=""
 							height="100" width="200" border="0" name="photo">
 								
@@ -347,7 +347,7 @@ if(request.getAttribute("demo") != null)
 				<tr>
 					<td colspan="5" class="tb_bottom">
 						<input type="button" value="返回"
-							onclick="window.location='${ctx}/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'" />
+							onclick="window.location='${ctx}/pages/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'" />
 							
 							<input type="button"  value="预览" onclick="javascript:myPreview()"/>
 						    <input type="button"  value="打印" onclick="javascript:myPrint()"/>
@@ -358,7 +358,7 @@ if(request.getAttribute("demo") != null)
 			
 		</s:form>
 <mytag:tab id="orgInfo"  width="100%" height="100%"   >
-	 <mytag:tabContent url="${ctx}/jxy/Tcarcaseinfo/show.do"  selected="true"   param="enrolid"  paramValue="${model.enrolid}"   frameBorder="0" tabType="frame" scrolling="auto" title="事故信息"/>
+	 <mytag:tabContent url="${ctx}/pages/jxy/Tcarcaseinfo/show.do"  selected="true"   param="enrolid"  paramValue="${model.enrolid}"   frameBorder="0" tabType="frame" scrolling="auto" title="事故信息"/>
 </mytag:tab>
 <!--  -->
 
@@ -584,7 +584,7 @@ if(request.getAttribute("demo") != null)
    	getPcs();
 	function getPcs(){
 	var recename='${model.recename}';
-	var url="${ctx}/jxy/Dictitem/getEmployeeList.do?ajax=true&show=true&recename="+recename;
+	var url="${ctx}/pages/jxy/Dictitem/getEmployeeList.do?ajax=true&show=true&recename="+recename;
 	$.post(url, function(data) {
 		$("#rece").html(data);
 		$("#receprint").html(data);

@@ -15,9 +15,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body onload="quickSelectInit()" >
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/ThotelBsQa/update.do"  theme="simple"  method="post">
+<s:form action="/pages/jxy/ThotelBsQa/update.do"  theme="simple"  method="post">
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
-	    <input type="hidden" name="returnUrl" value="!/jxy/ThotelBsQa/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+	    <input type="hidden" name="returnUrl" value="!/pages/jxy/ThotelBsQa/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 	    	<s:hidden id="xh" name="xh" />
 	        <tr>
 				      <td colspan="4" class="tb_title"> 
@@ -107,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        <tr >
 					 <td colspan="4" class="tb_bottom">
 	                        <input id="submitButton" name="submitButton" type="submit" value="提交" />
-	                        <input type="button" value="返回" onclick="window.location='${ctx}/jxy/ThotelBsQa/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>   
+	                        <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/ThotelBsQa/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>   
 					 </td>
 			</tr>
 	</table>

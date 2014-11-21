@@ -18,7 +18,7 @@ List listfile = (List) request.getAttribute("listfile");
 <body>
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/SsNotice/listPop.do" method="get" theme="simple" >
+<s:form action="/pages/jxy/SsNotice/listPop.do" method="get" theme="simple" >
 	<s:hidden name="noticeid" id="noticeid" value="%{model.noticeid}"/>
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all" style="margin: 8px">
 	               <tr>
@@ -94,9 +94,9 @@ List listfile = (List) request.getAttribute("listfile");
 				
                    <tr>
 						<td colspan="4" class="tb_bottom">
-						  <a href="${ctx}/jxy/SsNotice/listPop.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>">返 回</a>
+						  <a href="${ctx}/pages/jxy/SsNotice/listPop.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>">返 回</a>
 				      <c:if test="${model.isreply == '1'}">
-                    	<a style="margin-left: 10px" href="${ctx}/jxy/SsNoticeReply/save.do?nid=${model.noticeid}&pop=true<mytag:params includes="ec*,s*" type="queryStringUtf"/>">回 执</a>
+                    	<a style="margin-left: 10px" href="${ctx}/pages/jxy/SsNoticeReply/save.do?nid=${model.noticeid}&pop=true<mytag:params includes="ec*,s*" type="queryStringUtf"/>">回 执</a>
                     	</c:if>
                      </td>
 	                      </td>
@@ -112,7 +112,7 @@ List listfile = (List) request.getAttribute("listfile");
 
     function view(FILEID){
     	var url="";
-    	url ="${ctx}/jxy/FileAttach/pictShow.do?FILEID="+FILEID;
+    	url ="${ctx}/pages/jxy/FileAttach/pictShow.do?FILEID="+FILEID;
     	newwin = window.open(url,
 						"popupnav",
 						"resizable=yes,status=yes,menubar=no,scrollbars=yes");

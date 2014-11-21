@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?> 
 <chart caption='中文 Revenue' numVDivLines="10" numDivLines="10" 
 canvasBorderColor="FFFFFF" lineThickness='1'
 anchorBgColor="0BBF59" xAxisName='Month' yAxisName='Revenue' 

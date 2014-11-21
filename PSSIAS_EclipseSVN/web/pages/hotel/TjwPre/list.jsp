@@ -13,9 +13,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<base href="<%=basePath%>">
 	<link href="${ctx}/widgets/extremecomponents/extremecomponents.css" type="text/css" rel=stylesheet>
 	<title><%=TjwPre.TABLE_ALIAS%> 维护</title>
-	<script type='text/javascript' src='${ctx}/dwr/interface/menu.js'></script>
-	<script type='text/javascript' src='${ctx}/dwr/engine.js'></script>
-	<script type='text/javascript' src='${ctx}/dwr/util.js'></script>
 	<script type="text/javascript">
 
 	function loadSelect(){
@@ -241,6 +238,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
 	action="${ctx}/pages/hotel/TjwPre/list.do" autoIncludeParameters="true">
+	<ec:exportXls fileName="jw.xls" tooltip="输出Excel文件"/>
 	<ec:row>
 		                    <ec:column property="mfn"  title="<%=TjwPre.ALIAS_M_FN%>"/>
 		                    <mytag:lookupcolumn property="pnational"  title="<%=TjwPre.ALIAS_P_NATIONAL%>"	cell="net.java.dev.ec.table.view.LookUpCell" dictType="DIC_ITEM_COUNTRY" />

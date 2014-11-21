@@ -173,6 +173,7 @@ public class ClzyddDao extends BaseSpringJdbcDao<Clzydd, java.lang.String> {
 				+ "/~ and b.FJDM = '[fjdm]' ~/"
 				+ "/~ and c.deptseq like '[deptseq]%' ~/"
 				+ "/~ order by [sortColumns] ~/";
+		System.out.println(sql);
 		return pageQuery(sql, pageRequest);
 	}
 

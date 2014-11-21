@@ -1,6 +1,8 @@
 <%@page import="com.dyneinfo.hotel.model.*" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/commons/taglibs.jsp" %>
+<%@ include file="/pages/hotel/commons/dept.jsp" %>
+<%@ include file="/pages/hotel/commons/xzqh.jsp" %>
 <%
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
 %>
@@ -9,260 +11,125 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 	<%@ include file="/commons/meta.jsp" %>
 	<base href="<%=basePath%>">
-	<title><%=TtjGuestPre.TABLE_ALIAS%>查询</title>
+	<link href="${ctx}/widgets/extremecomponents/extremecomponents.css" type="text/css" rel=stylesheet>
+	<title><%=TtjGuestPre.TABLE_ALIAS%> 维护</title>
+<script type="text/javascript">
+
+	function loadSelect(){
+		queryCity();
+		queryCity2();
+		if(1 == "${pageRequest.filters.nonnative}"){
+			document.getElementById("s_nonnative").checked=true;
+		}
+		
+	}
+	function rt(){
+			document.getElementById("s_nonnative").checked=false;
+	}
+</script>
 </head>
 
-<body>
+<body onload="loadSelect()" >
 <%@ include file="/commons/messages.jsp" %>
+
 <div class="queryPanel">
-    <s:form action="/pages/hotel/TchPre/list.do"  theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/hotel/TtjGuestPre/list.do" name="form1" theme="simple"  method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
-			              <td class="tb_title" colspan="4"><%=TtjGuestPre.TABLE_ALIAS%>查询</td>
+			              <td class="tb_title" colspan="4"><%=TtjGuestPre.TABLE_ALIAS %></td>
 		           </tr>
-		           <tr class="crosscolor_tr">
+		            <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_NAME%>
+			                      <%=TtjGuestPre.ALIAS_BUR_CODE%>
 		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.name}"  name="s_name"  />
+			              <td class="crosscolor_td2">
+			              		<mytag:select  name="s_burCode" onchange="changeprov2();" value="${pageRequest.filters.burCode}" dictName="ssfj"/>
 		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_SEX%>
+		                  <td class="crosscolor_td">
+			                      <%=TtjGuestPre.ALIAS_STA_CODE%>
 		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.sex}"  name="s_sex"  />
-		                  </td>
+			              <td class="crosscolor_td2">
+			              			<select name="s_staCode"  >
+			              			</select>
+		                  </td>	
                    </tr>
 		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_NATION%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.nation}"  name="s_nation"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_BDATE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.bdate}"  name="s_bdate"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_ID_NAME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.idName}"  name="s_idName"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_ID_CODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.idCode}"  name="s_idCode"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
+		                  <td class="crosscolor_td">
 			                      <%=TtjGuestPre.ALIAS_XZQH%>
+		                  </td>	           
+		                  <td>
+						           <mytag:select onchange="changeprov();" name="s_province" value="${pageRequest.filters.province}" notEmpty="false"  dictName="T_DICT_PROV"/>
+							      <select style="margin-left: 10px" name="s_xzqh"></select>
 		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.xzqh}"  name="s_xzqh"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_ADDRESS%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.address}"  name="s_address"  />
-		                  </td>
+		                  <td  class="crosscolor_td">
+		                  		查询非本地人员
+		                  </td>	           
+		                  <td>
+		                  		<input type="checkbox" name="s_nonnative" value="1">
+		                  </td>	           
+		                  	
+                          
                    </tr>
-		           <tr class="crosscolor_tr">
+                   <tr class="crosscolor_tr">
+                   		<td class="crosscolor_td">
+                   			旅馆入住人数
+                   		</td>
+                   		<td>
+                   			<input size="10" value="${pageRequest.filters.guestHotel}" name="s_guestHotel" class="validate-digits" />
+                   			人以上
+                   		</td>
+                   		<td class="crosscolor_td">
+                   			房间入住人数
+                   		</td>
+                   		<td>
+                   			<input size="10" value="${pageRequest.filters.guestRoom}" name="s_guestRoom" class="validate-digits" />
+                   			人以上
+                   		</td>
+                   </tr>
+                    <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
 			                      <%=TtjGuestPre.ALIAS_IN_TIME%>
 		                  </td>
 			              <td>
-		                           <input value="${pageRequest.filters.inTime}"  name="s_inTime"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_NO_ROOM%>
-		                  </td>
+			             	<table class="list">
+			               <tr>
 			              <td>
-		                           <input value="${pageRequest.filters.noRoom}"  name="s_noRoom"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_OUT_TIME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.outTime}"  name="s_outTime"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_TRA_TIME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.traTime}"  name="s_traTime"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_CREDIT_CODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.creditCode}"  name="s_creditCode"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_CREDIT_NO%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.creditNo}"  name="s_creditNo"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_STA_CODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.staCode}"  name="s_staCode"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_BUR_CODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.burCode}"  name="s_burCode"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_SPM%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.spm}"  name="s_spm"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_INSERT_TIME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.insertTime}"  name="s_insertTime"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_MEMO%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.memo}"  name="s_memo"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_HOTELID%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.hotelid}"  name="s_hotelid"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_PDAFLAG%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.pdaflag}"  name="s_pdaflag"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_DRAGOMANAME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.dragomaname}"  name="s_dragomaname"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_DRAGOMAPHONE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.dragomaphone}"  name="s_dragomaphone"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_GROUPNO%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.groupno}"  name="s_groupno"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_KYRY%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.kyry}"  name="s_kyry"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_FLAGTJ%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.flagtj}"  name="s_flagtj"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_DAYS%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.days}"  name="s_days"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_FLAGKY%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.flagky}"  name="s_flagky"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_KYTYPE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.kytype}"  name="s_kytype"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_FLAGCQBF%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.flagcqbf}"  name="s_flagcqbf"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_HOTELNAME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.hotelname}"  name="s_hotelname"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_CITY_CODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.cityCode}"  name="s_cityCode"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TtjGuestPre.ALIAS_TLSY%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.tlsy}"  name="s_tlsy"  />
-		                  </td>
-                          <td>&nbsp;</td>
-                          <td>&nbsp;</td>
+				                   <s:select name="dateSelect1" list="dateSelectMap"  onchange="dateselect(this,'s_inTime_Begin','s_inTime_End','yyyy-MM-dd HH:mm');"  value="#request.dateSelect1" listKey="key"   listValue="value" theme="simple" label=""  emptyOption="false" ></s:select>
+			               </td>
+			               <td>从</td>
+			               <td>
+			                          <input id="d31310" name="s_inTime_Begin"  value="${pageRequest.filters.inTime_Begin}"   maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm',maxDate:'#F{$dp.$D(\'d31410\')}'})"/>
+			               <td>到</td>
+			               <td>
+			                        <input id="d31410" name="s_inTime_End"   value="${pageRequest.filters.inTime_End}"  maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({startDate:'%y-%M-%d 23:59:00',dateFmt:'yyyy-MM-dd HH:mm',minDate:'#F{$dp.$D(\'d31310\')}'})"/>
+			               </td>
+			              </tr>
+			              </table>
+		                  </td>	
+		                  <td></td>	
+		                  <td></td>	
+		                  
                    </tr>
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/hotel/TchPre/list.do'"/>
-	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/pages/hotel/TchPre/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+			                       <input type="submit" id="submitButton" value="统计" onclick="getReferenceForm(this).action='${ctx}/pages/hotel/TtjGuestPre/list.do'"/>
+			                       <input style="margin-left: 20px" type="button" value="重置" onclick="rt();resitData(document.forms.form1)"/>
 			              </td>
 		           </tr>
 	    </table>
     </s:form>
 </div>
+
+<script>
+	
+	new Validation(document.forms[0],{onSubmit:true,onFormValidate : function(result,form) {
+		var finalResult = result;
+		
+		//在这里添加自定义验证
+		
+		return disableSubmit(finalResult,'submitButton');
+	}});
+</script>
 			
 </body>
 

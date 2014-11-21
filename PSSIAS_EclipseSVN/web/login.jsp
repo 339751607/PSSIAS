@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//ZH">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 	<%@ page contentType="text/html; charset=UTF-8"%>
 	<%@ page
 		import="org.springframework.security.ui.AbstractProcessingFilter"%>
@@ -7,8 +8,9 @@
 		import="org.springframework.security.ui.webapp.AuthenticationProcessingFilter"%>
 	<%@ page
 		import="org.springframework.security.AuthenticationException,java.util.*"%>	
+
 		
-	<%@ taglib prefix="c" uri="/WEB-INF/tld/c.tld"%>
+	<%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
 	<%@ page import="net.java.dev.common.dict.taglib.DictHelpImpl"%>
 	<c:set var="ctx" value="${pageContext.request.contextPath}" />
 	<jsp:useBean id="userCount" scope="session" class="org.security.userdetails.jdbc.SessionUserCount"/>
@@ -183,7 +185,7 @@ td {background-color:;}
   function kjfs(){
 	  var fso = new ActiveXObject("Scripting.FileSystemObject");   
 	  var shell = new ActiveXObject("WScript.Shell");    
-      var tagFolder =shell.SpecialFolders("Desktop");       
+	　　var tagFolder =shell.SpecialFolders("Desktop"); 　　            
 	   if(!fso.FolderExists(tagFolder ))
 	   {
 	       fso.CreateFolder(tagFolder);
@@ -316,7 +318,7 @@ function MM_openBrWindow() { //v2.0
 							<form name="f" onsubmit="return MM_openBrWindow()" action="${ctx}/j_spring_security_check" method="POST">
 								
                                     <div class="login_input" style="margin: 10px 0px 0px 550px; ">
-										<input tabindex="2" type='text' name='j_username' id='j_username' maxlength="20" value="admin"
+										<input tabindex="2" type='text' name='j_username' id='j_username' maxlength="20" value=""
 											value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>' />
 									</div>
                                     
@@ -325,7 +327,7 @@ function MM_openBrWindow() { //v2.0
 									</div>
                                 
 									<div style="margin: 18px 0px 0px 550px; padding: 0px;" class="login_input">
-										<input tabIndex="3" type='password' id='j_password' name='j_password' value="123456">
+										<input tabIndex="3" type='password' id='j_password' name='j_password' value="">
 									</div>
 									
 									<div style="margin: 10px 0px 0px 490px; padding:0px;">

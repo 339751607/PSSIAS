@@ -176,7 +176,7 @@ List listfile = (List) request.getAttribute("listfile");
 	
     function view(FILEID){
     	var url="";
-    	url ="${ctx}/pages/FileAttach/pictShow.do?FILEID="+FILEID;
+    	url ="${ctx}/pmdd/FileAttach/pictShow.do?FILEID="+FILEID;
     	newwin = window.open(url,
 						"popupnav",
 						"resizable=yes,status=yes,menubar=no,scrollbars=yes");
@@ -185,7 +185,7 @@ List listfile = (List) request.getAttribute("listfile");
     function download(FILEID){
 		olddoc = document;
     	var url="";
-    	url =  "${ctx}/filedownload/downloadDB.do?FILEID="+FILEID;
+    	url =  "${ctx}/filedownload/pmdddownloadDB.do?FILEID="+FILEID;
     	location.href = url;
     }
 </script>

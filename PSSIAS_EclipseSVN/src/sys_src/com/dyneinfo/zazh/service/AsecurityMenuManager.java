@@ -39,6 +39,13 @@ public class AsecurityMenuManager extends BaseManager<AsecurityMenu,java.math.Bi
 		return asecurityMenuDao;
 	}
 	 
+	public String queryDataAuthoritySwitchStatus(){
+		return asecurityMenuDao.queryDataAuthoritySwitchStatus();
+	}
+	
+	public List getQuery(String sql){
+		return asecurityMenuDao.getQuery(sql);
+	}
 
 	
 }

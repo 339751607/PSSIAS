@@ -162,7 +162,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			              <td class="tb_bottom" colspan="4">
 
 			                        <input type="button"  value="查询" onclick="query();"/>
-			                        <input type="button" value="清空" onclick="resitData(document.forms[0]);"/>
+			                        <input type="button" value="重置" onclick="resitData(document.forms[0]);"/>
 			              </td>
 		           </tr>
 	    </table>

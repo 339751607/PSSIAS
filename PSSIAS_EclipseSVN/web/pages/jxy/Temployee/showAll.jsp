@@ -18,7 +18,7 @@ String  picCount ="";
 <body>
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/Temployee/listAll.do" method="get" theme="simple">
+<s:form action="/pages/jxy/Temployee/listAll.do" method="get" theme="simple">
 	<s:hidden name="cpempcode" id="cpempcode" value="%{model.cpempcode}"/>
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
@@ -41,7 +41,7 @@ String  picCount ="";
 		                  </td>
 		                  <td rowspan="12" width="18%" align="center" >
 						      <%if(picCount != null && picCount.equals("1")) { %>
-					             <a  href="#"> <img src='${ctx}/jxy/Temployee/showPic.do?xh=<s:property value="%{model.cpempcode}" />'  height="126" alt="" width="102" border="0" name="photo"> </a>	
+					             <a  href="#"> <img src='${ctx}/pages/jxy/Temployee/showPic.do?xh=<s:property value="%{model.cpempcode}" />'  height="126" alt="" width="102" border="0" name="photo"> </a>	
 					           <% } else {%>
 					             <a  href="#"> <IMG src="${ctx}/images/spacer.gif" height="126" alt="" width="102" border="0" name="photo"> </a>
 					           <%} %>
@@ -192,7 +192,7 @@ String  picCount ="";
 		          
                    <tr>
 						  <td colspan="5" class="tb_bottom">
-						           <input type="button" value="返回" onclick="window.location='${ctx}/jxy/Temployee/listAll.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+						           <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/Temployee/listAll.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 	                      </td>
 	               </tr>
 	</table>	

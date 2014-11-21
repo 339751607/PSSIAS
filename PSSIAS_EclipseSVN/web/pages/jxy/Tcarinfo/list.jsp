@@ -26,7 +26,7 @@ String webContext = request.getContextPath();
 <%@ include file="/commons/messages.jsp" %>
 
 <div class="queryPanel">
-    <s:form action="/jxy/Tcarinfo/list.do"  name="form1" theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/jxy/Tcarinfo/list.do"  name="form1" theme="simple" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	    <input type="hidden"  id="serveritem" name="serveritem" value="" />	
 	               <tr>
@@ -189,8 +189,8 @@ String webContext = request.getContextPath();
 
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/jxy/Tcarinfo/list.do'"/>
-	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/jxy/Tcarinfo/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/Tcarinfo/list.do'"/>
+	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/Tcarinfo/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 	                               <input type="button" value="清空" onclick="resitData(document.forms.form1);"/>
 			              </td>
 		           </tr>
@@ -202,7 +202,7 @@ String webContext = request.getContextPath();
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/Tcarinfo/list.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/Tcarinfo/list.do" autoIncludeParameters="true">
 	<ec:row>
 		                    <ec:column property="carowner"  title="<%=Tcarinfo.ALIAS_CAROWNER%>"/>
 		                    <mytag:lookupcolumn property="cartype"  title="<%=Tcarinfo.ALIAS_CARTYPE%>"	cell="net.java.dev.ec.table.view.LookUpCell" dictType="cllx" />
@@ -303,7 +303,7 @@ function xmlHttpInitializtions()
              
                 xmlHttpInitializtions();
             
-                xmlhttpRequest.Open("POST","${ctx}/jxy/Tcarinfo/getDataByIdNum.do?key=" + key,true);//POST
+                xmlhttpRequest.Open("POST","${ctx}/pages/jxy/Tcarinfo/getDataByIdNum.do?key=" + key,true);//POST
                 xmlhttpRequest.onreadystatechange=stateChange;//返回状态调用方法stateChange
                 xmlhttpRequest.Send();1
             }
@@ -427,9 +427,9 @@ function getAbsolutePos(el)
 				var input_txt = document.createElement("input");
 				input_txt.type = "hidden";
 				input_txt.name = "returnUrl";
-				input_txt.value = "!/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+				input_txt.value = "!/pages/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
 				form.appendChild(input_txt);
-		        form.action = '${ctx}/jxy/Tcarinfo/delete.do';
+		        form.action = '${ctx}/pages/jxy/Tcarinfo/delete.do';
 	            form.submit();
 	        }
 	  }
@@ -437,7 +437,7 @@ function getAbsolutePos(el)
 			var form = document.forms.ec;
 			if(!form) return;
 			inputParameters(enrolid,form);
-	        form.action = '${ctx}/jxy/Tcarinfo/show.do';
+	        form.action = '${ctx}/pages/jxy/Tcarinfo/show.do';
             form.submit();
 
 		}
@@ -445,7 +445,7 @@ function getAbsolutePos(el)
 			var form = document.forms.ec;
 			if(!form) return;
 			inputParameters(enrolid,form);
-	        form.action = '${ctx}/jxy/Tcarinfo/edit.do';
+	        form.action = '${ctx}/pages/jxy/Tcarinfo/edit.do';
             form.submit();
 		
 		}
@@ -453,17 +453,17 @@ function getAbsolutePos(el)
 			var form = document.forms.ec;
 			if(!form) return;
 			inputParameters(enrolid,form);
-	        form.action = '${ctx}/jxy/Tcarinfo/collectCar.do';
+	        form.action = '${ctx}/pages/jxy/Tcarinfo/collectCar.do';
             form.submit();
 		}
 		function carcase(enrolid){
-			var url="${ctx}/jxy/Tcarcaseinfo/getCarcaseList.do?ajax=true&enrolid="+enrolid;
+			var url="${ctx}/pages/jxy/Tcarcaseinfo/getCarcaseList.do?ajax=true&enrolid="+enrolid;
 			$.post(url, function(data) {
 			if(data=="edit"){
-				window.location='${ctx}/jxy/Tcarcaseinfo/edit.do?enrolid='+enrolid+'&<mytag:params includes="ec*,s*" type="queryStringUtf"/>';
+				window.location='${ctx}/pages/jxy/Tcarcaseinfo/edit.do?enrolid='+enrolid+'&<mytag:params includes="ec*,s*" type="queryStringUtf"/>';
 			}
 			if(data=="create"){
-				window.location='${ctx}/jxy/Tcarcaseinfo/create.do?oldenrolid='+enrolid+'&<mytag:params includes="ec*,s*" type="queryStringUtf"/>';
+				window.location='${ctx}/pages/jxy/Tcarcaseinfo/create.do?oldenrolid='+enrolid+'&<mytag:params includes="ec*,s*" type="queryStringUtf"/>';
 			}
 			});
 		}
@@ -471,7 +471,7 @@ function getAbsolutePos(el)
 		var input_txt = document.createElement("input");
 				input_txt.type = "hidden";
 				input_txt.name = "returnUrl";
-				input_txt.value = "!/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+				input_txt.value = "!/pages/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
 		var input_txt = document.createElement("input");
 				input_txt.type = "hidden";
 				input_txt.name = "enrolid";

@@ -13,9 +13,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body onload="quickSelectInit()">
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/SsNotice/save.do"  enctype="multipart/form-data"  theme="simple" name="inputForm"  method="post">
+<s:form action="/pages/jxy/SsNotice/save.do"  enctype="multipart/form-data"  theme="simple" name="inputForm"  method="post">
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
-	    <input type="hidden" name="returnUrl" value="!/jxy/SsNotice/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+	    <input type="hidden" name="returnUrl" value="!/pages/jxy/SsNotice/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 	       <tr>
 				<td colspan="4" class="tb_title"> 
 							<%=SsNotice.TABLE_ALIAS%>发布
@@ -164,7 +164,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td colspan="4" class="tb_bottom">
 							<input id="submitButton" name="submitButton" type="submit" value="提交" />
 	                        <input type="button" value="附件" title="单个文件小于5M，所有文件累加大小小于10M" onclick="javascript:addfj();"/>
-	                        <input type="button" value="返回" onclick="window.location='${ctx}/jxy/SsNotice/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+	                        <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/SsNotice/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 			    </td>
 	        </tr>
 	</table>

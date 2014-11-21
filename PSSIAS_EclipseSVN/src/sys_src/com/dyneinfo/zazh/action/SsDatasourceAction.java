@@ -123,6 +123,13 @@ public class SsDatasourceAction extends BaseStruts2Action implements Preparable,
 			}
 		}	
 		
+		//用户总数
+		String sql="SELECT COUNT(*) FROM SS_USER WHERE ENABLED='1' ";
+		int userTotal = ssDatasourceManager.getCountForSQL(sql).intValue();
+        request.setAttribute("usertotal", userTotal);	    
+	    //在线用户数
+        SessionUserCount userCount = new SessionUserCount();
+	    request.setAttribute("usercount", userCount.getCount());
 	    
 	    String deptWhere = " 1=1 ";
 	    //分局用户
@@ -134,7 +141,7 @@ public class SsDatasourceAction extends BaseStruts2Action implements Preparable,
 	    	deptWhere += " AND cp.stacode = '" + deptid + "' ";
 	    }
 	    //企业数统计
-	    String sql = " select code, called, nvl(inCount,0) incount, 0 inCount1 "
+	    sql = " select code, called, nvl(inCount,0) incount, 0 inCount1 "
             + " from ss_datasource t1, (select BUSINESSCODE, count(1) inCount from t_companyinfo cp WHERE " + deptWhere + " group by BUSINESSCODE) t2 "
             + " where isvalid = '1' and code<>'000'  and t1.code = t2.BUSINESSCODE(+) "
             + " order by code ";
@@ -142,8 +149,6 @@ public class SsDatasourceAction extends BaseStruts2Action implements Preparable,
 	    request.setAttribute("compList", compList);
 	    jsonArray = net.sf.json.JSONArray.fromObject(compList);
 	    request.setAttribute("jsonStr1", jsonArray.toString());
-	    
-	    
 	    //采录数据数统计
         sql = " select code, called, nvl(inCount, 0) incount, 0 inCount1" 
             + "  from ss_datasource t1, (select source, sum(inCount) inCount "
@@ -167,10 +172,8 @@ public class SsDatasourceAction extends BaseStruts2Action implements Preparable,
 	        + " order by code ";
         List dataList = ssDatasourceManager.getLogInfoForMap(sql);
 	    request.setAttribute("dataList", dataList);
-	    
 	    jsonArray = net.sf.json.JSONArray.fromObject(dataList);
 	    request.setAttribute("jsonStr2", jsonArray.toString());
-	    
 	    //统计报警数
 	    sql = " select code, called, nvl(inCount, 0) incount, nvl(inCount1, 0) inCount1 "
 	        + " from ss_datasource t1, "
@@ -205,10 +208,8 @@ public class SsDatasourceAction extends BaseStruts2Action implements Preparable,
 	    
 	    List alermList = ssDatasourceManager.getLogInfoForMap(sql);
 	    request.setAttribute("alermList", alermList);
-	    
-	     jsonArray = net.sf.json.JSONArray.fromObject(alermList);
+	    jsonArray = net.sf.json.JSONArray.fromObject(alermList);
 	    request.setAttribute("jsonStr3", jsonArray.toString());
-	    
 	    String days = DictHelpImpl.getInitData("NOUPLOADDATE");
 	    int intDay = 3;
         if(days != null && !"".equals(days)){
@@ -258,8 +259,6 @@ public class SsDatasourceAction extends BaseStruts2Action implements Preparable,
 	    request.setAttribute("uploadList", uploadList);
 	    jsonArray = net.sf.json.JSONArray.fromObject(uploadList);
 	    request.setAttribute("jsonStr4", jsonArray.toString());
-	    
-        
 		return LOGINFO_JSP;
 	}
 	/** 进入查询页面 */

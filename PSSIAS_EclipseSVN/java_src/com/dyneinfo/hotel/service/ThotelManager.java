@@ -44,4 +44,10 @@ public class ThotelManager extends BaseManager<Thotel,java.lang.String>{
 	public List getHotelNameByName(String hotelname) {
 		return thotelDao.getHotelNameByName(hotelname);
 	}
+	public Page findHotelByStatus(PageRequest<Map> pageRequest) {
+		return thotelDao.findHotelByStatus(pageRequest);
+	}
+	public Page findHotelOfNullInfo(PageRequest<Map> pageRequest) {
+		return thotelDao.findHotelOfNullInfo(pageRequest);
+	}
 }

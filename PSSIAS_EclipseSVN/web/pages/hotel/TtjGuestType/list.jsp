@@ -14,9 +14,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<base href="<%=basePath%>">
 	<link href="${ctx}/widgets/extremecomponents/extremecomponents.css" type="text/css" rel=stylesheet>
 	<title><%=TtjGuestType.TABLE_ALIAS%> 维护</title>
-	<script type='text/javascript' src='${ctx}/dwr/interface/menu.js'></script>
-	<script type='text/javascript' src='${ctx}/dwr/engine.js'></script>
-	<script type='text/javascript' src='${ctx}/dwr/util.js'></script>
 <script type="text/javascript">
 
 	function loadSelect(){
@@ -143,7 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    </tr>                 
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/hotel/TtjGuestType/list.do'"/>
+			                       <input type="submit"  value="统计" onclick="getReferenceForm(this).action='${ctx}/pages/hotel/TtjGuestType/list.do'"/>
 			                       <input style="margin-left: 20px" type="button" value="重置" onclick="resitData(document.forms.form1)"/>
 			              </td>
 		           </tr>
@@ -155,7 +152,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/pages/hotel/TtjGuestType/list.do" autoIncludeParameters="true">
+	action="${ctx}/pages/hotel/TtjGuestType/list.do" autoIncludeParameters="true" showPagination="false">
 	<ec:exportXls fileName="chpre.xls" tooltip="输出Excel文件"/>
 	<ec:row>
 		                    <mytag:lookupcolumn property="sex"  title="<%=TtjGuestType.ALIAS_GUESTTYPE%>"	cell="net.java.dev.ec.table.view.LookUpCell" dictType="T_DIC_SEX" />

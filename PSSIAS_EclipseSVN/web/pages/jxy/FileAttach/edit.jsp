@@ -14,9 +14,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body onload="quickSelectInit()" >
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/FileAttach/update.do"  theme="simple"  method="post">
+<s:form action="/pages/jxy/FileAttach/update.do"  theme="simple"  method="post">
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
-	    <input type="hidden" name="returnUrl" value="!/jxy/FileAttach/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+	    <input type="hidden" name="returnUrl" value="!/pages/jxy/FileAttach/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 	        <tr>
 				      <td colspan="4" class="tb_title"> 
 							<%=FileAttach.TABLE_ALIAS%>编辑
@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        <tr >
 					 <td colspan="4" class="tb_bottom">
 	                        <input id="submitButton" name="submitButton" type="submit" value="提交" />
-	                        <input type="button" value="返回" onclick="window.location='${ctx}/jxy/FileAttach/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>   
+	                        <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/FileAttach/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>   
 					 </td>
 			</tr>
 	</table>

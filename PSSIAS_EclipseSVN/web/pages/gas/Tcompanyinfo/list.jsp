@@ -129,7 +129,7 @@ function resetData(frm){
         }
 function getPcs()
 	{
-		var countryId = $("country").value;
+		var countryId = spider("country").value;
 		//默认为不选择
 		if(countryId == 0)
 		{
@@ -146,8 +146,8 @@ function getPcs()
 	function provinceCallback(provinces)
 	{
         DWRUtil.removeAllOptions("province");
-        var pcscode = $("pcscode").value;
-        var pcsname = $("pcsname").value;
+        var pcscode = spider("pcscode").value;
+        var pcsname = spider("pcsname").value;
         if(pcscode == null || pcscode ==""){
 	      //每次获得新的数据的时候先把每二个下拉框架的长度清0
 	        try{

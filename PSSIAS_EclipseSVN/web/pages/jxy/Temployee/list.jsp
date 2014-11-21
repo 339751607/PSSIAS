@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ include file="/commons/messages.jsp" %>
 
 <div class="queryPanel">
-    <s:form action="/jxy/Temployee/list.do"  theme="simple" name="form1" style="display: inline;" method="post">
+    <s:form action="/pages/jxy/Temployee/list.do"  theme="simple" name="form1" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4"><%=Temployee.TABLE_ALIAS%>查询</td>
@@ -123,8 +123,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       </authz:authorize>
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/jxy/Temployee/list.do'"/>			                   
-			                       <input type="button" value="清空" onclick="resitData(document.forms.form1);"/>
+			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/Temployee/list.do'"/>			                   
+			                       <input style="margin-left: 20px" type="button" value="重置" onclick="resitData(document.forms[0])"/>
 			              </td>
 		           </tr>
 	    </table>
@@ -135,7 +135,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/Temployee/list.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/Temployee/list.do" autoIncludeParameters="true">
 	<ec:row>
 							<authz:authorize ifAnyGranted="ROLE_HT_ADMIN">
 		                   	 <ec:column property="deptname"  title="<%=Temployee.ALIAS_DEPTNAME%>"/>
@@ -150,16 +150,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				            <mytag:lookupcolumn property="cyrjzt"  title="<%=Temployee.ALIAS_CYRJZT%>"	cell="net.java.dev.ec.table.view.LookUpCell" dictType="DIC_ITEM_EMPFLAG" />
 		                    
 		<ec:column property="操作" title="操作" sortable="false" viewsAllowed="html">
-			<!-- <a href="${ctx}/jxy/Temployee/show.do?cpempcode=${item.cpempcode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>&nbsp;&nbsp;&nbsp; -->
+			<!-- <a href="${ctx}/pages/jxy/Temployee/show.do?cpempcode=${item.cpempcode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>&nbsp;&nbsp;&nbsp; -->
 		<c:if test="${ deptid eq fn:trim(item.cpcode)}">
 		<c:if test="${item.cyrjzt == '0'}">
-				<a href="${ctx}/jxy/Temployee/edit.do?cpempcode=${item.cpempcode}&cpcode=${item.cpcode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">修改</a>
+				<a href="${ctx}/pages/jxy/Temployee/edit.do?cpempcode=${item.cpempcode}&cpcode=${item.cpcode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">修改</a>
 			</c:if>
 			<c:if test="${item.cyrjzt == '1'}">
-				<a href="${ctx}/jxy/Temployee/fz.do?cpempcode=${item.cpempcode}&cpcode=${item.cpcode}&returnUrl=<mytag:params includes="ec*,s*" type="queryStringUtf"/>">复职</a>
+				<a href="${ctx}/pages/jxy/Temployee/fz.do?cpempcode=${item.cpempcode}&cpcode=${item.cpcode}&returnUrl=<mytag:params includes="ec*,s*" type="queryStringUtf"/>">复职</a>
 			</c:if>
 		</c:if>
-		<a href="${ctx}/jxy/Temployee/show.do?cpempcode=${item.cpempcode}&cpcode=${item.cpcode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>
+		<a href="${ctx}/pages/jxy/Temployee/show.do?cpempcode=${item.cpempcode}&cpcode=${item.cpcode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>
 		</ec:column>
 	</ec:row>
 </ec:table>

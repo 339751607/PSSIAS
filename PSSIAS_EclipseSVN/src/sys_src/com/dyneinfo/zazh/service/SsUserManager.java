@@ -12,6 +12,7 @@ import java.util.*;
 
 import javacommon.base.*;
 import javacommon.util.*;
+
 import cn.org.rapid_framework.util.*;
 import cn.org.rapid_framework.web.util.*;
 import cn.org.rapid_framework.page.*;
@@ -41,15 +42,7 @@ public class SsUserManager extends BaseManager<SsUser,java.lang.Long>{
 	public Page findByPageRequest(PageRequest pr) {
 		return ssUserDao.findByPageRequest(pr);
 	}
-	/**
-	 * @description: 获取可用用户总数。
-	 * @author Liutao
-	 * @param sql
-	 * @return
-	 */
-	public Number getEnabledUserCount() {
-		return ssUserDao.getEnabledUserCount();
-	}
+	
 	//用户名是否存在
 	public int getCountUserName(String username) {
 		return (int)ssUserDao.getCountUserName(username);

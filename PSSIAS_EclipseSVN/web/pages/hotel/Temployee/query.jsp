@@ -1,6 +1,9 @@
 <%@page import="com.dyneinfo.hotel.model.*" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/commons/taglibs.jsp" %>
+<%@ include file="/pages/hotel/commons/getHotelName.jsp" %>
+<%@ include file="/pages/hotel/commons/dept.jsp" %>
+<%@ include file="/pages/hotel/commons/xzqh.jsp" %>
 <%
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
 %>
@@ -9,13 +12,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 	<%@ include file="/commons/meta.jsp" %>
 	<base href="<%=basePath%>">
-	<title><%=Temployee.TABLE_ALIAS%>查询</title>
+	<link href="${ctx}/widgets/extremecomponents/extremecomponents.css" type="text/css" rel=stylesheet>
+	<title><%=Temployee.TABLE_ALIAS%> 维护</title>
+	
+<script type="text/javascript">
+
+	function loadSelect(){
+		queryCity();
+		queryCity2();
+	}
+</script>
 </head>
 
-<body>
+<body onload="loadSelect()" >
 <%@ include file="/commons/messages.jsp" %>
+
 <div class="queryPanel">
-    <s:form action="/pages/hotel/Temployee/list.do"  theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/hotel/Temployee/list.do"  theme="simple"  method="post" name="form1">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4"><%=Temployee.TABLE_ALIAS%>查询</td>
@@ -24,217 +37,122 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                           <td class="crosscolor_td">
 			                      <%=Temployee.ALIAS_EMPNAME%>
 		                  </td>
-			              <td>
+			              <td class="crosscolor_td2">
 		                           <input value="${pageRequest.filters.empname}"  name="s_empname"  />
 		                  </td>
                           <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_ALIAS%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.alias}"  name="s_alias"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
 			                      <%=Temployee.ALIAS_SEX%>
 		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.sex}"  name="s_sex"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_BIRTH%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.birth}"  name="s_birth"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_STATURE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.stature}"  name="s_stature"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_WEIGHT%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.weight}"  name="s_weight"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_POSTURE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.posture}"  name="s_posture"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_POLITYVISAGE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.polityvisage}"  name="s_polityvisage"  />
+			              <td class="crosscolor_td2">
+		                           <mytag:select  name="s_sex" value="${pageRequest.filters.sex}"  notEmpty="false"  dictName="T_DIC_SEX"/>
 		                  </td>
                    </tr>
 		           <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
 			                      <%=Temployee.ALIAS_FOLK%>
 		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.folk}"  name="s_folk"  />
-		                  </td>
+			              <td class="crosscolor_td">
+		                           <mytag:select name="s_folk" value="${pageRequest.filters.folk}" notEmpty="false"  dictName="DIC_ITEM_HOTEL_NATION"/>
+		                  </td>		           
                           <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_NATIVEPLACE%>
+			                      <%=Temployee.ALIAS_BIRTH%>
 		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.nativeplace}"  name="s_nativeplace"  />
+		                  <td>
+			              <table class="list" >
+			               <tr>
+			               <td>
+			                          <input id="d31311" name="s_bdate_Begin"  value="${pageRequest.filters.bdate_Begin}"   maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'d31411\')}'})"/>
+			               <td>到</td>
+			               <td>
+			                        <input id="d31411" name="s_bdate_End"   value="${pageRequest.filters.bdate_End}"  maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'d31311\')}'})"/>
+			               </td>
+			              </tr>
+			              </table>
 		                  </td>
                    </tr>
 		           <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_ADDRESS%>
+			                      <%=Temployee.ALIAS_NPCODE%>
+		                  </td>	           
+		                  <td>
+						           <mytag:select onchange="changeprov();" name="s_province" value="${pageRequest.filters.province}" notEmpty="false"  dictName="T_DICT_PROV"/>
+							      <select style="margin-left: 10px" name="s_xzqh" ></select>
+						          
 		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.address}"  name="s_address"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_NOWADRESS%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.nowadress}"  name="s_nowadress"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_PHONE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.phone}"  name="s_phone"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_SCHOOLAGE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.schoolage}"  name="s_schoolage"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
 			                      <%=Temployee.ALIAS_PERSONID%>
 		                  </td>
-			              <td>
+			              <td >
 		                           <input value="${pageRequest.filters.personid}"  name="s_personid"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_NPCODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.npcode}"  name="s_npcode"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_NPADDRESS%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.npaddress}"  name="s_npaddress"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_TEMPORARYCODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.temporarycode}"  name="s_temporarycode"  />
-		                  </td>
-                   </tr>
+		                  </td>		                  
+		           </tr>
+
 		           <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
 			                      <%=Temployee.ALIAS_INSERTTIME%>
 		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.inserttime}"  name="s_inserttime"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_EDITTIME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.edittime}"  name="s_edittime"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_HYZH%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.hyzh}"  name="s_hyzh"  />
+		                  <td>
+			              <table class="list" >
+			               <tr>
+						              <td>
+							                   <s:select name="dateSelect1" list="dateSelectMap"  onchange="dateselect(this,'s_inTime_Begin','s_inTime_End','yyyy-MM-dd');"  value="#request.dateSelect1" listKey="key"   listValue="value" theme="simple" label=""  emptyOption="false" ></s:select>
+						               </td>
+					              		 <td>从</td>			               
+			               <td>
+			                          <input id="d31312" name="s_intime_Begin"  value="${pageRequest.filters.intime_Begin}"   maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'d31412\')}'})"/>
+			               <td>到</td>
+			               <td>
+			                        <input id="d31412" name="s_intime_End"   value="${pageRequest.filters.intime_End}"  maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'d31312\')}'})"/>
+			               </td>
+			              </tr>
+			              </table>
 		                  </td>
                           <td class="crosscolor_td">
 			                      <%=Temployee.ALIAS_CYRJZT%>
 		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.cyrjzt}"  name="s_cyrjzt"  />
+			              <td class="crosscolor_td">
+			              		<mytag:select  name="s_cyrjzt" value="${pageRequest.filters.cyrjzt}" dictName="cyryFlag"/>
 		                  </td>
                    </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_TRATIME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.tratime}"  name="s_tratime"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_INDBTIME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.indbtime}"  name="s_indbtime"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_HOTELCODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.hotelcode}"  name="s_hotelcode"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_STACODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.stacode}"  name="s_stacode"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
+		           		           <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
 			                      <%=Temployee.ALIAS_BURCODE%>
 		                  </td>
 			              <td>
-		                           <input value="${pageRequest.filters.burcode}"  name="s_burcode"  />
-		                  </td>
+			              		<mytag:select  name="s_burCode" onchange="changeprov2();" value="${pageRequest.filters.burCode}" dictName="ssfj"/>
+		                  </td>	
+		                  	           
                           <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_CITYCODE%>
+			                      <%=Temployee.ALIAS_STACODE%>
 		                  </td>
 			              <td>
-		                           <input value="${pageRequest.filters.citycode}"  name="s_citycode"  />
+			              			<select name="s_staCode" >
+			              			</select>
 		                  </td>
+
                    </tr>
 		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_TRANSFLAG%>
+		           			<td class="crosscolor_td">
+			                      <%=Temployee.ALIAS_HOTELNAME%>
 		                  </td>
 			              <td>
-		                           <input value="${pageRequest.filters.transflag}"  name="s_transflag"  />
+		                           <input size="25" onclick="Click();" onkeyup="getHotelNameByName()" value="${pageRequest.filters.hotelname}"  name="s_hotelname"  />
 		                  </td>
-                          <td>&nbsp;</td>
-                          <td>&nbsp;</td>
-                   </tr>
+		                  <div id="search_suggest" style="position:absolute;z-index:1;margin-top:4px;padding-top:20px;"></div>
+		                  <td></td>
+		                  <td></td>
+		           </tr>		           
+		           
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
 			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/hotel/Temployee/list.do'"/>
-	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/pages/hotel/Temployee/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+			                       <input style="margin-left: 20px" type="button" value="重置" onclick="resitData(document.forms.form1)"/>
 			              </td>
 		           </tr>
 	    </table>
     </s:form>
 </div>
+
 			
 </body>
 

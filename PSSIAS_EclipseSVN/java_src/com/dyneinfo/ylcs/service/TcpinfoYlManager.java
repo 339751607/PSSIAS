@@ -39,4 +39,16 @@ public class TcpinfoYlManager extends BaseManager<TcpinfoYl,java.lang.String>{
 		return tcpinfoYlDao.findByPageRequest(pr);
 	}
 	
+	public List getQuery(String sql) {
+	    return tcpinfoYlDao.getQuery(sql);
+	}
+	
+	public void doCancellation(String locode){
+		tcpinfoYlDao.doCancellation(locode);
+	}
+	
+	public void doLock(String locode){
+		tcpinfoYlDao.doLock(locode);
+	}
+	
 }

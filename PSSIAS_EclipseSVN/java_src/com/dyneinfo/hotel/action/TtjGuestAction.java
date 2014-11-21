@@ -157,9 +157,9 @@ public class TtjGuestAction extends BaseStruts2Action implements Preparable,Mode
 		if (StringUtils.isNotEmpty(s_bedNum_End)) {
 			hotelWhere = hotelWhere + " and nvl(BED_NUM,0) <= " + s_bedNum_End + " ";
 		}
-		if (StringUtils.isNotEmpty(s_bedNum_Begin))
+		if (StringUtils.isEmpty(s_bedNum_Begin))
 			pageRequest.getFilters().put("bedNum_Begin",0);
-		if (StringUtils.isNotEmpty(s_roomNum_Begin))
+		if (StringUtils.isEmpty(s_roomNum_Begin))
 			pageRequest.getFilters().put("roomNum_Begin",0);
 		
 		String sqlWhereTime = " ";
@@ -168,10 +168,15 @@ public class TtjGuestAction extends BaseStruts2Action implements Preparable,Mode
 			sqlWhereTime = sqlWhereTime + " and replace(DATEN, chr(13) || chr(10), '') >= '" + DateUtil.parseString(s_inTime_Begin,"yyyy-MM-dd","yyyyMMdd") + "' ";
 		}
 		String s_inTime_End = request.getParameter("s_inTime_End");
+		String inTime_End = "";
 		if (StringUtils.isNotEmpty(s_inTime_End)) {
-			sqlWhereTime = sqlWhereTime + " and replace(DATEN, chr(13) || chr(10), '') <= '" + DateUtil.parseString(s_inTime_End,"yyyy-MM-dd","yyyyMMdd") + "' ";
+			inTime_End = DateUtil.parseString(s_inTime_End,"yyyy-MM-dd","yyyyMMdd");
+			sqlWhereTime = sqlWhereTime + " and replace(DATEN, chr(13) || chr(10), '') <= '" + inTime_End + "' ";
+			pageRequest.getFilters().put("inTime_End", s_inTime_End);
+		}else{
+			inTime_End = DateUtil.getNowTime("yyyyMMdd");
+			pageRequest.getFilters().put("inTime_End", DateUtil.parseString(inTime_End, "yyyyMMdd", "yyyy-MM-dd"));
 		}
-		
 		String s_TableName = "";
 		if(StringUtils.isEmpty(request.getParameter("s_TableName"))){
 			s_TableName = "T_CH_ALL_TEMP";
@@ -207,7 +212,7 @@ public class TtjGuestAction extends BaseStruts2Action implements Preparable,Mode
 				+ "   and hotel.code = b.hotelid(+) "
 				+ hotelWhere
 				+ deptWhere
-				+ " order by "+ DEFAULT_SORT_COLUMNS +"";
+				+ "/~ order by [sortColumns] ~/";
 		}else if(null != s_burCode && !"".equals(s_burCode)){
 			sql = ""
 				+ "select code bur_sta_code, "
@@ -223,7 +228,7 @@ public class TtjGuestAction extends BaseStruts2Action implements Preparable,Mode
 				+ "                               sum(bed_num) bedNum "
 				+ "          from t_hotel hotel "
 				+ "         where status = '1' "
-				+ "           and (mod_time is null or mod_time <= '20141024')" 
+				+ "           and (mod_time is null or mod_time <= '"+ inTime_End +"')" 
 				+hotelWhere
 				+deptWhere
 				+ "         group by sta_code) h, "
@@ -239,7 +244,7 @@ public class TtjGuestAction extends BaseStruts2Action implements Preparable,Mode
 				+ " where sta.code = h.sta_code(+) "
 				+ "   and sta.code = t.sta_code(+) "
 				+staWhere
-				+ " order by "+ DEFAULT_SORT_COLUMNS +"";
+				+ "/~ order by [sortColumns] ~/";
 		}else{
 			sql = ""
 				+ "select code bur_sta_code, "
@@ -256,6 +261,7 @@ public class TtjGuestAction extends BaseStruts2Action implements Preparable,Mode
 				+ "               sum(bed_num) bedNum "
 				+ "          from t_hotel "
 				+ "         where STATUS = 1 "
+				+ "           and (mod_time is null or mod_time <= '"+ inTime_End +"')" 				
 				+hotelWhere
 				+ "         group by bur_code) h, "
 				+ "       (select bur_code, sum(incount) insum, sum(outcount) outsum "
@@ -268,7 +274,7 @@ public class TtjGuestAction extends BaseStruts2Action implements Preparable,Mode
 				+ "         group by bur_code) t "
 				+ " where bur.code = h.bur_code(+) "
 				+ "   and bur.code = t.bur_code(+)"
-				+ " order by "+ DEFAULT_SORT_COLUMNS +"";
+				+ "/~ order by [sortColumns] ~/";
 		}
 		
 		Page page = tjGuestManager.findByPageRequest(sql,pageRequest);
@@ -279,7 +285,7 @@ public class TtjGuestAction extends BaseStruts2Action implements Preparable,Mode
 	/** 查看对象*/
 	public String show() {
 		HttpServletRequest request = ServletActionContext.getRequest();
-		tjGuest.setModTime(DateUtil.parseString(tjGuest.getModTime(), "yyyyMMdd","yyyy-MM-dd"));
+//		tjGuest.setModTime(DateUtil.parseString(tjGuest.getModTime(), "yyyyMMdd","yyyy-MM-dd"));
 		return SHOW_JSP;
 	}
 	

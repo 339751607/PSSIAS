@@ -16,9 +16,9 @@ if (request.getParameter("s_checkid") != null)
 <body onload="quickSelectInit()">
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/TpoliceCheckinfo/save.do" theme="simple"  method="post">
+<s:form action="/pages/jxy/TpoliceCheckinfo/save.do" theme="simple"  method="post">
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
-	    <input type="hidden" name="returnUrl" value="!/jxy/TpoliceCheckinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+	    <input type="hidden" name="returnUrl" value="!/pages/jxy/TpoliceCheckinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 	        <input type="hidden" value="<%=s_checkid%>"  name="checkid"  />
 	       <tr>
 				<td colspan="2" class="tb_title"> 
@@ -50,7 +50,7 @@ if (request.getParameter("s_checkid") != null)
 	       <tr >
 				<td colspan="2" class="tb_bottom">
 							<input id="submitButton" name="submitButton" type="submit" value="提交" />
-	                        <input type="button" value="返回" onclick="window.location='${ctx}/jxy/TpoliceCheckinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+	                        <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/TpoliceCheckinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 			    </td>
 	        </tr>
 	</table>

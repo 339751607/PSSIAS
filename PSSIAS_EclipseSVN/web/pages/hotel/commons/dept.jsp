@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+	<script type='text/javascript' src='${ctx}/dwr/interface/menu.js'></script>
+	<script type='text/javascript' src='${ctx}/dwr/engine.js'></script>
+	<script type='text/javascript' src='${ctx}/dwr/util.js'></script>	
 <script type="text/javascript">
 
    function changeprov2()
@@ -9,7 +12,7 @@
 	//查询所属城市
 	function queryCity2()
 	{
-		var provinceId = $("s_burCode").value;
+		var provinceId = spider("s_burCode").value;
 		menu.queryProvinceById(provinceId,cityCallback2);
 	}
 	

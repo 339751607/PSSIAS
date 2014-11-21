@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ include file="/commons/messages.jsp" %>
 
 <div class="queryPanel">
-    <s:form action="/jxy/SsNoticeReply/list.do"  theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/jxy/SsNoticeReply/list.do"  theme="simple" style="display: inline;" method="post">
         <input type="hidden" name="s_noticeid" value="${pageRequest.filters.noticeid}"/>
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
@@ -56,8 +56,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    </tr>
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/jxy/SsNoticeReply/list.do'"/>
-			                       <input type="button" value="返回" onclick="window.location='${ctx}/jxy/SsNotice/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/SsNoticeReply/list.do'"/>
+			                       <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/SsNotice/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 			              </td>
 		           </tr>
 	    </table>
@@ -68,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/SsNoticeReply/list.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/SsNoticeReply/list.do" autoIncludeParameters="true">
 	<ec:row>
 
 		                    <ec:column property="noticetitle"  title="<%=SsNoticeReply.ALIAS_NOTICETITLE%>"/>
@@ -86,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
     function doBack(){
     	var url="";
-    	url =  "${ctx}/jxy/Temployee/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+    	url =  "${ctx}/pages/jxy/Temployee/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
     	location.href = url;
     }
 	  function doDel() {
@@ -100,9 +100,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var input_txt = document.createElement("input");
 				input_txt.type = "hidden";
 				input_txt.name = "returnUrl";
-				input_txt.value = "!/jxy/SsNoticeReply/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+				input_txt.value = "!/pages/jxy/SsNoticeReply/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
 				form.appendChild(input_txt);
-		        form.action = '${ctx}/jxy/SsNoticeReply/delete.do';
+		        form.action = '${ctx}/pages/jxy/SsNoticeReply/delete.do';
 	            form.submit();
 	        }
 	  }

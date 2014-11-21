@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ include file="/commons/messages.jsp" %>
 
 <div class="queryPanel">
-    <s:form action="/jxy/VCarCaseInfo/list.do"  name="form1" theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/jxy/VCarCaseInfo/list.do"  name="form1" theme="simple" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4"><%=VCarCaseInfo.TABLE_ALIAS%>查询</td>
@@ -102,9 +102,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			              
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/jxy/VCarCaseInfo/list.do'"/>
-	                       <input type="button" value="清空" onclick="resitData(document.forms.form1);"/>         
+			                      <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/VCarCaseInfo/list.do'"/>
+	                       		  <input style="margin-left: 20px" type="button" value="重置" onclick="resitData(document.forms[0])"/>       
 			              </td>
 		           </tr>
 	    </table>
@@ -114,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/VCarCaseInfo/list.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/VCarCaseInfo/list.do" autoIncludeParameters="true">
 		<ec:exportXls fileName="empxx.xls" tooltip="输出Excel文件"/> 
 	<ec:row>		
 		                    <ec:column property="cpcode"  title="<%=VCarCaseInfo.ALIAS_CPCODE%>"/>
@@ -210,7 +209,7 @@ function xmlHttpInitializtions()
              
                 xmlHttpInitializtions();
             
-                xmlhttpRequest.Open("POST","${ctx}/jxy/Tcarinfo/getDataByIdNum1.do?key=" + key,true);//POST
+                xmlhttpRequest.Open("POST","${ctx}/pages/jxy/Tcarinfo/getDataByIdNum1.do?key=" + key,true);//POST
                 xmlhttpRequest.onreadystatechange=stateChange;//返回状态调用方法stateChange
                 xmlhttpRequest.Send();
             }
@@ -332,9 +331,9 @@ function getAbsolutePos(el)
 				var input_txt = document.createElement("input");
 				input_txt.type = "hidden";
 				input_txt.name = "returnUrl";
-				input_txt.value = "!/jxy/VCarCaseInfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+				input_txt.value = "!/pages/jxy/VCarCaseInfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
 				form.appendChild(input_txt);
-		        form.action = '${ctx}/jxy/VCarCaseInfo/delete.do';
+		        form.action = '${ctx}/pages/jxy/VCarCaseInfo/delete.do';
 	            form.submit();
 	        }
 	  }

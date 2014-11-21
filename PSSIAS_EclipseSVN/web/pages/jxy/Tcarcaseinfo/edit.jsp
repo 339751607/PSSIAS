@@ -56,9 +56,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body onload="quickSelectInit()" >
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/Tcarcaseinfo/update.do"  theme="simple"  method="post">
+<s:form action="/pages/jxy/Tcarcaseinfo/update.do"  theme="simple"  method="post">
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
-	    <input type="hidden" name="returnUrl" value="!/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+	    <input type="hidden" name="returnUrl" value="!/pages/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 	        <input type="hidden" name="enrolid" value="${model.enrolid}">       
 	        <tr>
 				      <td colspan="4" class="tb_title"> 
@@ -70,14 +70,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 <td colspan="4" class="tb_bottom">
 	                        <input id="submitButton" name="submitButton" type="submit" value="修改" />
 	                        <input type="button"  value="删除" onclick="doDel();"/>
-	                        <input type="button" value="返回" onclick="window.location='${ctx}/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>   
+	                        <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>   
 					 </td>
 			</tr>
 	</table>
 </s:form>
 <mytag:tab id="orgInfo"  width="100%" height="100%"   >
   
-	 <mytag:tabContent url="${ctx}/jxy/Tcarinfo/view.do"  selected="true"   param="enrolid"  paramValue="${model.enrolid}"   frameBorder="0" tabType="frame" scrolling="auto" title="车辆信息"/>
+	 <mytag:tabContent url="${ctx}/pages/jxy/Tcarinfo/view.do"  selected="true"   param="enrolid"  paramValue="${model.enrolid}"   frameBorder="0" tabType="frame" scrolling="auto" title="车辆信息"/>
 </mytag:tab>
 <script>
 	
@@ -92,7 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    var form = document.forms[0];
 			if(!form) return;
 	        if (confirm('确定执行[删除]操作?')){
-		        form.action = '${ctx}/jxy/Tcarcaseinfo/delete.do';
+		        form.action = '${ctx}/pages/jxy/Tcarcaseinfo/delete.do';
 	            form.submit();
 	        }
 	  }

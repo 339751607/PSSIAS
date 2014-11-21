@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 	function queryProvince()
 	{
-		var countryId = $("country").value;
+		var countryId = spider("country").value;
 		//默认为不选择
 		if(countryId == 0)
 		{
@@ -36,8 +36,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function provinceCallback(provinces)
 	{
         DWRUtil.removeAllOptions("province");
-        var pcscode = $("pcscode").value;
-        var pcsname = $("pcsname").value;
+        var pcscode = spider("pcscode").value;
+        var pcsname = spider("pcsname").value;
         if(pcscode == null || pcscode ==""){
 	      //每次获得新的数据的时候先把每二个下拉框架的长度清0
 	        try{
@@ -52,13 +52,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      
       //同时关联第三级
     
-	  var provinceId = $("province").value;
+	  var provinceId = spider("province").value;
       menu.queryCityById(provinceId,cityCallback);
       }
 	//查询所属城市
 	function queryCity()
 	{
-		var provinceId = $("province").value;
+		var provinceId = spider("province").value;
 		menu.queryCityById(provinceId,cityCallback);
 	}
 	//查询所属城市回调函数

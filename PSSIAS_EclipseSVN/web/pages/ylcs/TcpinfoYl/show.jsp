@@ -23,7 +23,267 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<%=TcpinfoYl.TABLE_ALIAS%>信息
 				          </td>
 		           </tr>
+		           
 		           <tr class="crosscolor_tr">
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_CPNAME%>
+		                  </td>
+			              <td  colspan="3">
+		                          <s:property value="%{model.cpname}"  />
+		                  </td>
+                         
+                   </tr>
+                   <tr class="crosscolor_tr">
+             
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_CPADDRESS%>
+		                  </td>
+			              <td colspan="3">
+		                          <s:property value="%{model.cpaddress}"  />
+		                  </td>
+                   </tr>
+                   <tr class="crosscolor_tr">
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_PHONE%>
+		                  </td>
+			              <td>
+		                           <s:property value="%{model.phone}"   />
+		                  </td>
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_FAX%>
+		                  </td>
+			              <td>
+		                           <s:property value="%{model.fax}"  />
+		                  </td>
+                   </tr>
+                    <tr class="crosscolor_tr">
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_POSTALCODE%>
+		                  </td>
+			              <td>
+		                           <s:property value="%{model.postalcode}"  />
+		                  </td>
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_CORPCODE%>
+		                  </td>
+			              <td>
+		                           <s:property value="%{model.corpcode}" />
+		                  </td>
+                          
+                   </tr>
+                   <tr class="crosscolor_tr">
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_CORPNAME%>
+		                  </td>
+			              <td>
+		                           <s:property  value="%{model.corpname}"  />
+		                  </td>
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_ACREAGE%>
+		                  </td>
+			              <td>
+		                           <s:property value="%{model.acreage}" />
+		                  </td>
+		                  
+                   </tr>
+                    <tr class="crosscolor_tr">
+                          
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_ENROLCAPITAL%>
+		                  </td>
+			              <td>
+		                           <s:property  value="%{model.enrolcapital}"  />
+		                  </td>
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_ECONOMY%>
+		                  </td>
+			              <td>
+		                           <s:property value="%{model.economy}"  />
+		                  </td>
+                   </tr>
+                    <tr class="crosscolor_tr">
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_WORKAREA%>
+		                  </td>
+			              <td>
+		                           <s:property value="%{model.workarea}"  />
+		                  </td>
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_WORKAREASEC%>
+		                  </td>
+			              <td>
+		                           <s:property value="%{model.workareasec}" />
+		                  </td>
+                  </tr>
+                   <tr class="crosscolor_tr">
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_POLICENAME%>
+		                  </td>
+			              <td>
+		                           <s:property  value="%{model.policename}" />
+		                  </td>
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_POLICEPHONE%>
+		                  </td>
+			              <td>
+		                           <s:property value="%{model.policephone}"  />
+		                  </td>
+                   </tr>
+                   <tr class="crosscolor_tr">
+                         <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_POLICEUNIT%>
+		                  </td>
+			              <td>
+			              		   <mytag:write dictName="ssfj"  name="policeunit" property="%{model.policeunit}"/>
+		                           
+		                  </td>
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_SCBACKUPNO%>
+		                  </td>
+			              <td>
+		                           <s:property  value="%{model.scbackupno}"  />
+		                  </td>
+                   </tr>
+                   <tr class="crosscolor_tr">
+                          
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_SCBACKUPUNIT%>
+		                  </td>
+			              <td>
+			              		   <mytag:write dictName="ssfj"  name="scbackupunit" property="%{model.scbackupunit}" notEmpty="false"/>
+		                           
+		                  </td>
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_LICENCE%>
+		                  </td>
+			              <td>
+		                           <s:property  value="%{model.licence}"  />
+		                  </td>
+                   </tr>
+                   <tr class="crosscolor_tr">
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_FJCODE%>
+		                  </td>
+			              <td>
+			              		  <mytag:write dictName="ssfj"  name="fjcode" property="%{model.fjcode}"/>
+		                          
+		                  </td>
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_STATION%>
+		                  </td>
+			              <td>
+			              			 <mytag:write dictName="sspcs"  name="station" property="%{model.station}"/>
+									
+		                  </td>
+                   </tr>
+		           <tr class="crosscolor_tr">
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_THCODE%>
+		                  </td>
+			              <td>
+			              		   <mytag:write dictName="t_dic_cptype"  name="thcode" property="%{model.thcode}"/>
+		                           
+		                  </td>
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_ZAJB%>
+		                  </td>
+			              <td>
+			              		   <mytag:write dictName="T_DIC_ZAJB"  name="zajb" property="%{model.zajb}"/>
+		                           
+		                  </td>
+                   </tr>
+                   <tr class="crosscolor_tr">
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_CSXJ%>
+		                  </td>
+			              <td>
+			              		   <mytag:write dictName="T_DIC_CSXJ" name="csxj" property="%{model.csxj}"/>
+		                  </td>
+		                   <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_JWDZB%>
+		                  </td>
+			              <td>
+		                           <s:property value="%{model.jwdzb}" />
+		                  </td>
+                          <%--<td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_STATE%>
+		                  </td>
+			              <td>
+		                           <s:property label="%{@vs@ALIAS_STATE}" key="state" value="%{model.state}"  cssClass="max-length-1" required="false" />
+		                  </td>
+                   --%></tr>
+                   <tr class="crosscolor_tr">
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_BXSL%>
+		                  </td>
+			              <td>
+		                           <s:property  value="%{model.bxsl}"  />
+		                  </td>
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_XFZSL%>
+		                  </td>
+			              <td>
+		                           <s:property value="%{model.xfzsl}"   />
+		                  </td>
+                          
+                   </tr>
+                   <tr class="crosscolor_tr">
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_GDXX%>
+		                  </td>
+			              <td colspan="3">
+		                           <s:property value="%{model.gdxx}"   />
+		                  </td>
+                          
+                   </tr>
+                    <tr class="crosscolor_tr">
+                          
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_STATE%>
+		                  </td>
+			              <td>
+			              		   <mytag:write dictName="T_DIC_YLCSSTATE" property="%{model.state}" name="state" />
+		                  </td>
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_POLICELEVELCODE%>
+		                  </td>
+			              <td>
+			              		   <mytag:write dictName="T_DIC_ZADJ" name="policelevelcode" property="%{model.policelevelcode}"   />
+		                  </td>
+
+                   </tr>
+                   <tr class="crosscolor_tr">
+                  		 <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_STARTDATE%>
+		                  </td>
+			              <td>
+			              		  <s:property value="%{model.startdateString}"   />
+		                  </td>
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_STOPDATE%>
+		                  </td>
+			              <td>
+			              			 <s:property value="%{model.stopdateString}"   />
+		                  </td>
+                    </tr>
+                   <tr class="crosscolor_tr"><%--
+                          <td class="crosscolor_td">
+			                     	单位类型 		
+		                  </td>
+			              <td>
+			              	<mytag:write dictName="T_DIC_UNITTYPE"  name="dwlx" property="%{model.dwlx}"/>
+							
+		                  </td>
+                          --%><td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_SPJRURL%>
+		                  </td>
+			              <td>
+		                           <s:property value="%{model.spjrurl}" />
+		                  </td>
+                   </tr>
+	        <tr >
+		           
+		           <%--<tr class="crosscolor_tr">
                           <td class="crosscolor_td">
 			                      <%=TcpinfoYl.ALIAS_STATION%>
 		                  </td>
@@ -317,9 +577,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                           <s:property value="%{model.jcjb}" />
 		                  </td>
                    </tr>
-                   <tr>
+                   --%><tr>
 						  <td colspan="4" class="tb_bottom">
-						           <input type="button" value="返回" onclick="window.location='${ctx}/pages/ylcs/TcpinfoYl/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+						           <input type="button" value="返回" onclick="javascript:history.go(-1);"/>
 	                      </td>
 	               </tr>
 	</table>	

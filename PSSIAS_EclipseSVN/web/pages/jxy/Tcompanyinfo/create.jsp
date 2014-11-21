@@ -13,9 +13,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/Tcompanyinfo/save.do" theme="simple"  method="post">
+<s:form action="/pages/jxy/Tcompanyinfo/save.do" theme="simple"  method="post">
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
-	    <input type="hidden" name="returnUrl" value="!/jxy/Tcompanyinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+	    <input type="hidden" name="returnUrl" value="!/pages/jxy/Tcompanyinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 	       <tr>
 				<td colspan="4" class="tb_title"> 
 							<%=Tcompanyinfo.TABLE_ALIAS%>新增
@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       <tr >
 				<td colspan="4" class="tb_bottom">
 							<input id="submitButton" name="submitButton" type="submit" value="提交" />
-	                        <input type="button" value="返回" onclick="window.location='${ctx}/jxy/Tcompanyinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+	                        <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/Tcompanyinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 			    </td>
 	        </tr>
 	</table>
@@ -46,7 +46,7 @@ getPcs();
 function getPcs(){
 	var fjbm=document.getElementById("fjdm").value;
 	
-	var url="${ctx}/jxy/Ssdept/deptList.do?s_sfsh=0&s_fjbm="+fjbm+"&ajax=true";
+	var url="${ctx}/pages/jxy/Ssdept/deptList.do?s_sfsh=0&s_fjbm="+fjbm+"&ajax=true";
 	$.post(url, function(data) {
 		$("#pcstd").html("<select  name='pcsdm'  id='pcsdm' class='required validate-selection max-length-12'><option value=''>请选择...</option></select>");
 		$("#pcsdm").append(data);

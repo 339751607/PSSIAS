@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ include file="/commons/messages.jsp" %>
 
 <div class="queryPanel">
-    <s:form action="/jxy/ViewJspCpstat/listCar.do"  name="inputForm" theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/jxy/ViewJspCpstat/listCar.do"  name="inputForm" theme="simple" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4">承接车辆统计</td>
@@ -97,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    </tr>
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="统计" onclick="getReferenceForm(this).action='${ctx}/jxy/ViewJspCpstat/listCar.do'"/>
+			                       <input type="submit"  value="统计" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/ViewJspCpstat/listCar.do'"/>
 	                              
 			              </td>
 		           </tr>
@@ -109,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/ViewJspCpstat/listCar.do" 
+	action="${ctx}/pages/jxy/ViewJspCpstat/listCar.do" 
 	
 	autoIncludeParameters="true" border="1" style="text-align: center">
 	<ec:exportXls fileName="qyxx.xls" tooltip="输出Excel文件"/> 

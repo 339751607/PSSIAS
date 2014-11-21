@@ -26,7 +26,7 @@ String webContext = request.getContextPath();
 <%@ include file="/commons/messages.jsp" %>
 
 <div class="queryPanel">
-    <s:form action="/jxy/Tcarinfo/list1.do"  name="form1" theme="simple" style="display: inline;" method="post">
+    <s:form acti/pages/jxy/jxy/Tcarinfo/list1.do"  name="form1" theme="simple" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	    <input type="hidden"  id="serveritem" name="serveritem" value="" />	
 	               <tr>
@@ -195,7 +195,7 @@ String webContext = request.getContextPath();
 		            
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/jxy/Tcarinfo/list1.do'"/>
+			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${/pages/jxy/jxy/Tcarinfo/list1.do'"/>
 	                            
 	                               <input type="button" value="清空" onclick="resitData(document.forms.form1);"/>
 			              </td>
@@ -208,7 +208,7 @@ String webContext = request.getContextPath();
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/Tcarinfo/list1.do" autoIncludeParameters="true">
+	action="${/pages/jxy/jxy/Tcarinfo/list1.do" autoIncludeParameters="true">
 	<ec:row>
 	<ec:exportXls fileName="empxx.xls" tooltip="输出Excel文件"/> 
 	<ec:column property="deptname"  title="<%=Tcarreturn.ALIAS_deptname%>"/>
@@ -313,7 +313,7 @@ function xmlHttpInitializtions()
              
                 xmlHttpInitializtions();
             
-                xmlhttpRequest.Open("POST","${ctx}/jxy/Tcarinfo/getDataByIdNum.do?key=" + key,true);//POST
+                xmlhttpRequest.Open("POST","${/pages/jxy/jxy/Tcarinfo/getDataByIdNum.do?key=" + key,true);//POST
                 xmlhttpRequest.onreadystatechange=stateChange;//返回状态调用方法stateChange
                 xmlhttpRequest.Send();1
             }
@@ -443,9 +443,9 @@ function getAbsolutePos(el)
 				var input_txt = document.createElement("input");
 				input_txt.type = "hidden";
 				input_txt.name = "returnUrl";
-				input_txt.value = "!/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+				input_txt.value /pages/jxy/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
 				form.appendChild(input_txt);
-		        form.action = '${ctx}/jxy/Tcarinfo/delete.do';
+		        form.action = '${/pages/jxy/jxy/Tcarinfo/delete.do';
 	            form.submit();
 	        }
 	  }
@@ -453,7 +453,7 @@ function getAbsolutePos(el)
 			var form = document.forms.ec;
 			if(!form) return;
 			inputParameters(enrolid,form);
-	        form.action = '${ctx}/jxy/Tcarinfo/show1.do';
+	        form.action = '${/pages/jxy/jxy/Tcarinfo/show1.do';
             form.submit();
 
 		}
@@ -461,7 +461,7 @@ function getAbsolutePos(el)
 			var form = document.forms.ec;
 			if(!form) return;
 			inputParameters(enrolid,form);
-	        form.action = '${ctx}/jxy/Tcarinfo/edit.do';
+	        form.action = '${/pages/jxy/jxy/Tcarinfo/edit.do';
             form.submit();
 		
 		}
@@ -469,17 +469,17 @@ function getAbsolutePos(el)
 			var form = document.forms.ec;
 			if(!form) return;
 			inputParameters(enrolid,form);
-	        form.action = '${ctx}/jxy/Tcarinfo/collectCar.do';
+	        form.action = '${/pages/jxy/jxy/Tcarinfo/collectCar.do';
             form.submit();
 		}
 		function carcase(enrolid){
-			var url="${ctx}/jxy/Tcarcaseinfo/getCarcaseList.do?ajax=true&enrolid="+enrolid;
+			var url="${/pages/jxy/jxy/Tcarcaseinfo/getCarcaseList.do?ajax=true&enrolid="+enrolid;
 			$.post(url, function(data) {
 			if(data=="edit"){
-				window.location='${ctx}/jxy/Tcarcaseinfo/edit.do?enrolid='+enrolid+'&<mytag:params includes="ec*,s*" type="queryStringUtf"/>';
+				window.location='${/pages/jxy/jxy/Tcarcaseinfo/edit.do?enrolid='+enrolid+'&<mytag:params includes="ec*,s*" type="queryStringUtf"/>';
 			}
 			if(data=="create"){
-				window.location='${ctx}/jxy/Tcarcaseinfo/create.do?oldenrolid='+enrolid+'&<mytag:params includes="ec*,s*" type="queryStringUtf"/>';
+				window.location='${/pages/jxy/jxy/Tcarcaseinfo/create.do?oldenrolid='+enrolid+'&<mytag:params includes="ec*,s*" type="queryStringUtf"/>';
 			}
 			});
 		}
@@ -487,7 +487,7 @@ function getAbsolutePos(el)
 		var input_txt = document.createElement("input");
 				input_txt.type = "hidden";
 				input_txt.name = "returnUrl";
-				input_txt.value = "!/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+				input_txt.value /pages/jxy/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
 		var input_txt = document.createElement("input");
 				input_txt.type = "hidden";
 				input_txt.name = "enrolid";

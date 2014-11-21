@@ -10,7 +10,7 @@
 	//查询所属城市
 	function queryCity()
 	{
-		var provinceId = $("s_province").value;
+		var provinceId = spider("s_province").value;
 		provinceId = provinceId.substr(0,2);
 		menu.queryXzqhById(provinceId,cityCallback);
 	}

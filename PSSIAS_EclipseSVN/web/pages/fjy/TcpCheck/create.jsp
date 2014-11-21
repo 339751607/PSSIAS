@@ -149,7 +149,7 @@ String IDCardType = (String) DictHelpImpl.getInitData("IDCardType");
 	
 	function getEmpType()
 	{
-	    var idcardVaule = $("idcard").value;
+	    var idcardVaule = spider("idcard").value;
 		menu.queryEmpTypeByIdcard(idcardVaule,callBackEmpType);	
 	}
 	function callBackEmpType(data){ 

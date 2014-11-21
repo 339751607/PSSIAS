@@ -22,14 +22,88 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	               <tr>
 			              <td class="tb_title" colspan="4"><%=TcpinfoYl.TABLE_ALIAS%>查询</td>
 		           </tr>
-		           <tr class="crosscolor_tr">
+		            <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_CPNAME%>
+		                  </td>
+			              <td>
+		                           <input value="${pageRequest.filters.cpname}"  name="s_cpname"  />
+		                  </td>
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_ECONOMY%>
+		                  </td>
+			              <td>
+		                           <input value="${pageRequest.filters.economy}"  name="s_economy"  />
+		                  </td><%--
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_CPADDRESS%>
+		                  </td>
+			              <td>
+		                           <input value="${pageRequest.filters.cpaddress}"  name="s_cpaddress"  />
+		                  </td>
+                   --%></tr>
+		           <tr class="crosscolor_tr">
+                          
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_FJCODE%>
+		                  </td>
+			              <td>
+		                           <mytag:select dictName="ssfj" value="${pageRequest.filters.fjcode}" name="s_fjcode" />
+		                  </td>
+		                  <td class="crosscolor_td">
 			                      <%=TcpinfoYl.ALIAS_STATION%>
 		                  </td>
 			              <td>
-		                           <input value="${pageRequest.filters.station}"  name="s_station"  />
+		                          <select name="s_station" id="s_station" >
+										<option value="">请选择...</option>
+									</select>
 		                  </td>
+                         </tr>
+                   <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_WORKAREA%>
+		                  </td>
+			              <td>
+		                           <input value="${pageRequest.filters.workarea}"  name="s_workarea"  />
+		                  </td>
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_WORKAREASEC%>
+		                  </td>
+			              <td>
+		                           <input value="${pageRequest.filters.workareasec}"  name="s_workareasec"  />
+		                  </td>
+                        </tr>
+                   <tr class="crosscolor_tr">
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_THCODE%>
+		                  </td>
+			              <td>
+		                           <mytag:select dictName="t_dic_cptype" value="${pageRequest.filters.thcode}"  name="s_thcode" />
+		                  </td>
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_LICENCE%>
+		                  </td>
+			              <td>
+		                           <input value="${pageRequest.filters.licence}"  name="s_licence"  />
+		                  </td>
+                          
+                   </tr>
+                    <tr class="crosscolor_tr">
+                          <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_CSXJ%>
+		                  </td>
+			              <td>
+		                           <mytag:select dictName="T_DIC_CSXJ" name="s_csxj" value="${pageRequest.filters.csxj}" />
+		                  </td>
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_ZAJB%>
+		                  </td>
+			              <td>
+		                           <mytag:select dictName="T_DIC_ZAJB" value="${pageRequest.filters.zajb}" styleClass="required" name="s_zajb"/>
+		                  </td>
+		                 </tr>
+                    <tr class="crosscolor_tr">
+                   		<td class="crosscolor_td">
 			                      <%=TcpinfoYl.ALIAS_STARTDATE%>
 		                  </td>
 			              <td>
@@ -37,7 +111,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			                          从<input id="d3131" name="s_startdateBegin"  value="${pageRequest.filters.startdateBegin}"   maxlength="0" size="12" class="Wdate" type="text" onFocus="WdatePicker({dateFmt:'<%=TcpinfoYl.FORMAT_STARTDATE%>',maxDate:'#F{$dp.$D(\'d3141\')}'})"/> &nbsp;到&nbsp;
 			                        <input id="d3141" name="s_startdateEnd"   value="${pageRequest.filters.startdateEnd}"  maxlength="0" size="12" class="Wdate" type="text" onFocus="WdatePicker({dateFmt:'<%=TcpinfoYl.FORMAT_STARTDATE%>',minDate:'#F{$dp.$D(\'d3131\')}'})"/>
 		                  </td>
-                   </tr><%--
+		                  <td class="crosscolor_td">
+			                      <%=TcpinfoYl.ALIAS_STATE%>
+		                  </td>
+			              <td>
+		                           <mytag:select dictName="T_DIC_YLCSSTATE" name="s_state" value="${pageRequest.filters.state}"/>
+		                  </td>
+		           </tr>
+                   <%--
 		           <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
 			                      <%=TcpinfoYl.ALIAS_ACREAGE%>
@@ -52,20 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                           <input value="${pageRequest.filters.enrolcapital}"  name="s_enrolcapital"  />
 		                  </td>
                    </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TcpinfoYl.ALIAS_CPNAME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.cpname}"  name="s_cpname"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TcpinfoYl.ALIAS_CPADDRESS%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.cpaddress}"  name="s_cpaddress"  />
-		                  </td>
-                   </tr>
+		          
 		           <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
 			                      <%=TcpinfoYl.ALIAS_PHONE%>
@@ -87,12 +155,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			              <td>
 		                           <input value="${pageRequest.filters.postalcode}"  name="s_postalcode"  />
 		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TcpinfoYl.ALIAS_ECONOMY%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.economy}"  name="s_economy"  />
-		                  </td>
+                          
                    </tr>
 		           <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
@@ -122,20 +185,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                           <input value="${pageRequest.filters.policephone}"  name="s_policephone"  />
 		                  </td>
                    </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TcpinfoYl.ALIAS_WORKAREA%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.workarea}"  name="s_workarea"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TcpinfoYl.ALIAS_POLICEUNIT%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.policeunit}"  name="s_policeunit"  />
-		                  </td>
-                   </tr>
+		           
 		           <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
 			                      <%=TcpinfoYl.ALIAS_SCBACKUPNO%>
@@ -151,12 +201,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                  </td>
                    </tr>
 		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TcpinfoYl.ALIAS_LICENCE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.licence}"  name="s_licence"  />
-		                  </td>
+                          
                           <td class="crosscolor_td">
 			                      <%=TcpinfoYl.ALIAS_LICENCEUNIT%>
 		                  </td>
@@ -192,27 +237,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                           <input value="${pageRequest.filters.taxunit}"  name="s_taxunit"  />
 		                  </td>
                    </tr>
+		           
 		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TcpinfoYl.ALIAS_THCODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.thcode}"  name="s_thcode"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TcpinfoYl.ALIAS_FJCODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.fjcode}"  name="s_fjcode"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TcpinfoYl.ALIAS_WORKAREASEC%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.workareasec}"  name="s_workareasec"  />
-		                  </td>
+                          
                           <td class="crosscolor_td">
 			                      <%=TcpinfoYl.ALIAS_STOPDATE%>
 		                  </td>
@@ -257,27 +284,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			              <td>
 		                           <input value="${pageRequest.filters.bxsl}"  name="s_bxsl"  />
 		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TcpinfoYl.ALIAS_ZAJB%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.zajb}"  name="s_zajb"  />
-		                  </td>
+                          
                    </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TcpinfoYl.ALIAS_CSXJ%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.csxj}"  name="s_csxj"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TcpinfoYl.ALIAS_STATE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.state}"  name="s_state"  />
-		                  </td>
-                   </tr>
+		          
 		           <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
 			                      <%=TcpinfoYl.ALIAS_POLICELEVELCODE%>
@@ -324,6 +333,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			              <td class="tb_bottom" colspan="4">
 			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/ylcs/TcpinfoYl/list.do'"/>
 	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/pages/ylcs/TcpinfoYl/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+	                               <input type="button" value="硬件注销" onclick="Cancellation();" >
+	                               <input type="button" value="锁定" onclick="Lock();" >
 	                               <input type="button"  value="删除" onclick="doDel();"/>
 			              </td>
 		           </tr>
@@ -338,21 +349,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	action="${ctx}/pages/ylcs/TcpinfoYl/list.do" autoIncludeParameters="true">
 	<ec:row>
 		<ec:column property="选择" title="<input type='checkbox' onclick=\"setAllCheckboxState('items',this.checked)\" >" sortable="false" width="3%" viewsAllowed="html">
-			<input type="checkbox" name="items" value="locode=${item.locode}&"/>
+			<input type="checkbox" name="items" id="items" value="locode=${item.locode}&"/>
 		</ec:column>
 		                    <%--<ec:column property="station"  title="<%=TcpinfoYl.ALIAS_STATION%>"/>
-		                    --%><ec:column property="startdate" format="yyyy-mm-dd" value="${item.startdateString}" title="<%=TcpinfoYl.ALIAS_STARTDATE%>"/><%--
+		                   <ec:column property="startdate" format="yyyy-mm-dd" value="${item.startdateString}" title="<%=TcpinfoYl.ALIAS_STARTDATE%>"/>
 		                    <ec:column property="acreage"  title="<%=TcpinfoYl.ALIAS_ACREAGE%>"/>
 		                    <ec:column property="enrolcapital"  title="<%=TcpinfoYl.ALIAS_ENROLCAPITAL%>"/>
-		                    --%><ec:column property="cpname"  title="<%=TcpinfoYl.ALIAS_CPNAME%>"/>
-		                    <ec:column property="cpaddress"  title="<%=TcpinfoYl.ALIAS_CPADDRESS%>"/>
+		                    --%>
+		                    <ec:column property="locode"  title="<%=TcpinfoYl.ALIAS_LOCODE%>"/>
+		                    <ec:column property="cpname"  title="<%=TcpinfoYl.ALIAS_CPNAME%>"/>
+		                     <ec:column property="corpname"  title="<%=TcpinfoYl.ALIAS_CORPNAME%>"/>
+		                     <ec:column property="policename"  title="<%=TcpinfoYl.ALIAS_POLICENAME%>"/>
+		                     <mytag:lookupcolumn property="state" title="<%=TcpinfoYl.ALIAS_STATE%>" cell="net.java.dev.ec.table.view.LookUpCell" dictType="T_DIC_YLCSSTATE" />
+		                     <ec:column property="authorizationstatus"  title="<%=TcpinfoYl.ALIAS_AUTHORIZATIONSTATUS%>"/>
+		                     
+		                     
+		                   <%-- <ec:column property="cpaddress"  title="<%=TcpinfoYl.ALIAS_CPADDRESS%>"/>
 		                    <ec:column property="phone"  title="<%=TcpinfoYl.ALIAS_PHONE%>"/>
-		                    <ec:column property="fax"  title="<%=TcpinfoYl.ALIAS_FAX%>"/><%--
+		                    <ec:column property="fax"  title="<%=TcpinfoYl.ALIAS_FAX%>"/>
 		                    <ec:column property="postalcode"  title="<%=TcpinfoYl.ALIAS_POSTALCODE%>"/>
 		                    <ec:column property="economy"  title="<%=TcpinfoYl.ALIAS_ECONOMY%>"/>
 		                    <ec:column property="corpcode"  title="<%=TcpinfoYl.ALIAS_CORPCODE%>"/>
-		                    <ec:column property="corpname"  title="<%=TcpinfoYl.ALIAS_CORPNAME%>"/>
-		                    <ec:column property="policename"  title="<%=TcpinfoYl.ALIAS_POLICENAME%>"/>
+		                   
+		                    
 		                    <ec:column property="policephone"  title="<%=TcpinfoYl.ALIAS_POLICEPHONE%>"/>
 		                    <ec:column property="workarea"  title="<%=TcpinfoYl.ALIAS_WORKAREA%>"/>
 		                    <ec:column property="policeunit"  title="<%=TcpinfoYl.ALIAS_POLICEUNIT%>"/>
@@ -375,7 +394,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    <ec:column property="bxsl"  title="<%=TcpinfoYl.ALIAS_BXSL%>"/>
 		                    <ec:column property="zajb"  title="<%=TcpinfoYl.ALIAS_ZAJB%>"/>
 		                    <ec:column property="csxj"  title="<%=TcpinfoYl.ALIAS_CSXJ%>"/>
-		                    <ec:column property="state"  title="<%=TcpinfoYl.ALIAS_STATE%>"/>
+		                    
 		                    <ec:column property="policelevelcode"  title="<%=TcpinfoYl.ALIAS_POLICELEVELCODE%>"/>
 		                    <ec:column property="flagpack"  title="<%=TcpinfoYl.ALIAS_FLAGPACK%>"/>
 		                    <ec:column property="authorizationcode"  title="<%=TcpinfoYl.ALIAS_AUTHORIZATIONCODE%>"/>
@@ -383,8 +402,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    <ec:column property="currentscore"  title="<%=TcpinfoYl.ALIAS_CURRENTSCORE%>"/>
 		                    <ec:column property="jcjb"  title="<%=TcpinfoYl.ALIAS_JCJB%>"/>
 		--%><ec:column property="操作" title="操作" sortable="false" viewsAllowed="html">
-			<a href="${ctx}/pages/ylcs/TcpinfoYl/show.do?locode=${item.locode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>&nbsp;&nbsp;&nbsp;
-			<a href="${ctx}/pages/ylcs/TcpinfoYl/edit.do?locode=${item.locode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">修改</a>
+			<a href="${ctx}/pages/ylcs/TcpinfoYl/CpinfoTab.jsp?locode=${item.locode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>&nbsp;&nbsp;&nbsp;
+			<a href="${ctx}/pages/ylcs/TcpinfoYl/edit.do?locode=${item.locode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">修改</a>&nbsp;&nbsp;&nbsp;
+			<a href="${ctx}/pages/ylcs/TcpinfoYl/authorize.do?locode=${item.locode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">企业授权</a>
 		</ec:column>
 	</ec:row>
 </ec:table>
@@ -392,7 +412,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 
 </html>
-
 
 <script>
 	  function doDel() {
@@ -412,4 +431,57 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            form.submit();
 	        }
 	  }
+	  
+	  function Cancellation(){
+		   var form = document.forms.ec;
+			if(!form) return;
+			if (!hasOneChecked('items')){
+               alert('请选择要操作的对象!');
+               return;
+             }
+	        if (confirm('确定执行[硬件注销]操作?')){
+				var input_txt = document.createElement("input");
+				input_txt.type = "hidden";
+				input_txt.name = "returnUrl";
+				input_txt.value = "!/pages/ylcs/TcpinfoYl/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+				form.appendChild(input_txt);
+		        form.action = '${ctx}/pages/ylcs/TcpinfoYl/cancellation.do';
+	            form.submit();
+	        }
+	     }
+		  
+	    
+	  function Lock(){
+		   var form = document.forms.ec;
+			if(!form) return;
+			if (!hasOneChecked('items')){
+               alert('请选择要操作的对象!');
+               return;
+             }
+	        if (confirm('确定执行[锁定]操作?')){
+				var input_txt = document.createElement("input");
+				input_txt.type = "hidden";
+				input_txt.name = "returnUrl";
+				input_txt.value = "!/pages/ylcs/TcpinfoYl/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+				form.appendChild(input_txt);
+		        form.action = '${ctx}/pages/ylcs/TcpinfoYl/lock.do';
+	            form.submit();
+	        }
+	  }
+	  
+	  $(document).ready(function(){
+		
+		$("select[name=s_fjcode]").change(function(){
+			var url="${ctx}/pages/zazh/Tcoordinate/addStation.do?fjcode="+this.value;
+			$.get(url,function(data){
+				$("#s_station").html(data);
+					//alert(data);
+			});
+		});
+		var url="${ctx}/pages/zazh/Tcoordinate/addStation.do?fjcode=${pageRequest.filters.fjcode}&pcscode=${pageRequest.filters.station}";
+		$.get(url,function(data){
+			$("#s_station").html(data);
+					//alert(data);
+		});
+	});
 </script>

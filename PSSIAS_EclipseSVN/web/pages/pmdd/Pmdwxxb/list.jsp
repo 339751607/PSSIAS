@@ -120,7 +120,7 @@ Integer count=(Integer) request.getAttribute("count");
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
 			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/pmdd/Pmdwxxb/list.do'"/>
-			                       <input type="button" value="清空" onclick="resitData(document.forms.form1);"/>
+			                       <input type="button" value="重置" onclick="resitData(document.forms.form1);"/>
 	                               <input type="submit"  value="新增" onclick="if(xzjs())getReferenceForm(this).action='${ctx}/pages/pmdd/Pmdwxxb/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 	                              <!-- <input type="button"  value="删除" onclick="doDel();"/> --> 
 

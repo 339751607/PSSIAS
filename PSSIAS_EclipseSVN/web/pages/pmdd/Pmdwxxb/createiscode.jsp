@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			                    <FONT color="red">*</FONT> 软件授权码
 		                  </td>
 			              <td >
-		                            <s:textfield label="%{@vs@ALIAS_AREA}" key="iscode" value="%{model.iscode}"  cssClass="required max-length-50 " required="false" />
+		                            <s:textfield label="%{@vs@ALIAS_AREA}" key="iscode" value="%{mo	del.iscode}"  cssClass="required max-length-50 " required="false" />
 		                  </td>
 		                                            <td class="crosscolor_td">
 			                   	 读卡器授权码

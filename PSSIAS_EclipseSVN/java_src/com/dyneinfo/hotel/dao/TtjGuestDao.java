@@ -762,7 +762,7 @@ public class TtjGuestDao extends BaseSpringJdbcDao<TtjGuest,java.lang.String>{
 		
 	}
 	public Page findByPageRequest(String sql ,PageRequest<Map> pageRequest) {
-		return pageGroupQuery(sql,"select count(*) from ( "+sql+" )",pageRequest,new BeanPropertyRowMapper(getEntityClass()));	
+		return pageQuery(sql,"select count(*) from ( "+sql+" )",pageRequest,new BeanPropertyRowMapper(getEntityClass()));	
 	}
 
 }

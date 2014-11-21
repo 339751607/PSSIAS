@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ include file="/commons/messages.jsp" %>
 
 <div class="queryPanel">
-    <s:form action="/jxy/Temployee/listAll.do"  theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/jxy/Temployee/listAll.do"  theme="simple" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4"><%=Temployee.TABLE_ALIAS%>查询</td>
@@ -73,9 +73,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		           
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/jxy/Temployee/listAll.do'"/>
+			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/Temployee/listAll.do'"/>
 	                              
-	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/jxy/Temployee/createAll.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/Temployee/createAll.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 	                               <authz:authorize ifAnyGranted="ROLE_ADMIN,ROLE_BACK_MANAGER">
 	                               <input type="button"  value="删除" onclick="doDel();"/>
 	                                </authz:authorize>
@@ -89,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/Temployee/listAll.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/Temployee/listAll.do" autoIncludeParameters="true">
 	<ec:row>
 		                    <ec:column property="deptname"  title="工作单位"/>
 		                    <ec:column property="name"  title="<%=Temployee.ALIAS_NAME%>"/>
@@ -105,9 +105,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				            <mytag:lookupcolumn property="cyrjzt"  title="<%=Temployee.ALIAS_CYRJZT%>"	cell="net.java.dev.ec.table.view.LookUpCell" dictType="T_DIC_CYRJZT" />
 		                    
 		<ec:column property="操作" title="操作" sortable="false" viewsAllowed="html">
-			<a href="${ctx}/jxy/Temployee/showAll.do?cpempcode=${item.cpempcode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>&nbsp;&nbsp;&nbsp;
-			<a href="${ctx}/jxy/Temployee/editAll.do?cpempcode=${item.cpempcode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">修改</a>&nbsp;&nbsp;&nbsp;
-			<a href="${ctx}/jxy/Temployee/tabAll.do?cpempcode=${item.cpempcode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">其他信息</a>
+			<a href="${ctx}/pages/jxy/Temployee/showAll.do?cpempcode=${item.cpempcode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>&nbsp;&nbsp;&nbsp;
+			<a href="${ctx}/pages/jxy/Temployee/editAll.do?cpempcode=${item.cpempcode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">修改</a>&nbsp;&nbsp;&nbsp;
+			<a href="${ctx}/pages/jxy/Temployee/tabAll.do?cpempcode=${item.cpempcode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">其他信息</a>
 		</ec:column>
 	</ec:row>
 </ec:table>
@@ -129,9 +129,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var input_txt = document.createElement("input");
 				input_txt.type = "hidden";
 				input_txt.name = "returnUrl";
-				input_txt.value = "!/jxy/Temployee/listAll.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+				input_txt.value = "!/pages/jxy/Temployee/listAll.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
 				form.appendChild(input_txt);
-		        form.action = '${ctx}/jxy/Temployee/delete.do';
+		        form.action = '${ctx}/pages/jxy/Temployee/delete.do';
 	            form.submit();
 	        }
 	  }

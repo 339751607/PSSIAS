@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ include file="/commons/messages.jsp" %>
 <%@ include file="/commons/selectDept.jsp" %>
 <div class="queryPanel">
-    <s:form action="/pages/fjy/Tfeijiuwupin/list.do"  theme="simple" style="display: inline;" method="post">
+    <s:form  name="queryForm" action="/pages/fjy/Tfeijiuwupin/list.do"  theme="simple" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="1" class="tb_all">
  				    <tr>
 			              <td class="tb_title" colspan="4"><%=Tfeijiuwupin.TABLE_ALIAS%>查询</td>
@@ -125,7 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		           	 <tr>
 			              <td class="tb_bottom" colspan="4">
 			                       <input type="button"  value="查询" onclick="query();"/>
-	                               <input type="button" value="清空" onclick="resitData(document.forms[0]);"/>
+	                               <input type="button" value="重置" onclick="resitData(document.forms[0]);"/>
 			              </td>
 		           </tr>
 

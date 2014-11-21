@@ -13,9 +13,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<base href="<%=basePath%>">
 	<link href="${ctx}/widgets/extremecomponents/extremecomponents.css" type="text/css" rel=stylesheet>
 	<title><%=Thotel.TABLE_ALIAS%> 维护</title>
-	<script type='text/javascript' src='${ctx}/dwr/interface/menu.js'></script>
-	<script type='text/javascript' src='${ctx}/dwr/engine.js'></script>
-	<script type='text/javascript' src='${ctx}/dwr/util.js'></script>
 <script type="text/javascript">
 	function loadSelect(){
 		queryCity2();
@@ -86,6 +83,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                  <td>
 			              <table class="list" >
 			               <tr>
+			              <td>
+				                   <s:select name="dateSelect1" list="dateSelectMap"  onchange="dateselect(this,'s_modTime_Begin','s_modTime_End','yyyy-MM-dd');"  value="#request.dateSelect1" listKey="key"   listValue="value" theme="simple" label=""  emptyOption="false" ></s:select>
+			               </td>
+			               <td>从</td>			               
 			               <td>
 			                          <input id="d31312" name="s_modTime_Begin"  value="${pageRequest.filters.modTime_Begin}"   maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'d31412\')}'})"/>
 			               <td>到</td>
@@ -133,6 +134,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
 	action="${ctx}/pages/hotel/Thotel/list.do" autoIncludeParameters="true">
+	<ec:exportXls fileName="hotel.xls" tooltip="输出Excel文件"/>
 	<ec:row>
 							<ec:column property="called" title="<%=Thotel.ALIAS_CALLED%>">
 								<a href="${ctx}/pages/hotel/Thotel/show.do?code=${item.code}" >${item.called}</a>

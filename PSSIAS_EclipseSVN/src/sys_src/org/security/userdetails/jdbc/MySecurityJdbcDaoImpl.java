@@ -161,7 +161,7 @@ public class MySecurityJdbcDaoImpl extends JdbcDaoSupport implements
 			expirationDate = expirationDate.replace("-", "");
 			if (Integer.valueOf(date) >= Integer.valueOf(expirationDate)) {
 				throw new DisabledException(
-						"用户不可用",
+						"用户账号权限已过期",
 						"User is disabled");
 			}
 		}

@@ -15,9 +15,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body onload="quickSelectInit()" >
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/TpoliceCheckinfo/update.do"  theme="simple"  method="post">
+<s:form action="/pages/jxy/TpoliceCheckinfo/update.do"  theme="simple"  method="post">
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
-	    <input type="hidden" name="returnUrl" value="!/jxy/TpoliceCheckinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+	    <input type="hidden" name="returnUrl" value="!/pages/jxy/TpoliceCheckinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 	       <s:hidden id="checkinfoid" name="checkinfoid" />
 	        <tr>
 				      <td colspan="2" class="tb_title"> 
@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        <tr >
 					 <td colspan="2" class="tb_bottom">
 	                        <input id="submitButton" name="submitButton" type="submit" value="提交" />
-	                        <input type="button" value="返回" onclick="window.location='${ctx}/jxy/TpoliceCheckinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>   
+	                        <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/TpoliceCheckinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>   
 					 </td>
 			</tr>
 	</table>

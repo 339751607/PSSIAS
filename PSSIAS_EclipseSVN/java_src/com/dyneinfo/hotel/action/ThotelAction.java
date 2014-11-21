@@ -40,6 +40,8 @@ public class ThotelAction extends BaseStruts2Action implements Preparable,ModelD
 	//forward paths
 	protected static final String QUERY_JSP = "/pages/hotel/Thotel/query.jsp";
 	protected static final String LIST_JSP= "/pages/hotel/Thotel/list.jsp";
+	protected static final String LISTONLY_JSP= "/pages/hotel/Thotel/listOnly.jsp";
+	protected static final String LISTONLYOFNULLINFO_JSP= "/pages/hotel/Thotel/listOnlyOfNullInfo.jsp";
 	protected static final String CREATE_JSP = "/pages/hotel/Thotel/create.jsp";
 	protected static final String EDIT_JSP = "/pages/hotel/Thotel/edit.jsp";
 	protected static final String SHOW_JSP = "/pages/hotel/Thotel/show.jsp";
@@ -112,7 +114,8 @@ public class ThotelAction extends BaseStruts2Action implements Preparable,ModelD
 		HttpServletRequest request = ServletActionContext.getRequest();
 
 		dateSelectMap  = DateUtil.getDateSelectData();
-		
+		if (request.getParameter("dateSelect1") != null)
+			request.setAttribute("dateSelect1", request.getParameter("dateSelect1"));
 		if (request.getParameter("s_modTime_Begin") != null)
 			pageRequest.getFilters().put("modTime_BeginFormat",
 					DateUtil.parseString(request,"s_modTime_Begin", "yyyy-MM-dd", "yyyyMMdd"));
@@ -125,6 +128,50 @@ public class ThotelAction extends BaseStruts2Action implements Preparable,ModelD
 		Page page = thotelManager.findByPageRequest(pageRequest);
 		savePage(page,pageRequest);
 		return LIST_JSP;
+	}
+	public String listOnly() {
+		PageRequest<Map> pageRequest = newPageRequest(DEFAULT_SORT_COLUMNS);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		
+		dateSelectMap  = DateUtil.getDateSelectData();
+		if (request.getParameter("dateSelect1") != null)
+			request.setAttribute("dateSelect1", request.getParameter("dateSelect1"));
+		if (request.getParameter("s_modTime_Begin") != null)
+			pageRequest.getFilters().put("modTime_BeginFormat",
+					DateUtil.parseString(request,"s_modTime_Begin", "yyyy-MM-dd", "yyyyMMdd"));
+		if (request.getParameter("s_modTime_End") != null){
+			pageRequest.getFilters().put("modTime_EndFormat",
+					DateUtil.parseString(request,"s_modTime_End", "yyyy-MM-dd", "yyyyMMdd"));
+		}else{
+			pageRequest.getFilters().put("modTime_EndFormat",DateUtil.getNowTime("yyyyMMdd"));
+		}
+		if (null ==  request.getParameter("s_bedNum_Begin") || request.getParameter("s_bedNum_Begin").equals(""))
+			pageRequest.getFilters().put("bedNum_Begin",0);
+		
+		Page page = thotelManager.findHotelByStatus(pageRequest);
+		savePage(page,pageRequest);
+		return LISTONLY_JSP;
+	}
+	public String listOnlyOfNullInfo() {
+		PageRequest<Map> pageRequest = newPageRequest(DEFAULT_SORT_COLUMNS);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		
+		dateSelectMap  = DateUtil.getDateSelectData();
+		if (request.getParameter("dateSelect1") != null)
+			request.setAttribute("dateSelect1", request.getParameter("dateSelect1"));
+		if (request.getParameter("s_modTime_Begin") != null)
+			pageRequest.getFilters().put("modTime_BeginFormat",
+					DateUtil.parseString(request,"s_modTime_Begin", "yyyy-MM-dd", "yyyyMMdd"));
+		if (request.getParameter("s_modTime_End") != null){
+			pageRequest.getFilters().put("modTime_EndFormat",
+					DateUtil.parseString(request,"s_modTime_End", "yyyy-MM-dd", "yyyyMMdd"));
+		}else{
+			pageRequest.getFilters().put("modTime_EndFormat",DateUtil.getNowTime("yyyyMMdd"));
+		}
+		
+		Page page = thotelManager.findHotelOfNullInfo(pageRequest);
+		savePage(page,pageRequest);
+		return LISTONLYOFNULLINFO_JSP;
 	}
 	
 	/** 查看对象*/

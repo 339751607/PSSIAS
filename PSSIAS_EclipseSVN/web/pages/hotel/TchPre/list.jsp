@@ -14,9 +14,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<base href="<%=basePath%>">
 	<link href="${ctx}/widgets/extremecomponents/extremecomponents.css" type="text/css" rel=stylesheet>
 	<title><%=TchPre.TABLE_ALIAS%> 维护</title>
-	<script type='text/javascript' src='${ctx}/dwr/interface/menu.js'></script>
-	<script type='text/javascript' src='${ctx}/dwr/engine.js'></script>
-	<script type='text/javascript' src='${ctx}/dwr/util.js'></script>
 <script type="text/javascript">
 
 	function loadSelect(){
@@ -107,20 +104,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			                      <%=TchPre.ALIAS_IN_TIME%>
 		                  </td>
 			              <td>
-			              			               <table class="list">
-			               <tr>
-			              <td>
-				                   <s:select name="dateSelect1" list="dateSelectMap"  onchange="dateselect(this,'s_inTime_Begin','s_inTime_End','yyyy-MM-dd HH:mm');"  value="#request.dateSelect1" listKey="key"   listValue="value" theme="simple" label=""  emptyOption="false" ></s:select>
-			               </td>
-			               <td>从</td>
-			               <td>
-			                          <input id="d31310" name="s_inTime_Begin"  value="${pageRequest.filters.inTime_Begin}"   maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm',maxDate:'#F{$dp.$D(\'d31410\')}'})"/>
-			               <td>到</td>
-			               <td>
-			                        <input id="d31410" name="s_inTime_End"   value="${pageRequest.filters.inTime_End}"  maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({startDate:'%y-%M-%d 23:59:00',dateFmt:'yyyy-MM-dd HH:mm',minDate:'#F{$dp.$D(\'d31310\')}'})"/>
-			               </td>
-			              </tr>
-			              </table>
+					               <table class="list">
+					               <tr>
+						              <td>
+							                   <s:select name="dateSelect1" list="dateSelectMap"  onchange="dateselect(this,'s_inTime_Begin','s_inTime_End','yyyy-MM-dd HH:mm');"  value="#request.dateSelect1" listKey="key"   listValue="value" theme="simple" label=""  emptyOption="false" ></s:select>
+						               </td>
+					              		 <td>从</td>
+						               <td>
+						                          <input id="d31310" name="s_inTime_Begin"  value="${pageRequest.filters.inTime_Begin}"   maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm',maxDate:'#F{$dp.$D(\'d31410\')}'})"/>
+						               <td>到</td>
+						               <td>
+						                        <input id="d31410" name="s_inTime_End"   value="${pageRequest.filters.inTime_End}"  maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({startDate:'%y-%M-%d 23:59:00',dateFmt:'yyyy-MM-dd HH:mm',minDate:'#F{$dp.$D(\'d31310\')}'})"/>
+						               </td>
+					              </tr>
+					              </table>
 		                  </td>	
                    </tr>
 		           <tr class="crosscolor_tr">
@@ -130,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			                      <%=TchPre.ALIAS_STA_CODE%>
 		                  </td>
 			              <td>
-			              			<select onchange="cleanHotelName();" name="s_staCode"  value="${pageRequest.filters.staCode}"  >
+			              			<select onchange="cleanHotelName();" name="s_staCode"   >
 			              			</select>
 		                  </td>
 		           		  <td class="crosscolor_td">

@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <div class="queryPanel">
-    <s:form action="/jxy/Tcompanyinfo/list1.do"  theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/jxy/Tcompanyinfo/list1.do"  theme="simple" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4"><%=Tcompanyinfo.TABLE_ALIAS%></td>
@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    </tr>
 	           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/jxy/Tcompanyinfo/list1.do'"/>
+			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/Tcompanyinfo/list1.do'"/>
 	                              <input type="button"  value="选择" onclick="doAddRight()"/>
 	                               
 			              </td>
@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/Tcompanyinfo/list1.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/Tcompanyinfo/list1.do" autoIncludeParameters="true">
 	<ec:row >
 		<ec:column property="选择" title="<input type='radio' onclick=\"setAllCheckboxState('items',this.radio)\" >" sortable="false" width="3%" viewsAllowed="html">
 			<input type="radio" name="items" value="${item.cpcode}"/>

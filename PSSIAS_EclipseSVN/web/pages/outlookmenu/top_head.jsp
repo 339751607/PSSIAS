@@ -23,29 +23,29 @@
 	<style type="text/css">
 body {
 	background: url(img/top_head_bg.gif) left top repeat-x;
-	height: 72px;
+	height: 99px;
 	text-align: center;
 }
 
 .tophead {
 	width: 100%;
-	background: url("img/tophead_bg.gif") left top repeat-x;
-	height: 78px;
+	background: url("img/top_head_bg.gif") left top repeat-x;
+	height: 99px;
 	margin: 0px;
 	padding: 0px;
 }
 
 .tophead_left {
 	background: url("img/tophead_left.gif") left top no-repeat;
-	width: 640px;
-	height: 78px;
+	width: 884px;
+	height: 99px;
 	float: left;
 }
 
 .tophead_right {
-	background: url("img/tophead_right.gif") left top no-repeat;
+	background: url("img/top_head_bg.gif") left top no-repeat;
 	width: 300px;
-	height: 78px;
+	height: 99px;
 	float: right;
 	padding: 20px 0px 0px 94px;
 	font-size: 14px;
@@ -77,7 +77,7 @@ body {
 
 
 
-	<BODY bgcolor="#0097D6">
+	<BODY bgcolor="#0097D6" >
 		<table cellpadding="0" cellpadding="0" cellspacing="0" border="0"
 			class="tophead">
 			<tr>
@@ -91,15 +91,17 @@ body {
 <!--type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">-->
 <!--</embed></object>-->
 </div>
-					<div class="tophead_right">
+					<div class="tophead_right" >
+						<br />
+						<span style="margin: 0px 0px 0px 20px;vertical-align: bottom;"><a
+							href="${ctx}/pages/zazh/SsDatasource/loginfo.do" target="rightWorkSpace"><img src="img/index.gif" width="24" height="38"/></a>
+						</span>
+						
 						<span style="margin: 0px 0px 0px 20px;"><a
-							href="${ctx}/pages/zazh/SsDatasource/loginfo.do" target="bodyFrame"><img src="img/index.gif" width="32" height="50"/></a>
+							href="${ctx}/pages/SsUser/changepwd.do" target="rightWorkSpace"><img src="img/key.gif" width="24" height="38"/></a>
 						</span>
 						<span style="margin: 0px 0px 0px 20px;"><a
-							href="${ctx}/pages/SsUser/changepwd.do" target="bodyFrame"><img src="img/key.gif" width="32" height="50"/></a>
-						</span>
-						<span style="margin: 0px 0px 0px 20px;"><a
-							href="${ctx}/j_spring_security_logout" target="_top"><img src="img/exit.gif" width="32" height="50"/></a>
+							href="${ctx}/j_spring_security_logout" target="_top"><img src="img/exit.gif" width="24" height="38"/></a>
 						</span>
 					</div>
 				</td>

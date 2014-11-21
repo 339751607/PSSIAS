@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ include file="/commons/messages.jsp" %>
 
 <div class="queryPanel">
-    <s:form action="/jxy/TpoliceCheck/list.do"  name="inputForm" theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/jxy/TpoliceCheck/list.do"  name="inputForm" theme="simple" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4"><%=TpoliceCheck.TABLE_ALIAS%>查询</td>
@@ -59,9 +59,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    </tr>
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/jxy/TpoliceCheck/list.do'"/>
+			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/TpoliceCheck/list.do'"/>
 			                       <input type="button" value="清空" onclick="resitData(document.forms.inputForm);"/>
-	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/jxy/TpoliceCheck/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/TpoliceCheck/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 	                               
 			              </td>
 		           </tr>
@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/TpoliceCheck/list.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/TpoliceCheck/list.do" autoIncludeParameters="true">
 	<ec:row>
 		                    <ec:column property="deptname"  title="<%=TpoliceCheck.ALIAS_DEPTID%>"/>
 		                    <ec:column property="acceptcheckname"  title="<%=TpoliceCheck.ALIAS_ACCEPTCHECKNAME%>"/>
@@ -81,8 +81,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    <ec:column property="checknamephone"  title="<%=TpoliceCheck.ALIAS_CHECKNAMEPHONE%>"/>
 		                    <ec:column property="checktime" value="${item.checktimeString}" title="<%=TpoliceCheck.ALIAS_CHECKTIME%>"/>
 		<ec:column property="操作" title="操作" sortable="false" viewsAllowed="html">
-			<a href="${ctx}/jxy/TpoliceCheck/show.do?checkid=${item.checkid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>&nbsp;&nbsp;&nbsp;
-			<a href="${ctx}/jxy/TpoliceCheck/tab.do?checkid=${item.checkid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">检查信息</a>
+			<a href="${ctx}/pages/jxy/TpoliceCheck/show.do?checkid=${item.checkid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>&nbsp;&nbsp;&nbsp;
+			<a href="${ctx}/pages/jxy/TpoliceCheck/tab.do?checkid=${item.checkid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">检查信息</a>
 		</ec:column>
 	</ec:row>
 </ec:table>
@@ -104,9 +104,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var input_txt = document.createElement("input");
 				input_txt.type = "hidden";
 				input_txt.name = "returnUrl";
-				input_txt.value = "!/jxy/TpoliceCheck/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+				input_txt.value = "!/pages/jxy/TpoliceCheck/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
 				form.appendChild(input_txt);
-		        form.action = '${ctx}/jxy/TpoliceCheck/delete.do';
+		        form.action = '${ctx}/pages/jxy/TpoliceCheck/delete.do';
 	            form.submit();
 	        }
 	  }

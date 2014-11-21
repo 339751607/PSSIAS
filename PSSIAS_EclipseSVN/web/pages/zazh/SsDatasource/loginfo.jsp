@@ -6,52 +6,38 @@
 <%@ include file="/commons/messages.jsp"%>
 <script type="text/javascript" src="../../../scripts/jscharts.js"></script>
 <%
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ request.getContextPath() + "/";
 %>
 <html>
 
-<head>
-<%@ include file="/commons/meta.jsp"%>
-<base href="<%=basePath%>">
-<title>登录信息</title>
-<style type="text/css">
+	<head>
+		<%@ include file="/commons/meta.jsp"%>
+		<base href="<%=basePath%>">
+		<title>登录信息</title>
+		<style type="text/css">
 body {
-	background: #7fd5ff;
+	background: #C3E2FF;
+	background: url(${ctx}/images/bg.gif);
+	background-attachment:fixed;
 }
 
 .k1 {
+	font: 14px/ 1.5 '微软雅黑';
+	font-weight: bold;
 	width: 100%;
 	height: 100%;
-	background: url(${ctx}/images/bg.png) no-repeat;
+	
 	background-repeat: no-repeat;
 	background-position: center top;
+	
 }
 </style>
 
 </head>
 
 <body>
-
-	<%
-
-ArrayList alermList = (ArrayList)request.getAttribute("alermList");
-int baojingTotal = 0;
-int weichuliTotal1 = 0;
-if(alermList != null && alermList.size()>0){
-	 StringBuffer sb = new StringBuffer("");
-	 for(int i=0; i < alermList.size(); i++){
-		HashMap map =(HashMap) alermList.get(i);
-		String name = map.get("called")==null?"":(String)map.get("called");
-		int count = (Integer)map.get("incount");
-		int count1 = (Integer)map.get("incount1");
-		sb.append(name).append("：").append(count).append("&nbsp;/&nbsp;").append(count1).append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-		baojingTotal = baojingTotal + count;
-		weichuliTotal1 = weichuliTotal1 + count1;
-	 } 
-}
-%>
-	
-
 <script type="text/javascript">
 function strToJson(str){ 
 	var json = eval('(' + str + ')'); 
@@ -103,26 +89,39 @@ for(var j4=0;j4<arr4.length;j4++) {
 
 </script>
 
-<div id="graph1" style="float: left;">Loading graph...</div>
-<div id="graph2" style="float: left;">Loading graph...</div>
-<div id="graph3"style="float: left;">Loading...</div>
-<div id="graph4" style="float: left;">Loading graph...</div>
+
+		<div class="k1">
+		<table align="center">
+		        <tr>
+					<td height="100px;" align="center" style="font-size: 20px;font-weight: bold; "><!-- font-size: 20px;font-weight: bold; -->
+						系统状态一览表
+					</td>
+				</tr>
+		</table>
+			<div id="graph1" style="float: left;z-index: 100;">Loading graph...</div>
+			<div id="graph2" style="float: left;">Loading graph...</div>
+			<div id="graph3"style="float: left;">Loading graph...</div>
+			<div id="graph4" style="float: left;">Loading graph...</div>
+		</div>
+		
+		
 <script>
 
 	var myData = new Array(['U.S.A.', 69.5], ['Canada', 2.8], ['Japan & SE.Asia', 5.6], ['Aus. & NZ.', 2.8], ['E.U.', 14.6], ['Others Europe', 2.7], ['Others', 1.9]);
-	//var colors = ['#FA5E1F', '#FDCB3F', '#71D743', '#D23333', '#BAE73F', '#AB7B55', '#B381C9'];
-	var colors = ['#2F6D99', '#2F6D99', '#2F6D99', '#2F6D99', '#2F6D99', '#2F6D99', '#2F6D99'];
+	//多彩颜色 ['#FA5E1F', '#FDCB3F', '#71D743', '#D23333', '#BAE73F', '#AB7B55', '#B381C9'];
+
+	var colors = ['#FA5E1F', '#FDCB3F', '#71D743', '#D23333', '#BAE73F', '#AB7B55','#B381C9', '#FA5E1F','#FDCB3F', '#71D743', '#D23333', '#BAE73F', '#AB7B55', '#B381C9', '#FA5E1F','#FDCB3F'];
 	var myChart = new JSChart('graph1', 'bar');
 	myChart.setDataArray(arr1);
 	myChart.colorizeBars(colors);
 	myChart.setTitle('采录企业总数：'+sum1);
-	myChart.setTitleColor('#8E8E8E');
+	myChart.setTitleColor('#b10000');
 	myChart.setAxisNameX('');
 	myChart.setAxisNameY('');
-	myChart.setAxisColor('#c6c6c6');
+	myChart.setAxisColor('#b10000');
 	myChart.setAxisWidth(1);
-	myChart.setAxisNameColor('#9a9a9a');
-	myChart.setAxisValuesColor('#939393');
+	myChart.setAxisNameColor('#b10000');
+	myChart.setAxisValuesColor('#b10000');
 	myChart.setAxisPaddingTop(60);
 	myChart.setAxisPaddingLeft(50);
 	myChart.setAxisPaddingBottom(60);
@@ -131,30 +130,25 @@ for(var j4=0;j4<arr4.length;j4++) {
 	myChart.setTitleFontSize(11);
 	myChart.setBarBorderWidth(0);
 	myChart.setBarSpacingRatio(50);
-	myChart.setBarValuesColor('#737373');
+	myChart.setBarValuesColor('#b10000');
 	myChart.setGrid(false);
-	myChart.setSize(616, 321);
+	myChart.setSize(1100, 521);
 	myChart.setBackgroundImage('chart_bg.jpg');
 	myChart.draw();
-</script>
-
-
-<script>
 
 	var myData = new Array(['U.S.A.', 69.5], ['Canada', 2.8], ['Japan & SE.Asia', 5.6], ['Aus. & NZ.', 2.8], ['E.U.', 14.6], ['Others Europe', 2.7], ['Others', 1.9]);
-	//var colors = ['#FA5E1F', '#FDCB3F', '#71D743', '#D23333', '#BAE73F', '#AB7B55', '#B381C9'];
-	var colors = ['#2F6D99', '#2F6D99', '#2F6D99', '#2F6D99', '#2F6D99', '#2F6D99', '#2F6D99'];
+	var colors = ['#FA5E1F', '#FDCB3F', '#71D743', '#D23333', '#BAE73F', '#AB7B55','#B381C9', '#FA5E1F','#FDCB3F', '#71D743', '#D23333', '#BAE73F', '#AB7B55', '#B381C9', '#FA5E1F','#FDCB3F'];
 	var myChart = new JSChart('graph2', 'bar');
 	myChart.setDataArray(arr2);
 	myChart.colorizeBars(colors);
 	myChart.setTitle('采录数据总数：'+sum2);
-	myChart.setTitleColor('#8E8E8E');
+	myChart.setTitleColor('#b10000');
 	myChart.setAxisNameX('');
 	myChart.setAxisNameY('');
-	myChart.setAxisColor('#c6c6c6');
+	myChart.setAxisColor('#b10000');
 	myChart.setAxisWidth(1);
-	myChart.setAxisNameColor('#9a9a9a');
-	myChart.setAxisValuesColor('#939393');
+	myChart.setAxisNameColor('#b10000');
+	myChart.setAxisValuesColor('#b10000');
 	myChart.setAxisPaddingTop(60);
 	myChart.setAxisPaddingLeft(50);
 	myChart.setAxisPaddingBottom(60);
@@ -163,16 +157,11 @@ for(var j4=0;j4<arr4.length;j4++) {
 	myChart.setTitleFontSize(11);
 	myChart.setBarBorderWidth(0);
 	myChart.setBarSpacingRatio(50);
-	myChart.setBarValuesColor('#737373');
+	myChart.setBarValuesColor('#b10000');
 	myChart.setGrid(false);
-	myChart.setSize(616, 321);
+	myChart.setSize(1100, 521);
 	myChart.setBackgroundImage('chart_bg.jpg');
 	myChart.draw();
-</script>
-	
-	
-	
-	<script type="text/javascript">
 	
 	
 	
@@ -181,59 +170,54 @@ for(var j4=0;j4<arr4.length;j4++) {
 	myChart.setDataArray(arr3);
 	//myChart.setTitle('报警总数/未处理数：'+'/'+' ');
 	myChart.setTitle('未处理数/报警总数：'+sum3$1+'/'+sum3$2+' ');
-	myChart.setTitleColor('#8E8E8E');
+	myChart.setTitleColor('#b10000');
 	myChart.setAxisNameX('');
 	myChart.setAxisNameY('');
 	myChart.setAxisNameFontSize(16);
-	myChart.setAxisNameColor('#999');
+	myChart.setAxisNameColor('#b10000');
 //	myChart.setAxisValuesAngle(30);
-	myChart.setAxisValuesColor('#777');
-	myChart.setAxisColor('#B5B5B5');
+	myChart.setAxisValuesColor('#b10000');
+	myChart.setAxisColor('#b10000');
 	myChart.setAxisWidth(1);
-	myChart.setBarValuesColor('#2F6D99');
+	myChart.setBarValuesColor('#b10000');
 	myChart.setAxisPaddingTop(60);
 	myChart.setAxisPaddingBottom(60);
 	myChart.setAxisPaddingLeft(45);
 	myChart.setTitleFontSize(11);
-	myChart.setBarColor('#2D6B96', 1);
-	myChart.setBarColor('#9CCEF0', 2);
+	myChart.setBarColor('#FA5E1F', 1);
+	myChart.setBarColor('#ffde00', 2);
 	myChart.setBarBorderWidth(0);
 	myChart.setBarSpacingRatio(50);
 	myChart.setBarOpacity(0.9);
 	myChart.setFlagRadius(6);
-	//myChart.setTooltip(['旅馆业', 'Click me', 1], callback);   可以在图片上添加点击事件
 	myChart.setTooltipPosition('nw');
 	myChart.setTooltipOffset(3);
 	myChart.setLegendShow(false);
 	myChart.setLegendPosition('right top');
 	myChart.setLegendForBar(1, '2005');
 	myChart.setLegendForBar(2, '2010');
-	myChart.setSize(616, 321);
-	myChart.setGridColor('#C6C6C6');
+	myChart.setGrid(false);
+	myChart.setSize(1100, 521);
+	//myChart.setGridColor('#C6C6C6');
 	myChart.draw();
 	
 	function callback() {
 		alert('User click');
 	}
-</script>
-
-
-<script>
 
 	var myData = new Array(['U.S.A.', 69.5], ['Canada', 2.8], ['Japan & SE.Asia', 5.6], ['Aus. & NZ.', 2.8], ['E.U.', 14.6], ['Others Europe', 2.7], ['Others', 1.9]);
-	//var colors = ['#FA5E1F', '#FDCB3F', '#71D743', '#D23333', '#BAE73F', '#AB7B55', '#B381C9'];
-	var colors = ['#2F6D99', '#2F6D99', '#2F6D99', '#2F6D99', '#2F6D99', '#2F6D99', '#2F6D99'];
+	var colors = ['#FA5E1F', '#FDCB3F', '#71D743', '#D23333', '#BAE73F', '#AB7B55','#B381C9', '#FA5E1F','#FDCB3F', '#71D743', '#D23333', '#BAE73F', '#AB7B55', '#B381C9', '#FA5E1F','#FDCB3F'];
 	var myChart = new JSChart('graph4', 'bar');
 	myChart.setDataArray(arr4);
 	myChart.colorizeBars(colors);
-	myChart.setTitle('<s:property value="#request.disp_date"  />起未上传数据企业：'+sum4);
-	myChart.setTitleColor('#8E8E8E');
+	myChart.setTitle('最近一周内(<s:property value="#request.disp_date"  />-昨日）未上传数据企业：'+sum4);
+	myChart.setTitleColor('#b10000');
 	myChart.setAxisNameX('');
 	myChart.setAxisNameY('');
-	myChart.setAxisColor('#c6c6c6');
+	myChart.setAxisColor('#b10000');
 	myChart.setAxisWidth(1);
-	myChart.setAxisNameColor('#9a9a9a');
-	myChart.setAxisValuesColor('#939393');
+	myChart.setAxisNameColor('#b10000');
+	myChart.setAxisValuesColor('#b10000');
 	myChart.setAxisPaddingTop(60);
 	myChart.setAxisPaddingLeft(50);
 	myChart.setAxisPaddingBottom(60);
@@ -242,167 +226,12 @@ for(var j4=0;j4<arr4.length;j4++) {
 	myChart.setTitleFontSize(11);
 	myChart.setBarBorderWidth(0);
 	myChart.setBarSpacingRatio(50);
-	myChart.setBarValuesColor('#737373');
+	myChart.setBarValuesColor('#b10000');
 	myChart.setGrid(false);
-	myChart.setSize(616, 321);
+	myChart.setSize(1100, 521);
 	myChart.setBackgroundImage('chart_bg.jpg');
 	myChart.draw();
 </script>
 
-		<%--
-	<div class="k1" style="position: relative;">
-		<table align="center">
-			<tr>
-				<td>&nbsp;</td>
-			</tr>
-	
-  ArrayList compList = (ArrayList)request.getAttribute("compList");
- 
- if(compList != null && compList.size()>0){
-	 int Total = 0;
-	 StringBuffer sb = new StringBuffer("");
-	 for(int i=0; i < compList.size(); i++){
-		HashMap map =(HashMap) compList.get(i);
-		String name = map.get("called")==null?"":(String)map.get("called");
-		int count = (Integer)map.get("incount");
-		
-		sb.append(name).append("：").append(count).append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-		Total = Total + count;
-	 } 
-	
-	%>
-	<tr height="30">
-	   <td align="center">
-	   <b ><font color="#A05301">采录企业总数：&nbsp;<%=Total %></font></b>
-	   </td>
-	</tr>
-	<tr height="30">
-	   <td >    
-	   <%=sb.toString() %>
-	  </td>
-	</tr>
-	<%
- }
- %>
-			<tr>
-				<td height="1" bgcolor="#C7EAFA"></td>
-			</tr>
-
-			<%
-  ArrayList dataList = (ArrayList)request.getAttribute("dataList");
- 
- if(dataList != null && dataList.size()>0){
-	 int Total = 0;
-	 StringBuffer sb = new StringBuffer("");
-	 for(int i=0; i < dataList.size(); i++){
-		HashMap map =(HashMap) dataList.get(i);
-		String name = map.get("called")==null?"":(String)map.get("called");
-		int count = (Integer)map.get("incount");
-		
-		sb.append(name).append("：").append(count).append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-		Total = Total + count;
-	 } 
-	
-	%>
-			<tr height="30">
-				<td align="center"><b><font color="#A05301">采录数据总数：<%=Total %></font></b>
-				</td>
-			</tr>
-			<tr height="30">
-				<td><%=sb.toString() %></td>
-			</tr>
-			<%
- }
- %>
-			<tr>
-				<td height="1" bgcolor="#C7EAFA"></td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-			</tr>
-			<%
-  //ArrayList alermList = (ArrayList)request.getAttribute("alermList");
- 
- if(alermList != null && alermList.size()>0){
-	 //int Total = 0;
-	 //int Total1 = 0;
-	 StringBuffer sb = new StringBuffer("");
-	 for(int i=0; i < alermList.size(); i++){
-		HashMap map =(HashMap) alermList.get(i);
-		String name = map.get("called")==null?"":(String)map.get("called");
-		int count = (Integer)map.get("incount");
-		int count1 = (Integer)map.get("incount1");
-		sb.append(name).append("：").append(count).append("&nbsp;/&nbsp;").append(count1).append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-		//Total = Total + count;
-		//Total1 = Total1 + count1;
-	 } 
-	
-	%>
-	<input type="hidden" id="inputTxtTotal" value="<%=baojingTotal %>" />
-	   <input type="hidden" id="inputTxtTotal1" value="<%=weichuliTotal1 %>" />
-	 <tr height="30">
-	   <td align="center">
-	   
-	   <b><font color="#A05301">报警总数/未处理数：<%=baojingTotal %>/<%=weichuliTotal1 %></font></b>
-	   </td>
-	</tr>
-	<tr height="30">
-	   <td> 
-	   <%=sb.toString() %>
-	   </td>
-	</tr>
-	<%
- }
- %>
-			<tr>
-				<td height="1" bgcolor="#C7EAFA"></td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-			</tr>
-			<%
-  ArrayList uploadList = (ArrayList)request.getAttribute("uploadList");
- 
- if(uploadList != null && uploadList.size()>0){
-	 int Total = 0;
-	
-	 StringBuffer sb = new StringBuffer("");
-	 for(int i=0; i < uploadList.size(); i++){
-		HashMap map =(HashMap) uploadList.get(i);
-		String name = map.get("called")==null?"":(String)map.get("called");
-		int count = (Integer)map.get("incount");
-		sb.append(name).append("：").append(count).append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
-		Total = Total + count;
-		
-	 } 
-	
-	%>
-			<tr height="30">
-				<td align="center"><b><font color="#A05301"> <s:property
-								value="#request.disp_date" />起未上传数据企业：&nbsp;<%=Total %> 家
-					</font></b></td>
-			</tr>
-			<tr height="30">
-				<td><%=sb.toString() %></td>
-			</tr>
-			<%
- }
- %>
-			<tr>
-				<td height="1" bgcolor="#C7EAFA"></td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>系统用户总数&nbsp;：&nbsp;<s:property value="#request.usertotal" />&nbsp;个，
-					&nbsp; &nbsp; 当前在线数&nbsp;：&nbsp;<s:property
-						value="#request.usercount" />&nbsp;个
-				</td>
-			</tr>
-		</table>
-	</div>
-	--%>
 </body>
-
 </html>

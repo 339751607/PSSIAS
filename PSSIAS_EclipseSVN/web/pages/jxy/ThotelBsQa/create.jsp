@@ -13,9 +13,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/ThotelBsQa/save.do" theme="simple"  method="post">
+<s:form action="/pages/jxy/ThotelBsQa/save.do" theme="simple"  method="post">
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
-	    <input type="hidden" name="returnUrl" value="!/jxy/ThotelBsQa/listUser.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+	    <input type="hidden" name="returnUrl" value="!/pages/jxy/ThotelBsQa/listUser.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 	       <tr>
 				<td colspan="4" class="tb_title"> 
 							提&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;问
@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       <tr >
 				<td colspan="4" class="tb_bottom">
 							<input id="submitButton" name="submitButton" type="submit" value="提问" />
-	                        <input type="button" value="返回" onclick="window.location='${ctx}/jxy/ThotelBsQa/listUser.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+	                        <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/ThotelBsQa/listUser.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 			    </td>
 	        </tr>
 	</table>

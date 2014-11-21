@@ -16,9 +16,9 @@ if (request.getParameter("s_empcode") != null)
 <body onload="quickSelectInit()">
 <%@ include file="/commons/messages.jsp" %>
 <%@page import="com.dyneinfo.jxy.model.*" %>
-<s:form action="/jxy/Tempworklog/save.do" theme="simple"  name="inputForm" method="post">
+<s:form action="/pages/jxy/Tempworklog/save.do" theme="simple"  name="inputForm" method="post">
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
-	    <input type="hidden" name="returnUrl" value="!/jxy/Tempworklog/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+	    <input type="hidden" name="returnUrl" value="!/pages/jxy/Tempworklog/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 	      <input type="hidden" value="<%=s_empcode%>"  name="empcode"  />
 	       <tr>
 				<td colspan="4" class="tb_title"> 
@@ -74,7 +74,7 @@ if (request.getParameter("s_empcode") != null)
 	       <tr >
 				<td colspan="4" class="tb_bottom">
 							<input id="submitButton" name="submitButton" type="submit" value="提交" />
-	                        <input type="button" value="返回" onclick="window.location='${ctx}/jxy/Tempworklog/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+	                        <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/Tempworklog/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 			    </td>
 	        </tr>
 	</table>

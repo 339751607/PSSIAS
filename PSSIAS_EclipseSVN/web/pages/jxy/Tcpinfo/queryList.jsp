@@ -21,7 +21,7 @@
 		<%@ include file="/commons/messages.jsp"%>
 
 		<div class="queryPanel">
-			<s:form action="/jxy/Tcpinfo/queryList.do" name="form1" theme="simple"
+			<s:form action="/pages/jxy/Tcpinfo/queryList.do" name="form1" theme="simple"
 				style="display: inline;" method="post">
 				<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 					<tr>
@@ -255,16 +255,19 @@
 					<tr>
 						<td class="tb_bottom" colspan="4">
 							<input type="submit" value="查询"
-								onclick="getReferenceForm(this).action='${ctx}/jxy/Tcpinfo/queryList.do'" />
+								onclick="getReferenceForm(this).action='${ctx}/pages/jxy/Tcpinfo/queryList.do'" />
 							<%
 								String isSync = DictHelpImpl.getInitData("isSync");
 								if(isSync.equals("0")){
 							%>
+							<input type="button" value="重置" onclick="resitData(document.forms[0])"/>
 							<input type="submit" value="新增"
-								onclick="getReferenceForm(this).action='${ctx}/jxy/Tcpinfo/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'" />
+								onclick="getReferenceForm(this).action='${ctx}/pages/jxy/Tcpinfo/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'" />
 							<%
-								}
+								}else{
 							%>
+								<input style="margin-left: 20px" type="button" value="重置" onclick="resitData(document.forms[0])"/>
+							<%} %>
 						</td>
 					</tr>
 				</table>
@@ -275,7 +278,7 @@
 
 		<ec:table items='page.result' var="item" method="get"
 			retrieveRowsCallback="limit" sortRowsCallback="limit"
-			filterRowsCallback="limit" action="${ctx}/jxy/Tcpinfo/queryList.do"
+			filterRowsCallback="limit" action="${ctx}/pages/jxy/Tcpinfo/queryList.do"
 			autoIncludeParameters="true">
 			<ec:row>
 				<ec:column property="cpcode" title="<%=Tcpinfo.ALIAS_CPCODE%>" />
@@ -288,7 +291,7 @@
 					title="<%=Tcpinfo.ALIAS_POLICENAME%>" />
 				<ec:column width="85px" property="操作" title="操作" sortable="false"
 					viewsAllowed="html">
-					<a href="${ctx}/jxy/Tcpinfo/show.do?cpcode=${item.cpcode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>
+					<a href="${ctx}/pages/jxy/Tcpinfo/show.do?cpcode=${item.cpcode}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>
 
 				</ec:column>
 			</ec:row>

@@ -32,3 +32,4 @@
 <script src="<c:url value="/scripts/My97DatePicker/WdatePicker.js"/>" type="text/javascript"></script>
 <script src="<c:url value="/scripts/jquery.js"/>" type="text/javascript"></script>
 <script src="<c:url value="/scripts/checkDetail.js"/>" type="text/javascript"></script>
+<script src="<c:url value="/scripts/pgis.js"/>" type="text/javascript"></script>

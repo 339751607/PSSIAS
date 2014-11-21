@@ -5,6 +5,7 @@ package com.dyneinfo.zazh.action;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javacommon.base.BaseStruts2Action;
 
@@ -38,6 +39,8 @@ public class outlookmenuAction extends BaseStruts2Action implements Preparable,M
 	protected static final String LIST_LEFT_TREE = "/pages/outlookmenu/work_body_leftTree.jsp";
 	protected static final String LIST_TOP_MENU= "/pages/outlookmenu/top_menu.jsp";
 	protected static final String LIST_DROP_MENU_welcome= "/pages/main/dropmenu/welcome.jsp";
+	protected static final String MAP_JSP = "/pages/outlookmenu/map.jsp";
+	protected static final String NEW_LEFT_MENU= "/pages/outlookmenu/new_leftmenu.jsp";
 	
 	protected static final String LIST_LOGIN="/login.jsp";
 	
@@ -110,20 +113,90 @@ public class outlookmenuAction extends BaseStruts2Action implements Preparable,M
 
 		String outlookJscript = getOutLookMenuJavaScript();	
 		request.setAttribute("outlookJscript", outlookJscript);
-	  
+		
+		String dataAuthorityFlag = asecurityMenuManager.queryDataAuthoritySwitchStatus();
+	    request.getSession().setAttribute("dataAuthorityFlag", dataAuthorityFlag);
 		return LIST_TOP_MENU;
 	}
-	
+	public String newLeftMenu() throws Exception {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String username = "";
+		String deptid = "";
+		String deptSeq = "";
+
+		MyUserDetails userDetail = null;
+		userDetail = SpringTagFunctions.getUserDetails();
+		if (userDetail != null) {
+			username = userDetail.getUsername();
+			deptid = userDetail.getDeptID();
+			deptSeq = userDetail.getDeptSeq();
+
+		}
+
+	    if(StringUtils.isNotEmpty(username)&&StringUtils.isNotEmpty(deptSeq)){
+	    	
+	    }else{
+	    	return LIST_LOGIN;
+	    }
+	    
+	    mymenuList = asecurityMenuManager.getAsecurityMenuDao().getUserMenusList(username);
+
+		String menusJson = getMenusJson();	
+		request.setAttribute("menusJson", menusJson);
+	  
+		return NEW_LEFT_MENU;
+	}
+	/*
+	 * 为生成菜单Json数据 。
+	 */
+	public String getMenusJson(){
+		String menus = "";
+		StringBuffer menuBS = new StringBuffer();
+		menuBS.append("var menusJson=[");	
+		if( mymenuList != null && mymenuList.size() >0 ){			
+			//生成所需要的json		        
+	        Iterator iterator = mymenuList.iterator();
+	        while( iterator.hasNext()){
+	        	menuBS = creatJsonMenu((MainMenuItemExt)iterator.next(),menuBS);
+	        	
+	        }	       
+		}
+		menus = menuBS.toString();
+	    menus = menus.substring(0, menus.length()-1);
+		menus = menus +("];");
+		return menus;
+	}
+	private StringBuffer creatJsonMenu(MainMenuItemExt menuItem,StringBuffer jsonmenu){
+
+		jsonmenu.append("{");
+		jsonmenu.append(" 'name' : ");
+		jsonmenu.append(" '" + menuItem.getName() + "', ");
+		
+		//存在子菜单
+		int num = menuItem.getChilds().length;	
+		if(num > 0){	
+			jsonmenu.append(" 'submenu' : [ ");			
+			for(int i=0; i<num; i++){
+				jsonmenu = creatJsonMenu((MainMenuItemExt)menuItem.getChilds()[i], jsonmenu);
+				if(i==num-1){
+					jsonmenu = new StringBuffer(jsonmenu.substring(0,jsonmenu.length()-1));					
+				}
+			}
+			jsonmenu.append(" ] ");
+		}else{
+			jsonmenu.append(" 'url' : '");
+			String url =  menuItem.getAction()==null?"":menuItem.getAction();
+			jsonmenu.append( url );
+			jsonmenu.append( "' ");
+		}
+		jsonmenu.append("},");
+		return jsonmenu;
+	}
 	
 	public String leftTree() {
 		
 		return LIST_LEFT_TREE;
-	}
-	
-
-	
-	
-	
+	}	
 	// dropMenu
 	public String dropMenuWelcome() {
 		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -138,6 +211,15 @@ public class outlookmenuAction extends BaseStruts2Action implements Preparable,M
 
 			request.setAttribute("dropMenuJscript", dropMenuJscript);
 		return LIST_DROP_MENU_welcome;
+	}
+	
+	public String mapMain(){
+		HttpServletRequest request = ServletActionContext.getRequest();
+		 List hconfigList= asecurityMenuManager.getQuery("select * from t_config where key='ipAddress'");
+		 Map hconfigMap=(Map)hconfigList.get(0);
+		 String hcvalues = (String)hconfigMap.get("CODE");
+		 request.getSession().setAttribute("hcvalues", hcvalues);
+		return MAP_JSP;
 	}
 	
 	

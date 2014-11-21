@@ -16,11 +16,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body onload="quickSelectInit()">
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/Temployee/saveAll.do" theme="simple"  enctype="multipart/form-data"  name="inputForm" method="post">
+<s:form action="/pages/jxy/Temployee/saveAll.do" theme="simple"  enctype="multipart/form-data"  name="inputForm" method="post">
 <s:hidden key="npcodehidden"  />
 <s:hidden key="nativeplacehidden"  />
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
-	    <input type="hidden" name="returnUrl" value="!/jxy/Temployee/listAll.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+	    <input type="hidden" name="returnUrl" value="!/pages/jxy/Temployee/listAll.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 	       <tr>
 				<td colspan="4" class="tb_title"> 
 							<%=Temployee.TABLE_ALIAS%>新增
@@ -200,7 +200,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       <tr >
 				<td colspan="4" class="tb_bottom">
 							<input id="submitButton" name="submitButton" type="submit" value="提交" />
-	                        <input type="button" value="返回" onclick="window.location='${ctx}/jxy/Temployee/listAll.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+	                        <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/Temployee/listAll.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 			    </td>
 	        </tr>
 	</table>
@@ -390,7 +390,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//查询所属城市
 	function queryCity()
 	{
-		var provinceId = $("prov").value;
+		var provinceId = spider("prov").value;
 		provinceId = provinceId.substr(0,2);
 		menu.queryXzqhById(provinceId,cityCallback);
 	}
@@ -417,7 +417,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//查询所属城市
 	function queryCity2()
 	{
-		var provinceId = $("prov2").value;
+		var provinceId = spider("prov2").value;
 		provinceId = provinceId.substr(0,2);
 		menu.queryXzqhById(provinceId,cityCallback2);
 	}

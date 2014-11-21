@@ -52,7 +52,7 @@ function checkFileUpload(form,extensions,requireUpload,sizeLimit,minWidth,minHei
 </script>
 <base target="_self">
 <body topMargin="0">
-<form id="opeForm" name="opeForm"  action="${ctx}/jxy/Tcarinfo/updatePic.do" enctype="multipart/form-data" action="" method="post">
+<form id="opeForm" name="opeForm"  action="${ctx}/pages/jxy/Tcarinfo/updatePic.do" enctype="multipart/form-data" action="" method="post">
 <table width="100%" border="1" bordercolor="#7c8ca7" align="center" cellPadding="0" cellSpacing="0" class="tb_all">
 <input type="hidden" name="enrolid" value="<%=enrolid%>" />
  <tr class="crosscolor_tr">

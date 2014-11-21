@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/Tcarcaseinfo/list.do" method="get" theme="simple">
+<s:form action="/pages/jxy/Tcarcaseinfo/list.do" method="get" theme="simple">
 	<s:hidden name="enrolid" id="enrolid" value="%{model.enrolid}"/>
 	<s:hidden name="credid" id="credid" value="%{model.credid}"/>
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">

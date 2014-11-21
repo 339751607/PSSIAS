@@ -14,7 +14,7 @@ String FILEID = request.getParameter("FILEID");
 </head>
 
 <body>
-<form name="editForm"   action="${ctx}/jxy/FileAttach/editPict.do" enctype="multipart/form-data" method="post">
+<form name="editForm"   action="${ctx}/pages/jxy/FileAttach/editPict.do" enctype="multipart/form-data" method="post">
 <table cellspacing="0" cellpadding="0" border="0" width="100%" class="pg_add">
 	<input type="hidden" name="FILEID" value="<%=FILEID%>" />
 			<tr class="crosscolor_tr">
@@ -43,7 +43,7 @@ function SendFile()
 	   alert('请选取上传的图片！');
 	   return false;
 	}
-	document.editForm.action="${ctx}/jxy/FileAttach/editPict.do?FILEID="+FILEID;
+	document.editForm.action="${ctx}/pages/jxy/FileAttach/editPict.do?FILEID="+FILEID;
 	document.editForm.submit() ;
 }
 

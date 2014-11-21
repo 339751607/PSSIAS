@@ -101,7 +101,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
 		                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/pmdd/SsNotice/htadlist.do'"/>
-		                       <input type="button" value="清空" onclick="resitData(document.forms.form1);"/>
+		                       <input type="button" value="重置" onclick="resitData(document.forms.form1);"/>
                                <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/pages/pmdd/SsNotice/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
                                <input type="button"  value="删除" onclick="doDel();"/>
 			              </td>

@@ -55,9 +55,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body onload="quickSelectInit()">
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/Tcarcaseinfo/save.do" theme="simple"  method="post">
+<s:form action="/pages/jxy/Tcarcaseinfo/save.do" theme="simple"  method="post">
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
-	    <input type="hidden" name="returnUrl" value="!/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+	    <input type="hidden" name="returnUrl" value="!/pages/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 	       <tr>
 				<td colspan="4" class="tb_title"> 
 							<%=Tcarcaseinfo.TABLE_ALIAS%>信息录入
@@ -67,13 +67,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       <tr >
 				<td colspan="4" class="tb_bottom">
 							<input id="submitButton" name="submitButton" type="submit" value="保存" />
-	                        <input type="button" value="返回" onclick="window.location='${ctx}/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+	                        <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 			    </td>
 	        </tr>
 	</table>
 </s:form>
 <mytag:tab id="orgInfo"  width="100%" height="100%" >
-	 <mytag:tabContent url="${ctx}/jxy/Tcarinfo/view.do"  selected="true"   param="enrolid"  paramValue="${model.enrolid}"   frameBorder="0" tabType="frame" scrolling="auto" title="车辆信息"/>
+	 <mytag:tabContent url="${ctx}/pages/jxy/Tcarinfo/view.do"  selected="true"   param="enrolid"  paramValue="${model.enrolid}"   frameBorder="0" tabType="frame" scrolling="auto" title="车辆信息"/>
 </mytag:tab>
 <script>
 	

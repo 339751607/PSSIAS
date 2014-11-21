@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ include file="/commons/messages.jsp" %>
 
 <div class="queryPanel">
-    <s:form action="/jxy/ThotelBsQa/list.do" name="form1"  theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/jxy/ThotelBsQa/list.do" name="form1"  theme="simple" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4"><%=ThotelBsQa.TABLE_ALIAS%></td>
@@ -83,8 +83,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</tr>
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/jxy/ThotelBsQa/listUser.do'"/>
-	                               <input type="submit"  value="提问" onclick="getReferenceForm(this).action='${ctx}/jxy/ThotelBsQa/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/ThotelBsQa/listUser.do'"/>
+	                               <input type="submit"  value="提问" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/ThotelBsQa/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 			             <input type="button" value="清空" onclick="resitData(document.forms.form1);"/>
 			              </td>
 		           </tr>
@@ -96,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/ThotelBsQa/list.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/ThotelBsQa/list.do" autoIncludeParameters="true">
 	<ec:row>	         
 				<ec:column property="wtsj"  parse="yyyyMMdd" format="yyyy-MM-dd" cell="date"  title="<%=ThotelBsQa.ALIAS_WTSJ%>"/>
 				<mytag:lookupcolumn property="wtfl"  title="<%=ThotelBsQa.ALIAS_WTFL%>"	cell="net.java.dev.ec.table.view.LookUpCell" dictType="wtfl" />
@@ -104,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<ec:column property="jdr" title="<%=ThotelBsQa.ALIAS_JDR%>" />
 				<mytag:lookupcolumn property="jdbz"  title="<%=ThotelBsQa.ALIAS_JDBZ%>"	cell="net.java.dev.ec.table.view.LookUpCell" dictType="jdbz" />
 		<ec:column width="30px" property="操作" title="操作" sortable="false" viewsAllowed="html">
-			<a href="${ctx}/jxy/ThotelBsQa/show.do?xh=${item.xh}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>
+			<a href="${ctx}/pages/jxy/ThotelBsQa/show.do?xh=${item.xh}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>
 		</ec:column>
 	</ec:row>
 </ec:table>

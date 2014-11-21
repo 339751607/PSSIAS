@@ -88,6 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
 			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/gas/Tbuylog/list.do'"/>
+			              		   <input style="margin-left: 20px" type="button" value="重置" onclick="resitData(document.forms[0])"/>
 			              </td>
 		           </tr>
 	    </table>
@@ -108,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <ec:column property="bdate"  cell="date" title="<%=Tbuylog.ALIAS_BDATE%>"/>
 		                    
 	 <ec:column property="cpname"  title="<%=Tbuylog.ALIAS_CPCODE%>">
-		 <a href="${ctx}/pages/gas/Tcompanyinfogas/cpshow.do?cpcode=${item.cpcode}" style="color: #0000FF; text-decoration: underline;">${item.cpname} </a>
+		 <a href="${ctx}/pages/gas/Tcompanyinfogas/cpshow.do?cpcode=${item.cpcode}" style="color: #0000FF; text-decoration: underline;">spider{item.cpname} </a>
 	 </ec:column>
 	 <ec:column property="idCode"  title="<%=Tbuylog.ALIAS_ID_CODE%>"/>
 	 <ec:column property="logtime"  title="<%=Tbuylog.ALIAS_LOGTIME%>"/>
@@ -125,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script>
 	function getPcs()
 	{
-		var countryId = $("country").value;
+		var countryId = spider("country").value;
 		//默认为不选择
 		if(countryId == 0)
 		{
@@ -143,7 +144,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	{
         DWRUtil.removeAllOptions("province");
         var pcscode = $("pcscode").value;
-        var pcsname = $("pcsname").value;
+        var pcsname = spider("pcsname").value;
         if(pcscode == null || pcscode ==""){
 	      //每次获得新的数据的时候先把每二个下拉框架的长度清0
 	        try{

@@ -32,13 +32,11 @@ import org.springframework.security.context.SecurityContextHolder;
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
 import cn.org.rapid_framework.web.util.HttpUtils;
-import com.dyneinfo.zazh.model.FileAttach;
-import com.dyneinfo.zazh.service.FileAttachManager;
-import com.dyneinfo.pmdd.model.Clzydd;
+import com.dyneinfo.pmdd.model.FileAttach;
 import com.dyneinfo.pmdd.model.Dczydd;
-import com.dyneinfo.pmdd.model.Fcdydd;
 import com.dyneinfo.pmdd.model.Pmdwxxb;
 import com.dyneinfo.pmdd.service.DczyddManager;
+import com.dyneinfo.pmdd.service.FileAttachPmddManager;
 import com.dyneinfo.pmdd.service.PmdwxxbManager;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
@@ -86,7 +84,8 @@ public class DczyddAction extends BaseStruts2Action implements Preparable,
 	private String[][] ssfj;
 
 	private DczyddManager dczyddManager;
-	private FileAttachManager fileAttachManager;
+	private FileAttachPmddManager fileAttachManager;
+	private FileAttach fileAttach;
 	private PmdwxxbManager pmdwxxbManager;
 
 	private Dczydd dczydd;
@@ -96,19 +95,19 @@ public class DczyddAction extends BaseStruts2Action implements Preparable,
 	private TreeMap<String, String> dateSelectMap;// //日期选择
 
 	// 照片上传 start
-	private List<File> uploads = new ArrayList<File>();
+	private List<File> upload = new ArrayList<File>();
 	private List<String> uploadFileNames = new ArrayList<String>();
 	private List<String> uploadContentTypes = new ArrayList<String>();
 
 	// 照片上传 end
 
 	// 附件
-	private List<File> affixs = new ArrayList<File>();
+	private List<File> affix = new ArrayList<File>();
 	private List<String> affixFileNames = new ArrayList<String>();
 	private List<String> affixContentTypes = new ArrayList<String>();
 	
 	//身份证扫描
-	private List<File> pics = new ArrayList<File>();
+	private List<File> pic = new ArrayList<File>();
 	private List<String> picFileNames = new ArrayList<String>();
 	private List<String> picContentTypes = new ArrayList<String>();
 	
@@ -133,36 +132,50 @@ public class DczyddAction extends BaseStruts2Action implements Preparable,
 	}
 
 	/** 增加setXXXX()方法,spring就可以通过autowire自动设置对象属性 */
+	
 	public List<File> getUploads() {
-		return uploads;
+		return upload;
+	}
+
+	public FileAttachPmddManager getFileAttachPmddManager() {
+		return fileAttachManager;
+	}
+
+	public void setFileAttachPmddManager(FileAttachPmddManager fileAttachManager) {
+		this.fileAttachManager = fileAttachManager;
+	}
+
+	public FileAttach getFileAttach() {
+		return fileAttach;
+	}
+
+	public void setFileAttach(FileAttach fileAttach) {
+		this.fileAttach = fileAttach;
 	}
 
 	public void setUploads(List<File> uploads) {
-		this.uploads = uploads;
+		this.upload = uploads;
 	}
 
 	public List<File> getAffixs() {
-		return affixs;
+		return affix;
 	}
 
 	public void setAffixs(List<File> affixs) {
-		this.affixs = affixs;
+		this.affix = affixs;
 	}
 
 	public List<File> getPics() {
-		return pics;
+		return pic;
 	}
 
 	public void setPics(List<File> pics) {
-		this.pics = pics;
+		this.pic = pics;
 	}
 	public void setDczyddManager(DczyddManager manager) {
 		this.dczyddManager = manager;
 	}
-	
-	public void setFileAttachManager(FileAttachManager manager) {
-		this.fileAttachManager = manager;
-	}
+
 	public void setPmdwxxbManager(PmdwxxbManager manager) {
 		this.pmdwxxbManager = manager;
 	}	
@@ -247,7 +260,6 @@ public class DczyddAction extends BaseStruts2Action implements Preparable,
 		String query = request.getParameter("query");
 		Page page = dczyddManager.findByPageRequest(pageRequest);
 		savePage(page, pageRequest);
-
 		if (query != null && query.equals("true")) {
 			return QUERY_JSP;
 		}
@@ -532,9 +544,9 @@ public class DczyddAction extends BaseStruts2Action implements Preparable,
 		dczydd.setDnumber(start_char + str_emd_char);
 		try {
 			//判断申请人照片不能大于100KB
-			if (uploads != null && uploads.size() > 0) {
+			if (upload != null && upload.size() > 0) {
 				
-				File uploadFile = uploads.get(0);
+				File uploadFile = upload.get(0);
 				InputStream uploadIs =new FileInputStream(uploadFile);
 				byte[] picBytes= (byte[])IOUtils.toByteArray(uploadIs);
 				
@@ -545,8 +557,8 @@ public class DczyddAction extends BaseStruts2Action implements Preparable,
 				}
 			}
 			//判断当物照片不能大于5M
-			if (affixs != null && affixs.size() > 0) {
-				if (affixs.get(0).length() > affixsSize) {
+			if (affix != null && affix.size() > 0) {
+				if (affix.get(0).length() > affixsSize) {
 					request.setAttribute("message", "当物照片不能大于" + affixsSize
 							/ 1024 / 1024 + "M");
 					return UPDATEPHOTOERROR;
@@ -556,8 +568,8 @@ public class DczyddAction extends BaseStruts2Action implements Preparable,
 			File uploadFile = null;
 			InputStream uploadIs = null;
 			byte[] uploadBytes= null;
-			if(uploads != null && uploads.size() > 0 ){
-				uploadFile = uploads.get(0);
+			if(upload != null && upload.size() > 0 ){
+				uploadFile = upload.get(0);
 				uploadIs = new FileInputStream(uploadFile);
 			    uploadBytes =  (byte[])IOUtils.toByteArray(uploadIs);
 			}
@@ -572,8 +584,8 @@ public class DczyddAction extends BaseStruts2Action implements Preparable,
 			File affixFile = null;
 			InputStream affixIs = null;
 			byte[] affixBytes= null;
-			if(affixs != null && affixs.size() > 0 ){
-				affixFile = affixs.get(0);
+			if(affix != null && affix.size() > 0 ){
+				affixFile = affix.get(0);
 				affixIs = new FileInputStream(affixFile);
 				affixBytes =  (byte[])IOUtils.toByteArray(affixIs);
 				
@@ -595,8 +607,8 @@ public class DczyddAction extends BaseStruts2Action implements Preparable,
 			File picFile = null;
 			InputStream picIs = null;
 			byte[] picBytes= null;
-			if(pics != null && pics.size() > 0 ){
-				picFile = pics.get(0);
+			if(pic != null && pic.size() > 0 ){
+				picFile = pic.get(0);
 				picIs = new FileInputStream(picFile);
 				picBytes =  (byte[])IOUtils.toByteArray(picIs);	
 			}
@@ -758,8 +770,8 @@ public class DczyddAction extends BaseStruts2Action implements Preparable,
 		File uploadFile = null;
 		InputStream uploadIs = null;
 		byte[] uploadBytes= null;
-		if(uploads != null && uploads.size() > 0 ){
-			uploadFile = uploads.get(0);
+		if(upload != null && upload.size() > 0 ){
+			uploadFile = upload.get(0);
 			uploadIs = new FileInputStream(uploadFile);
 			uploadBytes =  (byte[])IOUtils.toByteArray(uploadIs);
 			
@@ -807,8 +819,8 @@ public class DczyddAction extends BaseStruts2Action implements Preparable,
 		File uploadFile = null;
 		InputStream uploadIs = null;
 		byte[] uploadBytes= null;
-		if(uploads != null && uploads.size() > 0 ){
-			uploadFile = uploads.get(0);
+		if(upload != null && upload.size() > 0 ){
+			uploadFile = upload.get(0);
 			uploadIs = new FileInputStream(uploadFile);
 			uploadBytes =  (byte[])IOUtils.toByteArray(uploadIs);
 			
@@ -854,8 +866,8 @@ public class DczyddAction extends BaseStruts2Action implements Preparable,
 		File uploadFile = null;
 		InputStream uploadIs = null;
 		byte[] uploadBytes= null;
-		if(uploads != null && uploads.size() > 0 ){
-			uploadFile = uploads.get(0);
+		if(upload != null && upload.size() > 0 ){
+			uploadFile = upload.get(0);
 			uploadIs = new FileInputStream(uploadFile);
 			uploadBytes =  (byte[])IOUtils.toByteArray(uploadIs);
 			
@@ -1050,14 +1062,6 @@ public class DczyddAction extends BaseStruts2Action implements Preparable,
 	public void setSsfj(String[][] ssfj) {
 		this.ssfj = ssfj;
 	}
-	public List<File> getUpload() {
-		return this.uploads;
-	}
-
-	public void setUpload(List<File> uploads) {
-		this.uploads = uploads;
-	}
-
 	public List<String> getUploadFileName() {
 		return this.uploadFileNames;
 	}
@@ -1075,13 +1079,6 @@ public class DczyddAction extends BaseStruts2Action implements Preparable,
 	}
 
 
-	public List<File> getAffix() {
-		return this.affixs;
-	}
-
-	public void setAffix(List<File> affixs) {
-		this.affixs = affixs;
-	}
 
 	public List<String> getAffixFileName() {
 		return this.affixFileNames;
@@ -1100,14 +1097,6 @@ public class DczyddAction extends BaseStruts2Action implements Preparable,
 	}
 
 	
-	public List<File> getPic() {
-		return this.pics;
-	}
-
-	public void setPic(List<File> pics) {
-		this.pics = pics;
-	}
-
 	public List<String> getPicFileName() {
 		return this.picFileNames;
 	}

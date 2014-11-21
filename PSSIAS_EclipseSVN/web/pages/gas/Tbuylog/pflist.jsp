@@ -63,6 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
 			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/gas/Tbuylog/pflist.do'"/>
+			              		   <input style="margin-left: 20px" type="button" value="重置" onclick="resitData(document.forms[0])"/>
 			              </td>
 		           </tr>
 	    </table>
@@ -96,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script>
 	function getPcs()
 	{
-		var countryId = $("country").value;
+		var countryId = spider("country").value;
 		//默认为不选择
 		if(countryId == 0)
 		{
@@ -113,8 +114,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function provinceCallback(provinces)
 	{
         DWRUtil.removeAllOptions("province");
-        var pcscode = $("pcscode").value;
-        var pcsname = $("pcsname").value;
+        var pcscode = spider("pcscode").value;
+        var pcsname = spider("pcsname").value;
         if(pcscode == null || pcscode ==""){
 	      //每次获得新的数据的时候先把每二个下拉框架的长度清0
 	        try{
@@ -129,16 +130,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       }
  function changeprov()
 	{
-		var provinceId = $("prov").value;
-		var provincename = $("prov").options[$("prov").options.selectedIndex].text;
-		var nativeplace = $("s_nativeplace").value;
-		var xzqh = $("s_xzqh").value;
+		var provinceId = spider("prov").value;
+		var provincename = spider("prov").options[spider("prov").options.selectedIndex].text;
+		var nativeplace = spider("s_nativeplace").value;
+		var xzqh = spider("s_xzqh").value;
 		if(nativeplace==""){
-			$("s_nativeplace").value = provincename;
-			$("s_xzqh").value = provinceId;
+			spider("s_nativeplace").value = provincename;
+			spider("s_xzqh").value = provinceId;
 		}else{
-			$("s_nativeplace").value = nativeplace+","+provincename;
-			$("s_xzqh").value = xzqh+","+provinceId;
+			spider("s_nativeplace").value = nativeplace+","+provincename;
+			spider("s_xzqh").value = xzqh+","+provinceId;
 		}
 	}
 	

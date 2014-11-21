@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/Tempworklog/list.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/Tempworklog/list.do" autoIncludeParameters="true">
 	<ec:row>
 		<ec:column property="选择" title="<input type='checkbox' onclick=\"setAllCheckboxState('items',this.checked)\" >" sortable="false" width="3%" viewsAllowed="html">
 			<input type="checkbox" name="items" value="worklogid=${item.worklogid}&"/>
@@ -43,9 +43,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				            <mytag:lookupcolumn property="emptype"  title="<%=Tempworklog.ALIAS_EMPTYPE%>"	cell="net.java.dev.ec.table.view.LookUpCell" dictType="emptype" />
 		                  
 		<ec:column property="操作" title="操作" sortable="false" viewsAllowed="html">
-			<a href="${ctx}/jxy/Tempworklog/show.do?worklogid=${item.worklogid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>&nbsp;&nbsp;
+			<a href="${ctx}/pages/jxy/Tempworklog/show.do?worklogid=${item.worklogid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>&nbsp;&nbsp;
 			<c:if test="${ deptid eq fn:trim(item.cpcode) && item.status=='0'}">
-			<a href="${ctx}/jxy/Tempworklog/edit.do?worklogid=${item.worklogid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">修改</a>
+			<a href="${ctx}/pages/jxy/Tempworklog/edit.do?worklogid=${item.worklogid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">修改</a>
 			</c:if>
 		</ec:column>
 	</ec:row>
@@ -68,9 +68,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var input_txt = document.createElement("input");
 				input_txt.type = "hidden";
 				input_txt.name = "returnUrl";
-				input_txt.value = "!/jxy/Tempworklog/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+				input_txt.value = "!/pages/jxy/Tempworklog/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
 				form.appendChild(input_txt);
-		        form.action = '${ctx}/jxy/Tempworklog/delete.do';
+		        form.action = '${ctx}/pages/jxy/Tempworklog/delete.do';
 	            form.submit();
 	        }
 	  }

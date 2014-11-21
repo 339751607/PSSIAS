@@ -1,6 +1,8 @@
 <%@page import="com.dyneinfo.hotel.model.*" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/commons/taglibs.jsp" %>
+<%@ include file="/pages/hotel/commons/dept.jsp" %>
+<%@ include file="/pages/hotel/commons/xzqh.jsp" %>
 <%
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
 %>
@@ -9,261 +11,120 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 	<%@ include file="/commons/meta.jsp" %>
 	<base href="<%=basePath%>">
-	<title><%=TchPre.TABLE_ALIAS%>查询</title>
+	<link href="${ctx}/widgets/extremecomponents/extremecomponents.css" type="text/css" rel=stylesheet>
+	<title><%=TchPre.TABLE_ALIAS%> 维护</title>
+<script type="text/javascript">
+
+	function loadSelect(){
+		queryCity();
+		queryCity2();
+		document.getElementById("s_origin2").value=document.getElementById("s_origin").value;
+	}
+</script>
+<script>
+	function changeXzqh(){
+		var xzqh = document.getElementById("s_xzqh").options[document.getElementById("s_xzqh").selectedIndex].text;
+		var xzqhCode = document.getElementById("s_xzqh").value;
+		document.getElementById("s_origin").value+=xzqh+';';
+		document.getElementById("s_origin2").value+=xzqh+';';
+		document.getElementById("s_originCode").value+=xzqhCode+';';
+
+	}
+	function clearInput(){
+		document.getElementById("s_originCode").value="";
+		document.getElementById("s_origin").value="";
+	}
+</script>
 </head>
 
-<body>
+<body onload="loadSelect()" >
 <%@ include file="/commons/messages.jsp" %>
+
 <div class="queryPanel">
-    <s:form action="/pages/hotel/TchPre/list.do"  theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/hotel/TchXzqh/list.do" name="form1" theme="simple" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
+	              <input type="hidden"  name="s_originCode" value="${pageRequest.filters.originCode}"/>	
 	               <tr>
-			              <td class="tb_title" colspan="4"><%=TchPre.TABLE_ALIAS%>查询</td>
+			              <td class="tb_title" colspan="4">重点来源地查询</td>
 		           </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_NAME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.name}"  name="s_name"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_SEX%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.sex}"  name="s_sex"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
+		            <tr class="crosscolor_tr">
+		                  <td class="crosscolor_td">
 			                      <%=TchPre.ALIAS_NATION%>
 		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.nation}"  name="s_nation"  />
-		                  </td>
+		                  <td class="crosscolor_td2">
+						           <mytag:select name="s_nation" value="${pageRequest.filters.nation}" notEmpty="false"  dictName="DIC_ITEM_HOTEL_NATION"/>
+		                  </td>	
+	           
                           <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_BDATE%>
+			                      <%=TchPre.ALIAS_BUR_CODE%>
 		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.bdate}"  name="s_bdate"  />
-		                  </td>
+			              <td class="crosscolor_td2">
+			              		<mytag:select  name="s_burCode" onchange="changeprov2();" value="${pageRequest.filters.burCode}" dictName="ssfj"/>
+		                  </td>	
                    </tr>
 		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_ID_NAME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.idName}"  name="s_idName"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_ID_CODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.idCode}"  name="s_idCode"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
+		                  <td class="crosscolor_td">
 			                      <%=TchPre.ALIAS_XZQH%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.xzqh}"  name="s_xzqh"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_ADDRESS%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.address}"  name="s_address"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_IN_TIME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.inTime}"  name="s_inTime"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_NO_ROOM%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.noRoom}"  name="s_noRoom"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_OUT_TIME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.outTime}"  name="s_outTime"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_TRA_TIME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.traTime}"  name="s_traTime"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_CREDIT_CODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.creditCode}"  name="s_creditCode"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_CREDIT_NO%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.creditNo}"  name="s_creditNo"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
+		                  </td>	           
+		                  <td>
+						           <mytag:select onchange="changeprov();" name="s_province" value="${pageRequest.filters.province}" notEmpty="false"  dictName="T_DICT_PROV"/>
+							      <select  style="margin-left: 10px"  name="s_xzqh"  onchange="changeXzqh()"></select>
+						          
+		                  </td>	
                           <td class="crosscolor_td">
 			                      <%=TchPre.ALIAS_STA_CODE%>
 		                  </td>
 			              <td>
-		                           <input value="${pageRequest.filters.staCode}"  name="s_staCode"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_BUR_CODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.burCode}"  name="s_burCode"  />
+			              			<select name="s_staCode">
+			              			</select>
 		                  </td>
                    </tr>
+                   
+                   
 		           <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_SPM%>
+			                     来源地
 		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.spm}"  name="s_spm"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_INSERT_TIME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.insertTime}"  name="s_insertTime"  />
-		                  </td>
+			              <td colspan="3">
+		                           <input type="hidden" value="${pageRequest.filters.origin}" name="s_origin" >
+		                           <input size="85" name="s_origin2" disabled="disabled" />
+		                  </td>		           
                    </tr>
-		           <tr class="crosscolor_tr">
+                    <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_MEMO%>
+			                      <%=TchPre.ALIAS_IN_TIME%>
 		                  </td>
 			              <td>
-		                           <input value="${pageRequest.filters.memo}"  name="s_memo"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_HOTELID%>
-		                  </td>
+			             	<table class="list">
+			               <tr>
 			              <td>
-		                           <input value="${pageRequest.filters.hotelid}"  name="s_hotelid"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_PDAFLAG%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.pdaflag}"  name="s_pdaflag"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_DRAGOMANAME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.dragomaname}"  name="s_dragomaname"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_DRAGOMAPHONE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.dragomaphone}"  name="s_dragomaphone"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_GROUPNO%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.groupno}"  name="s_groupno"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_KYRY%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.kyry}"  name="s_kyry"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_FLAGTJ%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.flagtj}"  name="s_flagtj"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_DAYS%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.days}"  name="s_days"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_FLAGKY%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.flagky}"  name="s_flagky"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_KYTYPE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.kytype}"  name="s_kytype"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_FLAGCQBF%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.flagcqbf}"  name="s_flagcqbf"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_HOTELNAME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.hotelname}"  name="s_hotelname"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_CITY_CODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.cityCode}"  name="s_cityCode"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchPre.ALIAS_TLSY%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.tlsy}"  name="s_tlsy"  />
-		                  </td>
-                          <td>&nbsp;</td>
-                          <td>&nbsp;</td>
+				                   <s:select name="dateSelect1" list="dateSelectMap"  onchange="dateselect(this,'s_inTime_Begin','s_inTime_End','yyyy-MM-dd HH:mm');"  value="#request.dateSelect1" listKey="key"   listValue="value" theme="simple" label=""  emptyOption="false" ></s:select>
+			               </td>
+			               <td>从</td>
+			               <td>
+			                          <input id="d31310" name="s_inTime_Begin"  value="${pageRequest.filters.inTime_Begin}"   maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm',maxDate:'#F{$dp.$D(\'d31410\')}'})"/>
+			               <td>到</td>
+			               <td>
+			                        <input id="d31410" name="s_inTime_End"   value="${pageRequest.filters.inTime_End}"  maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({startDate:'%y-%M-%d 23:59:00',dateFmt:'yyyy-MM-dd HH:mm',minDate:'#F{$dp.$D(\'d31310\')}'})"/>
+			               </td>
+			              </tr>
+			              </table>
+		                  </td>	
+		                  <td></td>	
+		                  <td></td>	
+		                  
                    </tr>
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/hotel/TchPre/list.do'"/>
-	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/pages/hotel/TchPre/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/hotel/TchXzqh/list.do'"/>
+			                       <input style="margin-left: 20px" type="button" value="重置" onclick="clearInput();resitData(document.forms.form1)"/>
 			              </td>
 		           </tr>
 	    </table>
     </s:form>
 </div>
-			
+
+	
 </body>
 
 </html>

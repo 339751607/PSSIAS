@@ -261,7 +261,8 @@ public class FileAttachDao extends BaseSpringJdbcDao<FileAttach, Long> {
 	}
 	//取得照片
 	public List getPic(final String FILE_SAVE,final String FILEGROUP,final String RELATION_ID,String sqlWhere) {
-		String sql = "select FILEID,FILENAME,CONTENTTYPE from FILE_ATTACH " +"where FILE_SAVE = ?  and FILEGROUP = ? and RELATION_ID = ?  ";
+		String sql = "select FILEID,FILENAME,CONTENTTYPE from FILE_ATTACH " +
+				"where FILE_SAVE = ?  and FILEGROUP = ? and RELATION_ID = ?  ";
 		if(sqlWhere != null && sqlWhere.length() > 0)
 			sql = sql + sqlWhere;
 		return getJdbcTemplate().query(sql, new String[] { FILE_SAVE,FILEGROUP,RELATION_ID },
@@ -272,7 +273,6 @@ public class FileAttachDao extends BaseSpringJdbcDao<FileAttach, Long> {
 						String FILEID = rs.getString("FILEID");
 						String FILENAME = rs.getString("FILENAME");
 						String CONTENTTYPE = rs.getString("CONTENTTYPE");
-						System.out.println("123456789===================="+FILEID);
 						results.put("FILEID", FILEID);
 						results.put("FILENAME", FILENAME);
 						results.put("CONTENTTYPE", CONTENTTYPE);

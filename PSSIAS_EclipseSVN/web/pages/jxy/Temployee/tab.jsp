@@ -60,7 +60,7 @@ String  picCount ="";
     document.title = "销售信息";
  </script>
 
-<s:form action="/jxy/Temployee/list.do" method="get" theme="simple">
+<s:form action="/pages/jxy/Temployee/list.do" method="get" theme="simple">
 	<s:hidden name="cpempcode" id="cpempcode" value="%{model.cpempcode}"/>
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
@@ -77,7 +77,7 @@ String  picCount ="";
 		                  </td>
                          	<td rowspan="12" width="18%" align="center" >
 						<img
-							src='${ctx}/jxy/Temployee/showPic.do?cpempcode=<s:property value="%{model.cpempcode}" />&cpcode=${model.cpcode}'
+							src='${ctx}/pages/jxy/Temployee/showPic.do?cpempcode=<s:property value="%{model.cpempcode}" />&cpcode=${model.cpcode}'
 							onerror="this.src='${ctx}/images/spacer.gif'" height="150" alt=""
 							width="140" border="0" name="photo">
 					</td>
@@ -230,8 +230,8 @@ String  picCount ="";
 </s:form>
 <!-- 
 <mytag:tab id="orgInfo"  width="100%" height="100%"   >
-     <mytag:tabContent url="${ctx}/jxy/Tlinkmaninfo/list.do" param="s_empcode"  paramValue="${model.cpempcode}"   frameBorder="0" tabType="frame" scrolling="auto" title="应急联系人"/>
-	 <mytag:tabContent url="${ctx}/jxy/Tempworklog/list.do"  selected="true"   param="s_personid"  paramValue="${model.personid}"   frameBorder="0" tabType="frame" scrolling="auto" title="从业记录"/>
+     <mytag:tabContent url="${ctx}/pages/jxy/Tlinkmaninfo/list.do" param="s_empcode"  paramValue="${model.cpempcode}"   frameBorder="0" tabType="frame" scrolling="auto" title="应急联系人"/>
+	 <mytag:tabContent url="${ctx}/pages/jxy/Tempworklog/list.do"  selected="true"   param="s_personid"  paramValue="${model.personid}"   frameBorder="0" tabType="frame" scrolling="auto" title="从业记录"/>
 </mytag:tab>
  -->
 </body>
@@ -241,7 +241,7 @@ String  picCount ="";
 	
     function doBack(){
     	var url="";
-    	url =  "${ctx}/jxy/Temployee/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+    	url =  "${ctx}/pages/jxy/Temployee/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
     	location.href = url;
     }
 </script>

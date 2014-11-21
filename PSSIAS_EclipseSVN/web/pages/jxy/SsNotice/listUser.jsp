@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ include file="/commons/messages.jsp" %>
 
 <div class="queryPanel">
-    <s:form action="/jxy/SsNotice/listUser.do"  theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/jxy/SsNotice/listUser.do"  theme="simple" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4"><%=SsNotice.TABLE_ALIAS%>查询</td>
@@ -98,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		          
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/jxy/SsNotice/listUser.do'"/>
+			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/SsNotice/listUser.do'"/>
 	                               
 			              </td>
 		           </tr>
@@ -110,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/SsNotice/listUser.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/SsNotice/listUser.do" autoIncludeParameters="true">
 	<ec:row>
 		                    <ec:column width="250px" property="noticetitle"  title="<%=SsNotice.ALIAS_NOTICETITLE%>"/>
 		                    <ec:column property="starttime" value="${item.starttimeString}" title="<%=SsNotice.ALIAS_STARTTIME%>"/>
@@ -119,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    <ec:column property="sendunitname"  title="<%=SsNotice.ALIAS_SENDUNITID%>"/>
 		                   
 		<ec:column width="30px" property="操作" title="操作" sortable="false" viewsAllowed="html">
-			<a href="${ctx}/jxy/SsNotice/showUser.do?noticeid=${item.noticeid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>
+			<a href="${ctx}/pages/jxy/SsNotice/showUser.do?noticeid=${item.noticeid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>
 			
 		</ec:column>
 	</ec:row>

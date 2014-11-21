@@ -83,7 +83,8 @@ public class ClzyddAction extends BaseStruts2Action implements Preparable,ModelD
 	protected static final String HTCXSHOW_JSP = "/pages/pmdd/Clzydd/htcxShow.jsp";
 	
 	private ClzyddManager clzyddManager;
-	private FileAttachManager fileAttachManager;
+	private FileAttachPmddManager fileAttachManager;
+	private FileAttach fileAttach;
 	private PmdwxxbManager pmdwxxbManager;
 	
 	private Clzydd clzydd;
@@ -93,7 +94,7 @@ public class ClzyddAction extends BaseStruts2Action implements Preparable,ModelD
 	private TreeMap<String, String> dateSelectMap;// //日期选择
 	
 	// 照片上传 start
-	private List<File> uploads = new ArrayList<File>();
+	private List<File> upload = new ArrayList<File>();
 	private List<String> uploadFileNames = new ArrayList<String>();
 	private List<String> uploadContentTypes = new ArrayList<String>();
 
@@ -104,16 +105,16 @@ public class ClzyddAction extends BaseStruts2Action implements Preparable,ModelD
 	// 照片上传 end
 
 	// 附件
-	private List<File> affixs = new ArrayList<File>();
+	private List<File> affix = new ArrayList<File>();
 	private List<String> affixFileNames = new ArrayList<String>();
 	private List<String> affixContentTypes = new ArrayList<String>();
 
 	public List<File> getAffix() {
-		return this.affixs;
+		return this.affix;
 	}
 
 	public void setAffix(List<File> affixs) {
-		this.affixs = affixs;
+		this.affix = affixs;
 	}
 
 	public List<String> getAffixFileName() {
@@ -136,16 +137,16 @@ public class ClzyddAction extends BaseStruts2Action implements Preparable,ModelD
 	
 	
 	//身份证扫描
-	private List<File> pics = new ArrayList<File>();
+	private List<File> pic = new ArrayList<File>();
 	private List<String> picFileNames = new ArrayList<String>();
 	private List<String> picContentTypes = new ArrayList<String>();
 	
 	public List<File> getPic() {
-		return this.pics;
+		return this.pic;
 	}
 
 	public void setPic(List<File> pics) {
-		this.pics = pics;
+		this.pic = pics;
 	}
 
 	public List<String> getPicFileName() {
@@ -180,10 +181,23 @@ public class ClzyddAction extends BaseStruts2Action implements Preparable,ModelD
 	public void setClzyddManager(ClzyddManager manager) {
 		this.clzyddManager = manager;
 	}	
-	public void setFileAttachManager(FileAttachManager manager) {
-		this.fileAttachManager = manager;
+
+	public FileAttachPmddManager getFileAttachPmddManager() {
+		return fileAttachManager;
 	}
-	
+
+	public void setFileAttachPmddManager(FileAttachPmddManager fileAttachManager) {
+		this.fileAttachManager = fileAttachManager;
+	}
+
+	public FileAttach getFileAttach() {
+		return fileAttach;
+	}
+
+	public void setFileAttach(FileAttach fileAttach) {
+		this.fileAttach = fileAttach;
+	}
+
 	public Object getModel() {
 		return clzydd;
 	}
@@ -379,7 +393,6 @@ public class ClzyddAction extends BaseStruts2Action implements Preparable,ModelD
 		String max_end_char = "0000";
 		if (clzydd2 != null) {
 			maxID = clzydd2;
-			
 		}
 		if (maxID != null && maxID.length() > 0) {
 			max_end_char = maxID.substring(start_char.length());
@@ -399,16 +412,16 @@ public class ClzyddAction extends BaseStruts2Action implements Preparable,ModelD
 		
 		try{
 			//判断申请人照片不能大于100KB
-			if (uploads != null && uploads.size() > 0) {
-				if (uploads.get(0).length() > uplodsSize) {
+			if (upload != null && upload.size() > 0) {
+				if (upload.get(0).length() > uplodsSize) {
 					request.setAttribute("message", "申请人照片不能大于" + uplodsSize
 							/ 1024 + "KB");
 					return UPDATEPHOTOERROR;
 				}
 			}
 			//判断当物照片不能大于5M
-			if (affixs != null && affixs.size() > 0) {
-				if (affixs.get(0).length() > affixsSize) {
+			if (affix != null && affix.size() > 0) {
+				if (affix.get(0).length() > affixsSize) {
 					request.setAttribute("message", "当物照片不能大于" + affixsSize
 							/ 1024 / 1024 + "M");
 					return UPDATEPHOTOERROR;
@@ -418,8 +431,8 @@ public class ClzyddAction extends BaseStruts2Action implements Preparable,ModelD
 			File uploadFile = null;
 			InputStream uploadIs = null;
 			byte[] uploadBytes= null;
-			if(uploads != null && uploads.size() > 0 ){
-				uploadFile = uploads.get(0);
+			if(upload != null && upload.size() > 0 ){
+				uploadFile = upload.get(0);
 				uploadIs = new FileInputStream(uploadFile);
 			    uploadBytes =  (byte[])IOUtils.toByteArray(uploadIs);
 			}
@@ -434,8 +447,8 @@ public class ClzyddAction extends BaseStruts2Action implements Preparable,ModelD
 			File affixFile = null;
 			InputStream affixIs = null;
 			byte[] affixBytes= null;
-			if(affixs != null && affixs.size() > 0 ){
-				affixFile = affixs.get(0);
+			if(affix != null && affix.size() > 0 ){
+				affixFile = affix.get(0);
 				affixIs = new FileInputStream(affixFile);
 				affixBytes =  (byte[])IOUtils.toByteArray(affixIs);
 				
@@ -457,8 +470,8 @@ public class ClzyddAction extends BaseStruts2Action implements Preparable,ModelD
 			File picFile = null;
 			InputStream picIs = null;
 			byte[] picBytes= null;
-			if(pics != null && pics.size() > 0 ){
-				picFile = pics.get(0);
+			if(pic != null && pic.size() > 0 ){
+				picFile = pic.get(0);
 				picIs = new FileInputStream(picFile);
 				picBytes =  (byte[])IOUtils.toByteArray(picIs);	
 			}
@@ -617,8 +630,8 @@ public class ClzyddAction extends BaseStruts2Action implements Preparable,ModelD
 			File uploadFile = null;
 			InputStream uploadIs = null;
 			byte[] uploadBytes= null;
-			if(uploads != null && uploads.size() > 0 ){
-				uploadFile = uploads.get(0);
+			if(upload != null && upload.size() > 0 ){
+				uploadFile = upload.get(0);
 				uploadIs = new FileInputStream(uploadFile);
 				uploadBytes =  (byte[])IOUtils.toByteArray(uploadIs);
 				
@@ -666,8 +679,8 @@ public class ClzyddAction extends BaseStruts2Action implements Preparable,ModelD
 			File uploadFile = null;
 			InputStream uploadIs = null;
 			byte[] uploadBytes= null;
-			if(uploads != null && uploads.size() > 0 ){
-				uploadFile = uploads.get(0);
+			if(upload != null && upload.size() > 0 ){
+				uploadFile = upload.get(0);
 				uploadIs = new FileInputStream(uploadFile);
 				uploadBytes =  (byte[])IOUtils.toByteArray(uploadIs);
 				
@@ -713,8 +726,8 @@ public class ClzyddAction extends BaseStruts2Action implements Preparable,ModelD
 			File uploadFile = null;
 			InputStream uploadIs = null;
 			byte[] uploadBytes= null;
-			if(uploads != null && uploads.size() > 0 ){
-				uploadFile = uploads.get(0);
+			if(upload != null && upload.size() > 0 ){
+				uploadFile = upload.get(0);
 				uploadIs = new FileInputStream(uploadFile);
 				uploadBytes =  (byte[])IOUtils.toByteArray(uploadIs);
 				
@@ -898,11 +911,11 @@ public class ClzyddAction extends BaseStruts2Action implements Preparable,ModelD
 	}
 	
 	public List<File> getUpload() {
-		return this.uploads;
+		return this.upload;
 	}
 
 	public void setUpload(List<File> uploads) {
-		this.uploads = uploads;
+		this.upload = uploads;
 	}
 
 	public List<String> getUploadFileName() {

@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<body>
 		<%@ include file="/commons/messages.jsp"%>
 
-		<s:form action="/jxy/Tcarinfo/list.do" method="get" theme="simple">
+		<s:form action="/pages/jxy/Tcarinfo/list.do" method="get" theme="simple">
 			<s:hidden name="enrolid" id="enrolid" value="%{model.enrolid}" />
 			<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 
@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td rowspan="4"  align="center" bgcolor="#EDF1FF" >
 					     
 									<img
-							src='${ctx}/jxy/Tcarinfo/showPic.do?enrolid=<s:property value="%{model.enrolid}" />'
+							src='${ctx}/pages/jxy/Tcarinfo/showPic.do?enrolid=<s:property value="%{model.enrolid}" />'
 							onerror="this.src='${ctx}/images/noCar.gif'"  alt=""
 							height="100" width="200" border="0" name="photo">
 							
@@ -214,7 +214,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    getPcs();
 	function getPcs(){
 	var recename='${model.recename}';
-	var url="${ctx}/jxy/Dictitem/getEmployeeList.do?ajax=true&show=true&recename="+recename;
+	var url="${ctx}/pages/jxy/Dictitem/getEmployeeList.do?ajax=true&show=true&recename="+recename;
 	$.post(url, function(data) {
 		$("#rece").html(data);
 	});

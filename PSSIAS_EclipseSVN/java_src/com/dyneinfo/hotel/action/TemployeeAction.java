@@ -17,6 +17,8 @@ import org.security.userdetails.MyUserDetails;
 import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContext;
 import org.springframework.security.context.SecurityContextHolder;
+
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import net.java.dev.common.util.DateUtil;
 import org.apache.struts2.ServletActionContext;
@@ -41,7 +43,7 @@ import com.dyneinfo.hotel.service.*;
 
 
 public class TemployeeAction extends BaseStruts2Action implements Preparable,ModelDriven{
-	//默认多列排序,example: username desc,createTime asc
+	//榛樿澶氬垪鎺掑簭,example: username desc,createTime asc
 	protected static final String DEFAULT_SORT_COLUMNS = null; 
 	
 	//forward paths
@@ -60,8 +62,8 @@ public class TemployeeAction extends BaseStruts2Action implements Preparable,Mod
 	private Temployee temployee;
 	java.lang.String id = null;
 	private String[] items;
-	private String returnUrl;  //返回列表，保留查询条件
-	private TreeMap<String, String> dateSelectMap;// //日期选择
+	private String returnUrl;  //杩斿洖鍒楄〃锛屼繚鐣欐煡璇㈡潯浠�
+	private TreeMap<String, String> dateSelectMap;// //鏃ユ湡閫夋嫨
 
 	public void prepare() throws Exception {
 		if (isNullOrEmptyString(id)) {
@@ -71,7 +73,7 @@ public class TemployeeAction extends BaseStruts2Action implements Preparable,Mod
 		}
 	}
 	
-	/** 增加setXXXX()方法,spring就可以通过autowire自动设置对象属性 */
+	/** 澧炲姞setXXXX()鏂规硶,spring灏卞彲浠ラ�氳繃autowire鑷姩璁剧疆瀵硅薄灞炴�� */
 	public void setTemployeehotelManager(TemployeehotelManager manager) {
 		this.temployeehotelManager = manager;
 	}	
@@ -103,25 +105,26 @@ public class TemployeeAction extends BaseStruts2Action implements Preparable,Mod
 		this.dateSelectMap = dateSelectMap;
 	}
 
-	/** 进入查询页面 */
+	/** 杩涘叆鏌ヨ椤甸潰 */
 	public String query() {
-		//日历快速选择用到
+		//鏃ュ巻蹇�熼�夋嫨鐢ㄥ埌
 		dateSelectMap  = DateUtil.getDateSelectData();
 //		HttpServletRequest request = ServletActionContext.getRequest();
-//		request.setAttribute("dateSelect","11");//选中本周
+//		request.setAttribute("dateSelect","11");//閫変腑鏈懆
 //		DateUtil tt = new DateUtil();     
-//      pageRequest.getFilters().put("s_inTime_start",tt.getMondayOFWeek());//页面
+//      pageRequest.getFilters().put("s_inTime_start",tt.getMondayOFWeek());//椤甸潰
 //      pageRequest.getFilters().put("s_inTime_end",tt.getCurrentWeekday());//
 		return QUERY_JSP;
 	}
 	
-	/** 执行搜索 */
+	/** 鎵ц鎼滅储 */
 	public String list() {
 		PageRequest<Map> pageRequest = newPageRequest(DEFAULT_SORT_COLUMNS);
 		HttpServletRequest request = ServletActionContext.getRequest();
 
 		dateSelectMap  = DateUtil.getDateSelectData();
-		
+		if (request.getParameter("dateSelect1") != null)
+			request.setAttribute("dateSelect1", request.getParameter("dateSelect1"));
 		if (request.getParameter("s_bdate_Begin") != null)
 			pageRequest.getFilters().put("bdate_BeginFormat",
 					DateUtil.parseString(request,"s_bdate_Begin", "yyyy-MM-dd", "yyyyMMdd"));
@@ -140,14 +143,14 @@ public class TemployeeAction extends BaseStruts2Action implements Preparable,Mod
 		return LIST_JSP;
 	}
 	
-	/** 查看对象*/
+	/** 鏌ョ湅瀵硅薄*/
 	public String show() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		temployee.setBirth(DateUtil.parseString(temployee.getBirth(), "yyyyMMdd","yyyy-MM-dd"));
 		temployee.setInserttime(DateUtil.parseString(temployee.getInserttime(), "yyyyMMddHHmmss","yyyy-MM-dd HH:mm"));
 		return SHOW_JSP;
 	}
-	/** 查看对象*/
+	/** 鏌ョ湅瀵硅薄*/
 	public String zazhShow() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		if(null == temployee){
@@ -158,32 +161,32 @@ public class TemployeeAction extends BaseStruts2Action implements Preparable,Mod
 		return ZAZHSHOW_JSP;
 	}
 	
-	/** 进入新增页面*/
+	/** 杩涘叆鏂板椤甸潰*/
 	public String create() {
 		return CREATE_JSP;
 	}
 	
-	/** 保存新增对象 */
+	/** 淇濆瓨鏂板瀵硅薄 */
 	public String save() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		temployeehotelManager.save(temployee);
 		return returnUrl;////LIST_ACTION;
 	}
 	
-	/**进入更新页面*/
+	/**杩涘叆鏇存柊椤甸潰*/
 	public String edit() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		return EDIT_JSP;
 	}
 	
-	/**保存更新对象*/
+	/**淇濆瓨鏇存柊瀵硅薄*/
 	public String update() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		temployeehotelManager.update(this.temployee);
 		return returnUrl;////LIST_ACTION;
 	}
 	
-	/**删除对象*/
+	/**鍒犻櫎瀵硅薄*/
 	public String delete() {
 		for(int i = 0; i < items.length; i++) {
 			Hashtable params = HttpUtils.parseQueryString(items[i]);
@@ -192,7 +195,7 @@ public class TemployeeAction extends BaseStruts2Action implements Preparable,Mod
 		}
 		return returnUrl ;//LIST_ACTION;
 	}
-	// 显示图片
+	// 鏄剧ず鍥剧墖
 	public String showPic() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String id = "";

@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     document.title = "检查信息";
  </script>
 
-<s:form action="/jxy/TpoliceCheck/list.do" method="get" theme="simple">
+<s:form action="/pages/jxy/TpoliceCheck/list.do" method="get" theme="simple">
 	<s:hidden name="checkid" id="checkid" value="%{model.checkid}"/>
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
@@ -109,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</table>	
 </s:form>
 <mytag:tab id="orgInfo"  width="100%" height="100%"   >
-     <mytag:tabContent url="${ctx}/jxy/TpoliceCheckinfo/list.do"     param="s_checkid"  paramValue="${model.checkid}"   frameBorder="0" tabType="frame" scrolling="auto" title="检查信息"/>
+     <mytag:tabContent url="${ctx}/pages/jxy/TpoliceCheckinfo/list.do"     param="s_checkid"  paramValue="${model.checkid}"   frameBorder="0" tabType="frame" scrolling="auto" title="检查信息"/>
 	 
 </mytag:tab>
 </body>
@@ -119,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
     function doBack(){
     	var url="";
-    	url =  "${ctx}/jxy/TpoliceCheck/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+    	url =  "${ctx}/pages/jxy/TpoliceCheck/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
     	location.href = url;
     }
 </script>

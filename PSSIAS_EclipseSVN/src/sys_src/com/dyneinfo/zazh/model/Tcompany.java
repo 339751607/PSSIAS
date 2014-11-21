@@ -60,7 +60,7 @@ public class Tcompany extends BaseEntity {
 	public static final String ALIAS_BURCODE = "所属分局";
 	public static final String ALIAS_STACODE = "所属派出所";
 	public static final String ALIAS_BASJ = "备案时间";
-	public static final String ALIAS_BUSINESSCODE = "所属行业";
+	public static final String ALIAS_BUSINESSCODE = "行业代码";
 	public static final String ALIAS_EXITEND2 = "扩展2";
 	public static final String ALIAS_EXITEND3 = "扩展3";
 	public static final String ALIAS_EXITEND1 = "扩展1";

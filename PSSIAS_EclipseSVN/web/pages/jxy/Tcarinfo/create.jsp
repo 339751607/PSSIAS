@@ -41,13 +41,13 @@
 	<body onload="quickSelectInit()" id="bd" >
 		<%@ include file="/commons/messages.jsp"%>
 
-		<s:form action="/jxy/Tcarinfo/save.do" theme="simple"
+		<s:form action="/pages/jxy/Tcarinfo/save.do" theme="simple"
 			name="inputForm" enctype="multipart/form-data" method="post">
 			<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 				<input type="hidden" name="typecode" value="<%=typecode%>" />
 				<input type="hidden" name="smycode" value="<%=smycode%>" />
 				<input type="hidden" name="returnUrl"
-					value="!/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+					value="!/pages/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 				<input type="hidden"  id="serveritem" name="serveritem" value="" />
 				<tr>
 					<td colspan="5" class="tb_title">
@@ -363,12 +363,12 @@
 						<input id="submitButton" name="submitButton" type="submit"
 							value="提交" />
 						<input type="button" value="返回"
-							onclick="window.location='${ctx}/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'" />
+							onclick="window.location='${ctx}/pages/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'" />
 					</td>
 				</tr>
 			</table>
 		</s:form>
-		<s:form action="/jxy/Tcarinfo/ryedit.do" theme="simple"
+		<s:form action="/pages/jxy/Tcarinfo/ryedit.do" theme="simple"
 			name="hiddenForm" method="post">
 			<input type="hidden" id="hidden_enrolid" name="hidden_enrolid"
 				value="" />
@@ -447,7 +447,7 @@ function PreviewImage(fileObj,imgPreviewId,divPreviewId){
 function getPcs(){
 	//var recename='%{model.recename}';
 	var  recename ='';
-	var url="${ctx}/jxy/Dictitem/getEmployeeList.do?ajax=true&recename="+recename;
+	var url="${ctx}/pages/jxy/Dictitem/getEmployeeList.do?ajax=true&recename="+recename;
 	$.post(url, function(data) {
 		$("#rece").html("<select  name='recename'  id='recename' Class='required max-length-30'><option value=''>请选择...</option></select>");
 		$("#recename").append(data);
@@ -455,7 +455,7 @@ function getPcs(){
 }
 var ags=0;
 function getOldInfo(carid){
-var url="${ctx}/jxy/Tcarinfo/getOldInfo.do?ajax=true&carid="+encodeURI(encodeURI(carid));
+var url="${ctx}/pages/jxy/Tcarinfo/getOldInfo.do?ajax=true&carid="+encodeURI(encodeURI(carid));
 $.post(url, function(data){    
 	if(data!=null&&data!=""){
 		if(data=="zt"){
@@ -578,7 +578,7 @@ function xmlHttpInitializtions()
             if(key.length>0)//有值才POST，这里最好加个Trim()方法，但是JAVASCRIPT没有现成的方法，自己定义。
             {
                 xmlHttpInitializtions();
-                xmlhttpRequest.Open("POST","${ctx}/jxy/Tcarinfo/getDataByIdNum.do?key=" + encodeURI(encodeURI(key)),true);//POST
+                xmlhttpRequest.Open("POST","${ctx}/pages/jxy/Tcarinfo/getDataByIdNum.do?key=" + encodeURI(encodeURI(key)),true);//POST
                 xmlhttpRequest.onreadystatechange=stateChange;//返回状态调用方法stateChange
                 xmlhttpRequest.Send();
             }

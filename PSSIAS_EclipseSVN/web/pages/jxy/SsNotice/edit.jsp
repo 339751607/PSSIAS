@@ -18,10 +18,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body onload="quickSelectInit()" >
 <%@ include file="/commons/messages.jsp" %>
-<s:form action="/jxy/SsNotice/update.do"  enctype="multipart/form-data"  theme="simple" name="inputForm"  method="post">
+<s:form action="/pages/jxy/SsNotice/update.do"  enctype="multipart/form-data"  theme="simple" name="inputForm"  method="post">
 
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
-	    <input type="hidden" name="returnUrl" value="!/jxy/SsNotice/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+	    <input type="hidden" name="returnUrl" value="!/pages/jxy/SsNotice/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 	    <s:hidden id="noticeid" name="noticeid" />
 	        <tr>
 				      <td colspan="4" class="tb_title"> 
@@ -200,7 +200,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 <td colspan="4" class="tb_bottom">
 						 	<input type="button" value="附件" title="单个文件小于5M，所有文件累加大小小于10M" onclick="javascript:addfj();"/>
 	                        <input id="submitButton" name="submitButton" type="submit" value="提交" />
-	                        <input type="button" value="返回" onclick="window.location='${ctx}/jxy/SsNotice/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>   
+	                        <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/SsNotice/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>   
 					 </td>
 			</tr>
 	</table>
@@ -234,7 +234,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
       function editPict(FILEID){
     	var url="";
-    	url ="${ctx}/jxy/SsNotice/editPictUpload.jsp?FILEID="+FILEID;
+    	url ="${ctx}/pages/jxy/SsNotice/editPictUpload.jsp?FILEID="+FILEID;
     	newwin = window.open(url,
 						"picUpdate",
 						"width=400,height=150,top=100,left=100,resizable=yes,status=yes,menubar=no,scrollbars=yes"); 
@@ -242,7 +242,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     function editFile(FILEID){
     	var url="";
-    	url ="${ctx}/jxy/SsNotice/editFileUpload.jsp?FILEID="+FILEID;
+    	url ="${ctx}/pages/jxy/SsNotice/editFileUpload.jsp?FILEID="+FILEID;
     	newwin = window.open(url,
 						"fileUpdate",
 						"width=400,height=150,top=100,left=100,resizable=yes,status=yes,menubar=no,scrollbars=yes,alwaysRaised=no"); 
@@ -256,9 +256,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               var input_txt = document.createElement("input");
 			  input_txt.type = "hidden";
 			  input_txt.name = "deleteReturnUrl";
-			  input_txt.value = "!/jxy/SsNotice/edit.do?noticeid=<s:property value="%{model.noticeid}" />&<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+			  input_txt.value = "!/pages/jxy/SsNotice/edit.do?noticeid=<s:property value="%{model.noticeid}" />&<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
 			  form.appendChild(input_txt);
-		      form.action = '${ctx}/jxy/SsNotice/deletePict.do?FILEID='+FILEID;
+		      form.action = '${ctx}/pages/jxy/SsNotice/deletePict.do?FILEID='+FILEID;
 		      k--;
 	          form.submit(); 
 	      }
@@ -270,16 +270,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               var input_txt = document.createElement("input");
 			  input_txt.type = "hidden";
 			  input_txt.name = "deleteReturnUrl";
-			  input_txt.value = "!/jxy/SsNotice/edit.do?noticeid=<s:property value="%{model.noticeid}" />&<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+			  input_txt.value = "!/pages/jxy/SsNotice/edit.do?noticeid=<s:property value="%{model.noticeid}" />&<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
 			  form.appendChild(input_txt);
-		      form.action = '${ctx}/jxy/SsNotice/deleteFile.do?FILEID='+FILEID;
+		      form.action = '${ctx}/pages/jxy/SsNotice/deleteFile.do?FILEID='+FILEID;
 	          form.submit();      
 	       } 
     }
     		
     function view(FILEID){
     	var url="";
-    	url ="${ctx}/jxy/FileAttach/pictShow.do?FILEID="+FILEID;
+    	url ="${ctx}/pages/jxy/FileAttach/pictShow.do?FILEID="+FILEID;
     	newwin = window.open(url,
 						"popupnav",
 						"resizable=yes,status=yes,menubar=no,scrollbars=yes");

@@ -12,9 +12,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<base href="<%=basePath%>">
 	<link href="${ctx}/widgets/extremecomponents/extremecomponents.css" type="text/css" rel=stylesheet>
 	<title><%=TtjGuest.TABLE_ALIAS%> 维护</title>
-	<script type='text/javascript' src='${ctx}/dwr/interface/menu.js'></script>
-	<script type='text/javascript' src='${ctx}/dwr/engine.js'></script>
-	<script type='text/javascript' src='${ctx}/dwr/util.js'></script>
 
 <script type="text/javascript">
 
@@ -102,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    </tr>
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit" id="submitButton" value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/hotel/TtjGuestRepeat/list.do'"/>
+			                       <input type="submit" id="submitButton" value="统计" onclick="getReferenceForm(this).action='${ctx}/pages/hotel/TtjGuestRepeat/list.do'"/>
 			              		   <input style="margin-left: 20px" type="button" value="重置" onclick="rt();resitData(document.forms.form1)"/>
 			              </td>
 		           </tr>

@@ -18,7 +18,7 @@ List listfile = (List) request.getAttribute("listfile");
 <body>
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/SsNotice/listPop.do" method="get" theme="simple">
+<s:form action="/pages/jxy/SsNotice/listPop.do" method="get" theme="simple">
 	<s:hidden name="noticeid" id="noticeid" value="%{model.noticeid}"/>
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
@@ -124,9 +124,9 @@ List listfile = (List) request.getAttribute("listfile");
 				 </c:if>
                   <tr>
 				  <td colspan="4" class="tb_bottom">
-				  <input type="button" value="返回" onclick="window.location='${ctx}/jxy/SsNotice/listUser.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+				  <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/SsNotice/listUser.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 				      <c:if test="${model.isreply == '1' && tips!='1'}">
-                    	<input type="button" value="回执" onclick="window.location='${ctx}/jxy/SsNoticeReply/save.do?nid=${model.noticeid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+                    	<input type="button" value="回执" onclick="window.location='${ctx}/pages/jxy/SsNoticeReply/save.do?nid=${model.noticeid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
                     </c:if>
                      </td>
                </tr>
@@ -143,7 +143,7 @@ List listfile = (List) request.getAttribute("listfile");
 	
     function view(FILEID){
     	var url="";
-    	url ="${ctx}/jxy/FileAttach/pictShow.do?FILEID="+FILEID;
+    	url ="${ctx}/pages/jxy/FileAttach/pictShow.do?FILEID="+FILEID;
     	newwin = window.open(url,
 						"popupnav",
 						"resizable=yes,status=yes,menubar=no,scrollbars=yes");

@@ -78,6 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		           <tr>
 			              <td class="tb_bottom" colspan="6">
 			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/pmdd/Shxx/list.do?query=true'"/>
+			              		   <input style="margin-left: 20px" type="button" value="重置" onclick="resitData(document.forms[0])"/>
 			              </td>
 		           </tr>
 	    </table>

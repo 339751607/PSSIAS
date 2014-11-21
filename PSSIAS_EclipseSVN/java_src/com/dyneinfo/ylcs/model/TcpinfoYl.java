@@ -30,9 +30,9 @@ import com.dyneinfo.ylcs.service.*;
 public class TcpinfoYl extends BaseEntity {
 	
 	//alias
-	public static final String TABLE_ALIAS = "企业信息表";
+	public static final String TABLE_ALIAS = "企业信息";
 	public static final String ALIAS_LOCODE = "场所编号";
-	public static final String ALIAS_STATION = "所属派出所(代码)";
+	public static final String ALIAS_STATION = "所属派出所";
 	public static final String ALIAS_STARTDATE = "开业日期";
 	public static final String ALIAS_ACREAGE = "占地面积";
 	public static final String ALIAS_ENROLCAPITAL = "注册资本";
@@ -56,21 +56,22 @@ public class TcpinfoYl extends BaseEntity {
 	public static final String ALIAS_BCRETUNIT = "营业执照发证机构名称";
 	public static final String ALIAS_TAXCODE = "税务登记证编号";
 	public static final String ALIAS_TAXUNIT = "税务登记证发证机构名称";
-	public static final String ALIAS_THCODE = "特行编号";
-	public static final String ALIAS_FJCODE = "分局行政区划";
+	public static final String ALIAS_THCODE = "场所分类";
+	public static final String ALIAS_FJCODE = "所属分局";
 	public static final String ALIAS_WORKAREASEC = "兼营范围";
 	public static final String ALIAS_STOPDATE = "停业日期";
 	public static final String ALIAS_HIS = "删除标识(默认为'0',删除置'1')";
 	public static final String ALIAS_JWDZB = "经纬度坐标";
-	public static final String ALIAS_GDXX = "股东信息(按公司章程填写)";
+	public static final String ALIAS_GDXX = "股东信息";
 	public static final String ALIAS_XFZSL = "消费者数量（人）";
 	public static final String ALIAS_BXSL = "包箱数量";
-	public static final String ALIAS_ZAJB = " 治安级别代码（字典表T_DIC_ZAJB）";
-	public static final String ALIAS_CSXJ = "场所星级(字典表 T_DIC_CSXJ";
-	public static final String ALIAS_STATE = "1营业,2停业,3歇业,4注销,9其它";
-	public static final String ALIAS_POLICELEVELCODE = "治安管理等级  0 普通 1 重点";
+	public static final String ALIAS_ZAJB = " 治安级别";
+	public static final String ALIAS_CSXJ = "场所星级";
+	public static final String ALIAS_STATE = "营业状态";
+	public static final String ALIAS_POLICELEVELCODE = "治安管理等级";
 	public static final String ALIAS_FLAGPACK = "flagpack";
 	public static final String ALIAS_AUTHORIZATIONCODE = "授权码";
+	public static final String ALIAS_AUTHORIZATIONSTATUS = "授权状态";
 	public static final String ALIAS_SPJRURL = "视频接入URL";
 	public static final String ALIAS_CURRENTSCORE = "当前分值";
 	public static final String ALIAS_JCJB = " 检查级别代码（字典表T_DIC_PLACE_GRADES）";
@@ -120,10 +121,22 @@ public class TcpinfoYl extends BaseEntity {
 	private java.lang.String policelevelcode;
 	private java.lang.String flagpack;
 	private java.lang.String authorizationcode;
+	private java.lang.String authorizationstatus;
 	private java.lang.String spjrurl;
 	private Long currentscore;
 	private java.lang.String jcjb;
+	private java.lang.String dwlx;
+	
+	
 	//columns END
+
+	public java.lang.String getDwlx() {
+		return dwlx;
+	}
+
+	public void setDwlx(java.lang.String dwlx) {
+		this.dwlx = dwlx;
+	}
 
 	public TcpinfoYl(){
 	}
@@ -132,6 +145,16 @@ public class TcpinfoYl extends BaseEntity {
 		java.lang.String locode
 	){
 		this.locode = locode;
+	}
+	
+	
+
+	public java.lang.String getAuthorizationstatus() {
+		return authorizationstatus;
+	}
+
+	public void setAuthorizationstatus(java.lang.String authorizationstatus) {
+		this.authorizationstatus = authorizationstatus;
 	}
 
 	public void setLocode(java.lang.String value) {

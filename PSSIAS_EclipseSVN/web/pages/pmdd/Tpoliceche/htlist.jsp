@@ -81,19 +81,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                  </td>
                          
                    </tr>
-		        
-		 
-		        
-		       
-		         
-		         
-		     
-		     
-		      
-		        
-		
-		     
-		      
 		           <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
 			                      <%=Tpoliceche.ALIAS_DISPOSE%>
@@ -126,6 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
 			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/pmdd/Tpoliceche/htlist.do'"/>
+			                       <input style="margin-left: 20px" type="button" value="重置" onclick="resitData(document.forms[0])"/>
 	                               <!-- <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/pages/Tpoliceche/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/> -->
 	                              
 			              </td>

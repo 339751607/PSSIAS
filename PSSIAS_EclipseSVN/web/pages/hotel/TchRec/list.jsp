@@ -14,9 +14,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<base href="<%=basePath%>">
 	<link href="${ctx}/widgets/extremecomponents/extremecomponents.css" type="text/css" rel=stylesheet>
 	<title><%=TchRec.TABLE_ALIAS%> 维护</title>
-<script type='text/javascript' src='${ctx}/dwr/interface/menu.js'></script>
-	<script type='text/javascript' src='${ctx}/dwr/engine.js'></script>
-	<script type='text/javascript' src='${ctx}/dwr/util.js'></script>
 <script type="text/javascript">
 
 	function loadSelect(){
@@ -192,6 +189,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
 	action="${ctx}/pages/hotel/TchRec/list.do" autoIncludeParameters="true">
+	<ec:exportXls fileName="chrec.xls" tooltip="输出Excel文件"/>
 	<ec:row>
 		                    <ec:column property="name"  title="<%=TchRec.ALIAS_NAME%>"/>
 		                    <ec:column property="bdate"  title="<%=TchRec.ALIAS_BDATE%>" parse="yyyyMMdd" format="yyyy-MM-dd" cell="date"/>		                    

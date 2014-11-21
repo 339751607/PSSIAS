@@ -281,7 +281,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		
     function view(FILEID){
     	var url="";
-    	url ="${ctx}/pages/FileAttach/pictShow.do?FILEID="+FILEID;
+    	url ="${ctx}/pages/pmdd/FileAttach/pictShow.do?FILEID="+FILEID;
     	newwin = window.open(url,
 						"popupnav",
 						"resizable=yes,status=yes,menubar=no,scrollbars=yes");
@@ -290,7 +290,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     function download(FILEID){
 		olddoc = document;
     	var url="";
-    	url =  "${ctx}/filedownload/downloadDB.do?FILEID="+FILEID;
+    	url =  "${ctx}/pages/pmdd/filedownload/downloadDB.do?FILEID="+FILEID;
     	location.href = url;
     }
 

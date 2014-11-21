@@ -24,6 +24,7 @@ import java.util.*;
 
 import javacommon.base.*;
 import javacommon.util.*;
+
 import cn.org.rapid_framework.util.*;
 import cn.org.rapid_framework.web.util.*;
 import cn.org.rapid_framework.page.*;
@@ -51,19 +52,6 @@ public class SsUserDao extends BaseSpringJdbcDao<SsUser,java.lang.Long>{
 		return "userid";
 	}
 	
-	
-	/**
-	 * @description: 获取可用用户总数。
-	 * @author Liutao
-	 * @param sql
-	 * @return
-	 */
-	public Number getEnabledUserCount() {
-		String sql = "SELECT COUNT(*) FROM SS_USER WHERE ENABLED='1' ";
-		int count = getSimpleJdbcTemplate().queryForInt(sql);
-		
-		return count;
-	}
 //已选部门角色
 	
 	public List<SsRole> findDeptRole(String deptId) {

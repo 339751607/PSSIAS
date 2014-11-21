@@ -101,7 +101,7 @@ public class TchPreDao extends BaseSpringJdbcDao<TchPre,java.lang.String>{
 		+ "/~ and t.ID_NAME = '[idName]' ~/"
 		+ "/~ and t.ID_CODE like '%[idCode]%' ~/"
 		+ "/~ and t.XZQH like substr('[province]',0,2)||'%' ~/"
-		+ "/~ and t.XZQH like '[xzqh]' ~/"
+		+ "/~ and t.XZQH = '[xzqh]' ~/"
 		+ "/~ and t.ADDRESS = '[address]' ~/"
 		+ "/~ and t.IN_TIME >= '[inTime_BeginFormat]' ~/"
 		+ "/~ and t.IN_TIME <= '[inTime_EndFormat]' ~/"

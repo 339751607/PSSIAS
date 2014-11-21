@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <%@ include file="/commons/messages.jsp" %>
 <div class="queryPanel">
-    <s:form action="/jxy/Tlinkmaninfo/list.do"  theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/jxy/Tlinkmaninfo/list.do"  theme="simple" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4"><%=Tlinkmaninfo.TABLE_ALIAS%>查询</td>
@@ -78,8 +78,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    </tr>
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/jxy/Tlinkmaninfo/list.do'"/>
-	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/jxy/Tlinkmaninfo/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/Tlinkmaninfo/list.do'"/>
+	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/Tlinkmaninfo/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 			              </td>
 		           </tr>
 	    </table>

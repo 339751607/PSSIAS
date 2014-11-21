@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/Tpoliceche/list.do" method="get" theme="simple">
+<s:form action="/pages/jxy/Tpoliceche/list.do" method="get" theme="simple">
 	<s:hidden name="checkid" id="checkid" value="%{model.checkid}"/>
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
@@ -483,7 +483,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                    <tr>
 						  <td colspan="6" class="tb_bottom">
-						           <input type="button" value="返回" onclick="window.location='${ctx}/jxy/tpoliCk/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+						           <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/tpoliCk/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 	                      </td>
 	               </tr>
 	</table>	

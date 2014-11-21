@@ -23,7 +23,7 @@
 		<ec:table items='page.result' var="item" method="get"
 			retrieveRowsCallback="limit" sortRowsCallback="limit"
 			filterRowsCallback="limit"
-			action="${ctx}/jxy/Tcarinfo/queryczxx.do"
+			action="${ctx}/pages/jxy/Tcarinfo/queryczxx.do"
 			autoIncludeParameters="false">
 			<ec:row>
 				<ec:column property="carowner" title="<%=Tcarinfo.ALIAS_CAROWNER%>" />
@@ -57,7 +57,7 @@ $(document).ready(function(){
 	  caller.document.getElementById("hidden_enrolid").value=this.value;	
 	  window.close();
 	  
-	 //window.location.href="${ctx}/jxy/Tcarinfo/ryedit.do?enrolid="+this.value;
+	 //window.location.href="${ctx}/pages/jxy/Tcarinfo/ryedit.do?enrolid="+this.value;
 	//		$.post(url, function(data) { });
  	// caller.location.reload();
 			

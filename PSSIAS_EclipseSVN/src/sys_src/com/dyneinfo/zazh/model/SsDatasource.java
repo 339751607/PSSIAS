@@ -32,7 +32,7 @@ public class SsDatasource extends BaseEntity {
 	//alias
 	public static final String TABLE_ALIAS = "行业子系统配置表";
 	public static final String ALIAS_ID = "流水号";
-	public static final String ALIAS_CODE = "所属行业";
+	public static final String ALIAS_CODE = "行业代码";
 	public static final String ALIAS_CALLED = "行业名称";
 	public static final String ALIAS_DBS_DRIVERCLASSNAME = "驱动名称";
 	public static final String ALIAS_DBS_URL = "链接地址";

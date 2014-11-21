@@ -17,14 +17,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ include file="/commons/messages.jsp" %>
 <ec:table style="margin: 8px" items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/SsNotice/listPop.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/SsNotice/listPop.do" autoIncludeParameters="true">
 	<ec:row>
 		                    <ec:column width="250px" property="noticetitle"  title="<%=SsNotice.ALIAS_NOTICETITLE%>"/>
 		                    <ec:column property="authorname"  title="<%=SsNotice.ALIAS_AUTHORID%>"/>
 		                    <ec:column property="sendunitname"  title="<%=SsNotice.ALIAS_SENDUNITID%>"/>
 		                   
 		<ec:column width="30px" property="操作" title="操作" sortable="false" viewsAllowed="html">
-			<a href="${ctx}/jxy/SsNotice/showPop.do?noticeid=${item.noticeid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>	
+			<a href="${ctx}/pages/jxy/SsNotice/showPop.do?noticeid=${item.noticeid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>	
 		</ec:column>
 	</ec:row>
 </ec:table>

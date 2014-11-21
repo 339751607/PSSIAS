@@ -148,7 +148,7 @@ if(request.getAttribute("demo") != null)
         <script language="javascript" src="CheckActivX.js">CheckLodop();</script>
         
         
-		<s:form action="/jxy/Vcarreturn/list.do"  method="get" theme="simple">
+		<s:form action="/pages/jxy/Vcarreturn/list.do"  method="get" theme="simple">
 			<s:hidden name="enrolid" id="enrolid" value="%{model.enrolid}" />
 			<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 				<tr>
@@ -189,7 +189,7 @@ if(request.getAttribute("demo") != null)
 					<td rowspan="5"  align="center">
 					     
 									<img
-							src='${ctx}/jxy/Tcarinfo/showPic.do?enrolid=<s:property value="%{model.enrolid}" />'
+							src='${ctx}/pages/jxy/Tcarinfo/showPic.do?enrolid=<s:property value="%{model.enrolid}" />'
 							onerror="this.src='${ctx}/images/noCar.gif'"  alt=""
 							height="100" width="200" border="0" name="photo">
 								
@@ -344,7 +344,7 @@ if(request.getAttribute("demo") != null)
 				<tr>
 					<td colspan="5" class="tb_bottom">
 						<input type="button" value="返回"
-							onclick="window.location='${ctx}/jxy/Vcarreturn/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'" />
+							onclick="window.location='${ctx}/pages/jxy/Vcarreturn/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'" />
 							
 						           
 					</td>
@@ -359,7 +359,7 @@ if(request.getAttribute("demo") != null)
 	getPcs();
 	function getPcs(){
 	var recename='${model.recename}';
-	var url="${ctx}/jxy/Dictitem/getEmployeeList.do?ajax=true&show=true&recename="+recename;
+	var url="${ctx}/pages/jxy/Dictitem/getEmployeeList.do?ajax=true&show=true&recename="+recename;
 	$.post(url, function(data) {
 		$("#rece").html(data);
 		$("#receprint").html(data);

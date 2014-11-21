@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ include file="/commons/messages.jsp" %>
 
 <div class="queryPanel">
-    <s:form action="/jxy/SsNotice/htadlist.do"  theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/jxy/SsNotice/htadlist.do"  theme="simple" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4"><%=SsNotice.TABLE_ALIAS%>查询</td>
@@ -109,8 +109,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		          
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/jxy/SsNotice/htadlist.do'"/>
-	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/jxy/SsNotice/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/SsNotice/htadlist.do'"/>
+	                               <input type="button" value="重置" onclick="resitData(document.forms[0])"/>
+	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/SsNotice/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 	                               <input type="button"  value="删除" onclick="doDel();"/>
 			              </td>
 		           </tr>
@@ -122,7 +123,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/SsNotice/htadlist.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/SsNotice/htadlist.do" autoIncludeParameters="true">
 	<ec:row>
 		<ec:column property="选择" title="<input type='checkbox' onclick=\"setAllCheckboxState('items',this.checked)\" >" sortable="false" width="3%" viewsAllowed="html">
 			<input type="checkbox" name="items" value="noticeid=${item.noticeid}&"/>
@@ -135,12 +136,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    <ec:column property="sendunitname"  title="<%=SsNotice.ALIAS_SENDUNITID%>"/>
 		                   <mytag:lookupcolumn property="isreply"  title="<%=SsNotice.ALIAS_ISREPLY%>"	cell="net.java.dev.ec.table.view.LookUpCell" dictType="shiFou" />
 		<ec:column width="60px" property="操作" title="操作" sortable="false" viewsAllowed="html">
-			<a href="${ctx}/jxy/SsNotice/show.do?noticeid=${item.noticeid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>
+			<a href="${ctx}/pages/jxy/SsNotice/show.do?noticeid=${item.noticeid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>
 			<c:if test="${item.state != '1'}">
-			<a href="${ctx}/jxy/SsNotice/edit.do?noticeid=${item.noticeid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">修改</a>
+			<a href="${ctx}/pages/jxy/SsNotice/edit.do?noticeid=${item.noticeid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">修改</a>
 		    </c:if> 
 		    <c:if test="${item.isreply == '1'}">
-				<a href="${ctx}/jxy/SsNoticeReply/list.do?h_noticeid=${item.noticeid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">回执</a>
+				<a href="${ctx}/pages/jxy/SsNoticeReply/list.do?h_noticeid=${item.noticeid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">回执</a>
 		    </c:if> 
 		</ec:column>
 	</ec:row>
@@ -163,9 +164,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var input_txt = document.createElement("input");
 				input_txt.type = "hidden";
 				input_txt.name = "returnUrl";
-				input_txt.value = "!/jxy/SsNotice/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+				input_txt.value = "!/pages/jxy/SsNotice/htadlist.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
 				form.appendChild(input_txt);
-		        form.action = '${ctx}/jxy/SsNotice/delete.do';
+		        form.action = '${ctx}/pages/jxy/SsNotice/delete.do';
 	            form.submit();
 	        }
 	  }

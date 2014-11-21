@@ -14,9 +14,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/Tpoliceche/save.do" theme="simple"  method="post">
+<s:form action="/pages/jxy/Tpoliceche/save.do" theme="simple"  method="post">
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
-	    <input type="hidden" name="returnUrl" value="!/jxy/Tpoliceche/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+	    <input type="hidden" name="returnUrl" value="!/pages/jxy/Tpoliceche/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 	       <tr>
 				<td colspan="6" class="tb_title"> 
 							<%=Tpoliceche.TABLE_ALIAS%>新增
@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       <tr >
 				<td colspan="6" class="tb_bottom">
 							<input id="submitButton" name="submitButton" type="submit" value="提交" />
-	                        <input type="button" value="返回" onclick="window.location='${ctx}/jxy/Tpoliceche/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+	                        <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/Tpoliceche/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 			    </td>
 	        </tr>
 	</table>
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  	 var left = "50", top = "50";
 	     if(arguments[3] != null) left = "dialogLeft:" + arguments[3] + "px;"
 	     if(arguments[4] != null) top = "dialogTop:" + arguments[4] + "px;"
-	     window.showModalDialog('${ctx}/jxy/Tpoliceche/getDept.do?flag=0&search_random='+Math.random(),
+	     window.showModalDialog('${ctx}/pages/jxy/Tpoliceche/getDept.do?flag=0&search_random='+Math.random(),
 									window,
 									"dialogWidth:420px;" + "dialogHeight:230px;" 
 									+ left + top 

@@ -16,7 +16,7 @@ String type = request.getParameter("type");
 <body  >
 	
 <table cellspacing="0" cellpadding="0" border="0" width="100%" class="pg_add">
-	<form id="editForm" name="editForm"  action="${ctx}/jxy/Shxx/picEdit.do" enctype="multipart/form-data" action="" method="post">
+	<form id="editForm" name="editForm"  action="${ctx}/pages/jxy/Shxx/picEdit.do" enctype="multipart/form-data" action="" method="post">
 	<input type="hidden" name="dnumber" value="<%=id%>" />
 	<input type="hidden" name="flag" value="<%=type%>" />
 			<tr class="crosscolor_tr">
@@ -77,7 +77,7 @@ function SendFile()
 	   return false;
 	}
 	
-	document.editForm.action="${ctx}/jxy/Shxx/picEdit.do?dnumber="+dnumber+"&flag="+flag;
+	document.editForm.action="${ctx}/pages/jxy/Shxx/picEdit.do?dnumber="+dnumber+"&flag="+flag;
 	var frm = document.editForm;
     checkFileUpload(frm,'GIF,JPG,JPEG,PNG,BMP',true,'','','','','','','');
 	//document.editForm.submit() ;

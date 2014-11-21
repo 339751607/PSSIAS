@@ -21,12 +21,12 @@ String  picCount ="";
 <body onload="quickSelectInit()" >
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/Temployee/updateAll.do"  theme="simple" name="inputForm"  method="post">
+<s:form action="/pages/jxy/Temployee/updateAll.do"  theme="simple" name="inputForm"  method="post">
 	<s:hidden id="cpempcode" name="cpempcode" ></s:hidden>
 	<s:hidden name="npcodehidden"  value="%{#request.npcodehidden}" ></s:hidden>
 	<s:hidden name="nativeplacehidden" value="%{#request.nativeplacehidden}" ></s:hidden>
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
-	    <input type="hidden" name="returnUrl" value="!/jxy/Temployee/listAll.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+	    <input type="hidden" name="returnUrl" value="!/pages/jxy/Temployee/listAll.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 	        <tr>
 				      <td colspan="5" class="tb_title"> 
 							<%=Temployee.TABLE_ALIAS%>编辑
@@ -47,7 +47,7 @@ String  picCount ="";
 		                  </td>
 		                   <td rowspan="12" width="18%" align="center" >
 			      <%if(picCount != null && picCount.equals("1")) { %>
-		             <a onclick="javascript:uploadEmpPhoto('<s:property value="%{model.cpempcode}" />');return false;" href="#"> <img src='${ctx}/jxy/Temployee/showPic.do?xh=<s:property value="%{model.cpempcode}" />'  height="126" alt="" width="102" border="0" name="photo"> </a>	
+		             <a onclick="javascript:uploadEmpPhoto('<s:property value="%{model.cpempcode}" />');return false;" href="#"> <img src='${ctx}/pages/jxy/Temployee/showPic.do?xh=<s:property value="%{model.cpempcode}" />'  height="126" alt="" width="102" border="0" name="photo"> </a>	
 		           <% } else {%>
 		             <a onclick="javascript:uploadEmpPhoto('<s:property value="%{model.cpempcode}" />');return false;" href="#"> <IMG src="${ctx}/images/spacer.gif" height="126" alt="" width="102" border="0" name="photo"> </a>
 		           <%} %>
@@ -205,7 +205,7 @@ String  picCount ="";
 	        <tr >
 					 <td colspan="5" class="tb_bottom">
 	                        <input id="submitButton" name="submitButton" type="submit" value="提交" />
-	                        <input type="button" value="返回" onclick="window.location='${ctx}/jxy/Temployee/listAll.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>   
+	                        <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/Temployee/listAll.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>   
 					 </td>
 			</tr>
 	</table>
@@ -392,7 +392,7 @@ String  picCount ="";
 	//查询所属城市
 	function queryCity()
 	{
-		var provinceId = $("prov").value;
+		var provinceId = spider("prov").value;
 		provinceId = provinceId.substr(0,2);
 		menu.queryXzqhById(provinceId,cityCallback);
 	}
@@ -419,7 +419,7 @@ String  picCount ="";
 	//查询所属城市
 	function queryCity2()
 	{
-		var provinceId = $("prov2").value;
+		var provinceId = spider("prov2").value;
 		provinceId = provinceId.substr(0,2);
 		menu.queryXzqhById(provinceId,cityCallback2);
 	}
@@ -456,7 +456,7 @@ String  picCount ="";
 	
 	function uploadEmpPhoto(ID) {
         var frm = document.forms("form1");
-		var returnvalue = window.showModalDialog("${ctx}/jxy/Temployee/uploadPhoto.jsp?xh="+ID,"childWIn","dialogHeight:150px;dialogWidth:400px;scroll:off;center:yes");
+		var returnvalue = window.showModalDialog("${ctx}/pages/jxy/Temployee/uploadPhoto.jsp?xh="+ID,"childWIn","dialogHeight:150px;dialogWidth:400px;scroll:off;center:yes");
 		if (returnvalue == "yes"){
 		    changesrc();
 	      }      
@@ -476,7 +476,7 @@ String  picCount ="";
     
    function changesrc(){
 	    var pic=document.getElementById('photo');
-	    pic.src='${ctx}/jxy/Temployee/showPic.do?xh=<s:property value="%{model.cpempcode}" />&rand='+rand(1000);
+	    pic.src='${ctx}/pages/jxy/Temployee/showPic.do?xh=<s:property value="%{model.cpempcode}" />&rand='+rand(1000);
    }  
    
    function selectDept(frm,displayName,hiddenName) {

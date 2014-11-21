@@ -18,6 +18,8 @@ import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContext;
 import org.springframework.security.context.SecurityContextHolder;
 import java.text.SimpleDateFormat;
+
+import net.java.dev.common.dict.taglib.DictHelpImpl;
 import net.java.dev.common.util.DateUtil;
 import org.apache.struts2.ServletActionContext;
 
@@ -34,6 +36,7 @@ import cn.org.rapid_framework.page.impl.*;
 import com.dyneinfo.ylcs.model.*;
 import com.dyneinfo.ylcs.dao.*;
 import com.dyneinfo.ylcs.service.*;
+import com.dyneinfo.zazh.util.Encry;
 
 /**
  * @author lisc email:lishicheng(a)gmail.com
@@ -49,6 +52,8 @@ public class TcpinfoYlAction extends BaseStruts2Action implements Preparable,Mod
 	protected static final String LIST_JSP= "/pages/ylcs/TcpinfoYl/list.jsp";
 	protected static final String CREATE_JSP = "/pages/ylcs/TcpinfoYl/create.jsp";
 	protected static final String EDIT_JSP = "/pages/ylcs/TcpinfoYl/edit.jsp";
+	protected static final String AUTHORIZE_JSP = "/pages/ylcs/TcpinfoYl/authorize.jsp";
+	
 	protected static final String SHOW_JSP = "/pages/ylcs/TcpinfoYl/show.jsp";
 	//redirect paths,startWith: !
 	protected static final String LIST_ACTION = "!/pages/ylcs/TcpinfoYl/list.do";
@@ -142,6 +147,7 @@ public class TcpinfoYlAction extends BaseStruts2Action implements Preparable,Mod
 			request.setAttribute("dateSelect27",dateSelect27);		        
 		
 		Page page = tcpinfoYlManager.findByPageRequest(pageRequest);
+		System.out.println(page.getResult().size());
 		savePage(page,pageRequest);
 		return LIST_JSP;
 	}
@@ -160,7 +166,43 @@ public class TcpinfoYlAction extends BaseStruts2Action implements Preparable,Mod
 	/** 保存新增对象 */
 	public String save() {
 		HttpServletRequest request = ServletActionContext.getRequest();
-		tcpinfoYlManager.save(tcpinfoYl);
+		List hconfigList =tcpinfoYlManager.getQuery("select hcvalue from t_hconfig t where t.hckey='Code'");
+		if(hconfigList.size()>0){
+			String locode="";
+			
+			Map hconfigMap=(Map)hconfigList.get(0);
+			String code = (String)hconfigMap.get("HCVALUE");//配置的CODE
+			
+			List idList=tcpinfoYlManager.getQuery("Select to_char(S_LIEUCODE.nextval) as id From dual");
+			Map idMap=(Map)idList.get(0);
+			String id=(String)idMap.get("ID");
+			
+			if (id.length() == 1) {
+				locode = code + "00" + id;
+	        }else if(id.length() == 2){
+	        	locode = code + "0" + id;
+	        }else if(id.length() == 3){
+	        	locode = code + id;
+	        }
+			
+			if("1".equals(tcpinfoYl.getDwlx())){
+				tcpinfoYl.setLocode(tcpinfoYl.getThcode() + tcpinfoYl.getFjcode().substring(0,6) + locode) ;
+			}else{
+				tcpinfoYl.setLocode("J99" +  tcpinfoYl.getFjcode().substring(0,6) + locode);
+			}
+			System.out.println(tcpinfoYl);
+			
+			tcpinfoYlManager.save(tcpinfoYl);
+			
+		}else{
+			//System.out.println("没有配置Code");
+			request.setAttribute("message", "没有配置Code");
+			return CREATE_JSP;
+		}
+		
+		
+		
+		
 		return returnUrl;////LIST_ACTION;
 	}
 	
@@ -170,10 +212,41 @@ public class TcpinfoYlAction extends BaseStruts2Action implements Preparable,Mod
 		return EDIT_JSP;
 	}
 	
+	/**
+	 * 企业授权
+	 * @return
+	 */
+	public String authorize() {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		return AUTHORIZE_JSP;
+	}
+	
+	
+	
 	/**保存更新对象*/
 	public String update() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		tcpinfoYlManager.update(this.tcpinfoYl);
+		return returnUrl;////LIST_ACTION;
+	}
+	
+	public String corporateLicense(){
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String code = tcpinfoYl.getLocode().substring(3, tcpinfoYl.getLocode().length());
+		Encry encry=new Encry();
+		List hconfigList =tcpinfoYlManager.getQuery("select hcvalue from t_hconfig t where t.hckey='Encry'");
+		Map hconfigMap=(Map)hconfigList.get(0);
+		String hcvalue = (String)hconfigMap.get("HCVALUE");//配置的CODE
+		
+		String str=encry.crypt_pwd("e", hcvalue, tcpinfoYl.getAuthorizationcode());
+		if(code.equals(str)){
+			tcpinfoYlManager.update(this.tcpinfoYl);
+		}else{
+			//System.out.println("没有配置Code");
+			request.setAttribute("message", "无效的授权");
+			return AUTHORIZE_JSP;
+		}
+		
 		return returnUrl;////LIST_ACTION;
 	}
 	
@@ -183,6 +256,29 @@ public class TcpinfoYlAction extends BaseStruts2Action implements Preparable,Mod
 			Hashtable params = HttpUtils.parseQueryString(items[i]);
 			java.lang.String id = new java.lang.String((String)params.get("locode"));
 			tcpinfoYlManager.removeById(id);
+		}
+		return returnUrl ;//LIST_ACTION;
+	}
+	
+	
+	/**
+	 * 硬件注销
+	 * @return
+	 */
+	public String cancellation(){
+		for(int i = 0; i < items.length; i++) {
+			Hashtable params = HttpUtils.parseQueryString(items[i]);
+			java.lang.String id = new java.lang.String((String)params.get("locode"));
+			tcpinfoYlManager.doCancellation(id);
+		}
+		return returnUrl ;//LIST_ACTION;
+	}
+	
+	public String lock(){
+		for(int i = 0; i < items.length; i++) {
+			Hashtable params = HttpUtils.parseQueryString(items[i]);
+			java.lang.String id = new java.lang.String((String)params.get("locode"));
+			tcpinfoYlManager.doLock(id);
 		}
 		return returnUrl ;//LIST_ACTION;
 	}

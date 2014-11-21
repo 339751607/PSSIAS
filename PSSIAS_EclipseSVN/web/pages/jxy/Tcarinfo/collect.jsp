@@ -31,11 +31,11 @@ if(request.getAttribute("serveritemName") != null)
 	<body onload="quickSelectInit()"  id="bd">
 		<%@ include file="/commons/messages.jsp"%>
 
-		<s:form action="/jxy/Tcarinfo/collectUpdate.do" theme="simple"
+		<s:form action="/pages/jxy/Tcarinfo/collectUpdate.do" theme="simple"
 			name="inputForm" enctype="multipart/form-data" method="post">
 			<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 				<input type="hidden" name="returnUrl"
-					value="!/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+					value="!/pages/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 				<s:hidden id="enrolid" name="enrolid" />
 				 <s:hidden  id="serveritem" name="serveritem" value="%{model.serveritem}"></s:hidden>
 				<tr>
@@ -71,7 +71,7 @@ if(request.getAttribute("serveritemName") != null)
 									<a
 							onclick="javascript:uploadEmpPhoto('<s:property value="%{model.enrolid}" />');return false;"
 							href="#"> <img
-								src='${ctx}/jxy/Tcarinfo/showPic.do?enrolid=<s:property value="%{model.enrolid}" />'
+								src='${ctx}/pages/jxy/Tcarinfo/showPic.do?enrolid=<s:property value="%{model.enrolid}" />'
 								onerror="this.src='${ctx}/images/noCar.gif'"   
 								alt="" height="100" width="200" border="0" name="photo"> </a>
 							
@@ -265,7 +265,7 @@ if(request.getAttribute("serveritemName") != null)
 						<input id="submitButton" name="submitButton" type="submit"
 							value="提交" />
 						<input type="button" value="返回"
-							onclick="window.location='${ctx}/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'" />
+							onclick="window.location='${ctx}/pages/jxy/Tcarinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'" />
 					</td>
 				</tr>
 			</table>
@@ -281,7 +281,7 @@ if(request.getAttribute("serveritemName") != null)
 	}});
 	function uploadEmpPhoto(enrolid) {
         var frm = document.forms("form1");
-		var returnvalue = window.showModalDialog("${ctx}/jxy/Tcarinfo/uploadPhoto.jsp?enrolid="+enrolid,"childWIn","dialogHeight:150px;dialogWidth:400px;scroll:off;center:yes");
+		var returnvalue = window.showModalDialog("${ctx}/pages/jxy/Tcarinfo/uploadPhoto.jsp?enrolid="+enrolid,"childWIn","dialogHeight:150px;dialogWidth:400px;scroll:off;center:yes");
 		if (returnvalue == "yes"){
 		    changesrc();
 	      }      
@@ -318,12 +318,12 @@ if(request.getAttribute("serveritemName") != null)
     
 	function changesrc(){
 	    var pic=document.getElementById('photo');
-	    pic.src='${ctx}/jxy/Tcarinfo/showPic.do?enrolid=<s:property value="%{model.enrolid}" />&rand='+rand(1000);
+	    pic.src='${ctx}/pages/jxy/Tcarinfo/showPic.do?enrolid=<s:property value="%{model.enrolid}" />&rand='+rand(1000);
    }  
    getPcs();
 	function getPcs(){
 	var recename='${model.recename}';
-	var url="${ctx}/jxy/Dictitem/getEmployeeList.do?ajax=true&show=true&recename="+recename;
+	var url="${ctx}/pages/jxy/Dictitem/getEmployeeList.do?ajax=true&show=true&recename="+recename;
 	$.post(url, function(data) {
 		$("#rece").html(data);
 	});

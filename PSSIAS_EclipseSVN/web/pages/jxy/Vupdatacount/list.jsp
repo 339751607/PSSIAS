@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ include file="/commons/messages.jsp" %>
 
 <div class="queryPanel">
-    <s:form action="/jxy/Vupdatacount/list.do"  theme="simple" name="form1" style="display: inline;" method="post">
+    <s:form action="/pages/jxy/Vupdatacount/list.do"  theme="simple" name="form1" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4"><%=Vupdatacount.TABLE_ALIAS%>查询</td>
@@ -104,8 +104,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                  </tr>
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/jxy/Vupdatacount/list.do'"/>
-	                               
+			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/Vupdatacount/list.do'"/>
+	                               <input style="margin-left: 20px" type="button" value="重置" onclick="resitData(document.forms[0])"/>
 			              </td>
 		           </tr>
 	    </table>
@@ -116,7 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/Vupdatacount/list.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/Vupdatacount/list.do" autoIncludeParameters="true">
 		<ec:exportXls fileName="empxx.xls" tooltip="输出Excel文件"/> 
 	<ec:row>
 		
@@ -150,9 +150,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var input_txt = document.createElement("input");
 				input_txt.type = "hidden";
 				input_txt.name = "returnUrl";
-				input_txt.value = "!/jxy/Vupdatacount/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+				input_txt.value = "!/pages/jxy/Vupdatacount/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
 				form.appendChild(input_txt);
-		        form.action = '${ctx}/jxy/Vupdatacount/delete.do';
+		        form.action = '${ctx}/pages/jxy/Vupdatacount/delete.do';
 	            form.submit();
 	        }
 	  }

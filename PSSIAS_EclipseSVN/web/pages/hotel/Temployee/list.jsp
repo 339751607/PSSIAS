@@ -14,9 +14,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<base href="<%=basePath%>">
 	<link href="${ctx}/widgets/extremecomponents/extremecomponents.css" type="text/css" rel=stylesheet>
 	<title><%=Temployee.TABLE_ALIAS%> 维护</title>
-<script type='text/javascript' src='${ctx}/dwr/interface/menu.js'></script>
-	<script type='text/javascript' src='${ctx}/dwr/engine.js'></script>
-	<script type='text/javascript' src='${ctx}/dwr/util.js'></script>
 	
 <script type="text/javascript">
 
@@ -89,17 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                           <input value="${pageRequest.filters.personid}"  name="s_personid"  />
 		                  </td>		                  
 		           </tr>
-		           <tr class="crosscolor_tr">
-		           			<td class="crosscolor_td">
-			                      <%=Temployee.ALIAS_HOTELNAME%>
-		                  </td>
-			              <td>
-		                           <input size="25" onclick="Click();" onkeyup="getHotelNameByName()" value="${pageRequest.filters.hotelname}"  name="s_hotelname"  />
-		                  </td>
-		                  <div id="search_suggest" style="position:absolute;z-index:1;margin-top:4px;padding-top:20px;"></div>
-		                  <td></td>
-		                  <td></td>
-		           </tr>
+
 		           <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
 			                      <%=Temployee.ALIAS_INSERTTIME%>
@@ -107,6 +94,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                  <td>
 			              <table class="list" >
 			               <tr>
+						              <td>
+							                   <s:select name="dateSelect1" list="dateSelectMap"  onchange="dateselect(this,'s_inTime_Begin','s_inTime_End','yyyy-MM-dd');"  value="#request.dateSelect1" listKey="key"   listValue="value" theme="simple" label=""  emptyOption="false" ></s:select>
+						               </td>
+					              		 <td>从</td>			               
 			               <td>
 			                          <input id="d31312" name="s_intime_Begin"  value="${pageRequest.filters.intime_Begin}"   maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'d31412\')}'})"/>
 			               <td>到</td>
@@ -140,7 +131,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                  </td>
 
                    </tr>
-		           
+		           <tr class="crosscolor_tr">
+		           			<td class="crosscolor_td">
+			                      <%=Temployee.ALIAS_HOTELNAME%>
+		                  </td>
+			              <td>
+		                           <input size="25" onclick="Click();" onkeyup="getHotelNameByName()" value="${pageRequest.filters.hotelname}"  name="s_hotelname"  />
+		                  </td>
+		                  <div id="search_suggest" style="position:absolute;z-index:1;margin-top:4px;padding-top:20px;"></div>
+		                  <td></td>
+		                  <td></td>
+		           </tr>		           
 		           
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
@@ -157,6 +158,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
 	action="${ctx}/pages/hotel/Temployee/list.do" autoIncludeParameters="true">
+	<ec:exportXls fileName="employee.xls" tooltip="输出Excel文件"/>
 	<ec:row>
 		                    <ec:column property="empname"  title="<%=Temployee.ALIAS_EMPNAME%>"/>
 		                    <ec:column property="birth"  title="<%=Temployee.ALIAS_BIRTH%>" parse="yyyyMMdd" format="yyyy-MM-dd" cell="date"/>

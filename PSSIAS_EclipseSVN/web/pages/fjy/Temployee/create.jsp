@@ -541,7 +541,7 @@
 	//查询所属城市
 	function queryCity()
 	{
-		var provinceId = $("prov").value;
+		var provinceId = spider("prov").value;
 		provinceId = provinceId.substr(0,2);
 		menu.queryXzqhById(provinceId,cityCallback);
 	}
@@ -554,6 +554,7 @@
         try{
            // DWRUtil.addOptions("xzqh",{'':'请选择...'});  
             DWRUtil.addOptions("nativeplace",citys,"id","cityName");//将option对象添加到第三个下拉框中    
+           // DWRUtil.setValue('nativeplace',$F("nativeplacehidden"));  //改动前 
             DWRUtil.setValue('nativeplace',$F("nativeplacehidden")); 
         }catch(e){
         }
@@ -568,7 +569,7 @@
 	//查询所属城市
 	function queryCity2()
 	{
-		var provinceId = $("prov2").value;
+		var provinceId = spider("prov2").value;
 		provinceId = provinceId.substr(0,2);
 		menu.queryXzqhById(provinceId,cityCallback2);
 	}

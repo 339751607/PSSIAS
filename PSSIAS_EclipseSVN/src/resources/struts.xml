@@ -29,7 +29,7 @@
         </result-types>
         <default-interceptor-ref name="paramsPrepareParamsStack"/>
   	</package>
-    <package name="jxy" namespace="/jxy" extends="custom-default">
+    <package name="jxy" namespace="/pages/jxy" extends="custom-default">
 		
 		<!-- 通过URL访问的路径是 /namesapce/Entity/method.do -->
 		<action name="*/*" method="{2}" class="com.dyneinfo.jxy.action.{1}Action">
@@ -39,6 +39,13 @@
 								
     </package>  	
   	  	<package name ="dyneinfohotel" namespace ="/pages/hotel" extends ="custom-default">
+  		<action name="Twzhc/update" method="update" class="com.dyneinfo.hotel.action.TwzhcAction">
+            <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="token" />
+            <!-- 如果重复提交，跳转到error.jsp页面 -->
+            <result name="invalid.token">/doNotReSubmit.jsp</result>  
+            <result name="*" type="direct">通过Action直接返回，这一行无需修改</result>			
+		</action>
   		<action name="*/*" method="{2}" class="com.dyneinfo.hotel.action.{1}Action">
 		    <result name="*" type="direct">通过Action直接返回，这一行无需修改</result>
 		</action>
@@ -64,6 +71,12 @@
 		</action>
     </package>
     
+    <package name="zdmw" namespace="/pages/zdmw" extends="custom-default">
+		<!-- 通过URL访问的路径是 /namesapce/Entity/method.do -->
+		<action name="*/*" method="{2}" class="com.dyneinfo.zdmw.action.{1}Action">
+		    <result name="*" type="direct">通过Action直接返回，这一行无需修改</result>
+		</action>
+    </package>
      <package name="ylcs" namespace="/pages/ylcs" extends="custom-default">
 		<!-- 通过URL访问的路径是 /namesapce/Entity/method.do -->
 		<action name="*/*" method="{2}" class="com.dyneinfo.ylcs.action.{1}Action">

@@ -92,6 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
 			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/gas/Temployeegas/list.do'"/>
+							       <input style="margin-left: 20px" type="button" value="重置" onclick="resitData(document.forms[0])"/>
 <!--	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/pages/gas/Temployeegas/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>-->
 <!--	                               <input type="button"  value="删除" onclick="doDel();"/>-->
 			              </td>
@@ -130,7 +131,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script>
 	function getPcs()
 	{
-		var countryId = $("country").value;
+		var countryId = spider("country").value;
 		//默认为不选择
 		if(countryId == 0)
 		{
@@ -147,8 +148,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function provinceCallback(provinces)
 	{
         DWRUtil.removeAllOptions("province");
-        var pcscode = $("pcscode").value;
-        var pcsname = $("pcsname").value;
+        var pcscode = spider("pcscode").value;
+        var pcsname = spider("pcsname").value;
         if(pcscode == null || pcscode ==""){
 	      //每次获得新的数据的时候先把每二个下拉框架的长度清0
 	        try{

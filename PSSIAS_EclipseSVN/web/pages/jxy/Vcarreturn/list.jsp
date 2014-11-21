@@ -31,7 +31,7 @@ String webContext = request.getContextPath();
 <%@ include file="/commons/messages.jsp" %>
 
 <div class="queryPanel">
-    <s:form action="/jxy/Vcarreturn/list.do"  theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/jxy/Vcarreturn/list.do"  theme="simple" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	      <input type="hidden"  id="serveritem" name="serveritem" value="" />	
 	               <tr>
@@ -168,8 +168,8 @@ String webContext = request.getContextPath();
 		     
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/jxy/Vcarreturn/list.do'"/>
-	                              
+			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/Vcarreturn/list.do'"/>
+	                               <input style="margin-left: 20px" type="button" value="重置" onclick="resitData(document.forms[0])"/>
 			              </td>
 		           </tr>
 	    </table>
@@ -180,7 +180,7 @@ String webContext = request.getContextPath();
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/Vcarreturn/list.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/Vcarreturn/list.do" autoIncludeParameters="true">
 		<ec:exportXls fileName="empxx.xls" tooltip="输出Excel文件"/> 
 	<ec:row>
 	
@@ -199,7 +199,7 @@ String webContext = request.getContextPath();
 		                  <ec:column property="totime"  parse="yyyyMMddhhmm" format="yyyy-MM-dd HH:mm" cell="date" title="<%=Vcarreturn.ALIAS_TOTIME%>"/>
 		                  <ec:column property="recetime"  parse="yyyyMMddhhmm" format="yyyy-MM-dd HH:mm" cell="date" title="<%=Vcarreturn.ALIAS_RECETIME%>"/>
 		                  <ec:column property="操作" title="操作" sortable="false" viewsAllowed="html" width="30">
-							<a href="${ctx}/jxy/Tcarinfo/showjsp.do?pid=${item.enrolid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>
+							<a href="${ctx}/pages/jxy/Tcarinfo/showjsp.do?pid=${item.enrolid}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>
 			
 						</ec:column> 
 		                   
@@ -223,9 +223,9 @@ String webContext = request.getContextPath();
 				var input_txt = document.createElement("input");
 				input_txt.type = "hidden";
 				input_txt.name = "returnUrl";
-				input_txt.value = "!/jxy/Vcarreturn/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+				input_txt.value = "!/pages/jxy/Vcarreturn/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
 				form.appendChild(input_txt);
-		        form.action = '${ctx}/jxy/Vcarreturn/delete.do';
+		        form.action = '${ctx}/pages/jxy/Vcarreturn/delete.do';
 	            form.submit();
 	        }
 	  }

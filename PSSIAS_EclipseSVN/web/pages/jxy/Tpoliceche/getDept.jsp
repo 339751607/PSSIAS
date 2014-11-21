@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <div class="queryPanel">
-    <s:form action="/jxy/Tpoliceche/getDept.do?flag=1"  theme="simple" style="display: inline;" method="post"  id="query" name="query" >
+    <s:form action="/pages/jxy/Tpoliceche/getDept.do?flag=1"  theme="simple" style="display: inline;" method="post"  id="query" name="query" >
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4">用户登录
@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div style="display:none">
 <ec:table items='page.result' var="item" method="get" 
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/Tpoliceche/getDept.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/Tpoliceche/getDept.do" autoIncludeParameters="true">
 	<ec:row >
 		<ec:column property="选择" title="<input type='radio' onclick=\"setAllCheckboxState('items',this.radio)\" >" sortable="false" width="3%" viewsAllowed="html">
 			<input type="radio" name="items" value="${item.deptname}/${item.fullname}" checked="true"/>

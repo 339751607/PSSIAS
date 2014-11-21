@@ -223,12 +223,13 @@ public class PmdwxxbDao extends BaseSpringJdbcDao<Pmdwxxb,java.lang.String>{
 		
 		String sql="select max(dwbm) from  pmdwxxb t where substr(t.dwbm,0,6) = ? ";
 //		String sql2 ="select code from T_CONFIG ";
-		String  maxSequence="";
+		String  maxSequence=null;
 		String  qybmz ="";
 		int newSequence=0;
 		Object[] obj ={fjbm}; 
 		try {   
-			maxSequence= this.getJdbcTemplate().queryForObject(sql,obj, String.class).toString();
+			maxSequence= (String) this.getJdbcTemplate().queryForObject(sql,obj, String.class);
+			
 //			qybmz =(String)this.getJdbcTemplate().queryForObject(sql2, obj,String.class);
 		} catch (EmptyResultDataAccessException ex) {   
 			  logger.error("忽略此类错误,允许查询为空时,返回空字符串!");   

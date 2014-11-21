@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ include file="/commons/messages.jsp" %>
 
 <div class="queryPanel">
-    <s:form action="/jxy/Tcpnsjl/list.do"  theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/jxy/Tcpnsjl/list.do"  theme="simple" style="display: inline;" method="post">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4">企业年审记录</td>
@@ -88,9 +88,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		      
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
-			                       <input type="submit" id="submitButton"  value="保存" onclick="getReferenceForm(this).action='${ctx}/jxy/Tcpnsjl/list.do?static=upd'"/>
-	                              <!-- <input type="button" value="返回" onclick="window.location='${ctx}/jxy/Tcpinfo/listnsjl.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>-->
-	                               <input type="button" value="返回" onclick="window.location='${ctx}/jxy/Tcpinfo/listnsjl.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+			                       <input type="submit" id="submitButton"  value="保存" onclick="getReferenceForm(this).action='${ctx}/pages/jxy/Tcpnsjl/list.do?static=upd'"/>
+	                              <!-- <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/Tcpinfo/listnsjl.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>-->
+	                               <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/Tcpinfo/listnsjl.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 	                               
 			              </td>
 		           </tr>
@@ -102,7 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <ec:table items='page.result' var="item" method="get"
 	retrieveRowsCallback="limit" sortRowsCallback="limit" filterRowsCallback="limit"
-	action="${ctx}/jxy/Tcpnsjl/list.do" autoIncludeParameters="true">
+	action="${ctx}/pages/jxy/Tcpnsjl/list.do" autoIncludeParameters="true">
 	<ec:row>
              <ec:column property="cpcode"  title="<%=Tcpnsjl.ALIAS_CPCODE%>"/>
              
@@ -113,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <ec:column property="qsr"  title="<%=Tcpnsjl.ALIAS_QSR%>"/>
              <ec:column property="jbr"  title="<%=Tcpnsjl.ALIAS_JBR%>"/>
              <ec:column width="30px" property="操作" title="操作" sortable="false" viewsAllowed="html">
-			<a href="${ctx}/jxy/Tcpnsjl/list.do?cpcode=${item.cpcode}&shnd=${item.shnd}&static=show&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">修改</a>
+			<a href="${ctx}/pages/jxy/Tcpnsjl/list.do?cpcode=${item.cpcode}&shnd=${item.shnd}&static=show&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">修改</a>
 			
 		</ec:column>
 	

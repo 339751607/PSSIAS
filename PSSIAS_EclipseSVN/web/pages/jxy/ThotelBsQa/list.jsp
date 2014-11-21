@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<%@ include file="/commons/messages.jsp"%>
 
 		<div class="queryPanel">
-			<s:form action="/jxy/ThotelBsQa/htadlist.do" theme="simple" name="form1"
+			<s:form action="/pages/jxy/ThotelBsQa/htadlist.do" theme="simple" name="form1"
 				style="display: inline;" method="post">
 				<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 					<tr>
@@ -94,8 +94,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<tr>
 						<td class="tb_bottom" colspan="4">
 							<input type="submit" value="查询"
-								onclick="getReferenceForm(this).action='${ctx}/jxy/ThotelBsQa/htadlist.do'" />
-								 <input type="button" value="清空" onclick="resitData(document.forms.form1);"/>
+								onclick="getReferenceForm(this).action='${ctx}/pages/jxy/ThotelBsQa/htadlist.do'" />
+						   <input style="margin-left: 20px" type="button" value="重置" onclick="resitData(document.forms[0])"/>
 						</td>
 					</tr>
 				</table>
@@ -106,7 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		<ec:table items='page.result' var="item" method="get"
 			retrieveRowsCallback="limit" sortRowsCallback="limit"
-			filterRowsCallback="limit" action="${ctx}/jxy/ThotelBsQa/list.do"
+			filterRowsCallback="limit" action="${ctx}/pages/jxy/ThotelBsQa/list.do"
 			autoIncludeParameters="true">
 			<ec:row>
 				<ec:column property="dwmc" title="<%=ThotelBsQa.ALIAS_DWMC%>" />
@@ -121,9 +121,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<mytag:lookupcolumn property="jdbz"  title="<%=ThotelBsQa.ALIAS_JDBZ%>"	cell="net.java.dev.ec.table.view.LookUpCell" dictType="jdbz" />
 				<ec:column width="30px" property="操作" title="操作" sortable="false"
 					viewsAllowed="html">
-					<a href="${ctx}/jxy/ThotelBsQa/htadshow.do?xh=${item.xh}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>
+					<a href="${ctx}/pages/jxy/ThotelBsQa/htadshow.do?xh=${item.xh}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">查看</a>
 					 <c:if test="${item.jdbz == '1'}">
-						<a href="${ctx}/jxy/ThotelBsQa/htadedit.do?xh=${item.xh}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">解答</a>
+						<a href="${ctx}/pages/jxy/ThotelBsQa/htadedit.do?xh=${item.xh}&<mytag:params includes="ec*,s*" type="queryStringUtf"/>">解答</a>
 					</c:if>
 				</ec:column>
 			</ec:row>
@@ -146,9 +146,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var input_txt = document.createElement("input");
 				input_txt.type = "hidden";
 				input_txt.name = "returnUrl";
-				input_txt.value = "!/jxy/ThotelBsQa/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
+				input_txt.value = "!/pages/jxy/ThotelBsQa/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>";
 				form.appendChild(input_txt);
-		        form.action = '${ctx}/jxy/ThotelBsQa/delete.do';
+		        form.action = '${ctx}/pages/jxy/ThotelBsQa/delete.do';
 	            form.submit();
 	        }
 	  }

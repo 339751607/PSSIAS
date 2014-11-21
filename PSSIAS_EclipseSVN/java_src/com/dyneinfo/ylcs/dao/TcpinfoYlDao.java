@@ -96,6 +96,7 @@ public class TcpinfoYlDao extends BaseSpringJdbcDao<TcpinfoYl,java.lang.String>{
 				+" POLICELEVELCODE as policelevelcode,"
 				+" FLAGPACK as flagpack,"
 				+" AUTHORIZATIONCODE as authorizationcode,"
+				+" decode(AUTHORIZATIONCODE,'','未授权','已授权') as authorizationstatus,"
 				+" SPJRURL as spjrurl,"
 				+" CURRENTSCORE as currentscore,"
 				+" JCJB as jcjb"
@@ -124,10 +125,10 @@ public class TcpinfoYlDao extends BaseSpringJdbcDao<TcpinfoYl,java.lang.String>{
 		//insertWithIdentity(entity,sql); //for sqlserver and mysql
 		
 		//其它主键生成策略
-		insertWithOracleSequence(entity,"SEQ_T_CPINFO",sql); //oracle sequence: 
+//		insertWithOracleSequence(entity,"S_LIEUCODE",sql); //oracle sequence: 
 		//insertWithDB2Sequence(entity,"sequenceName",sql); //db2 sequence:
 		//insertWithUUID(entity,sql); //uuid
-		//insertWithAssigned(entity,sql); //手工分配
+		insertWithAssigned(entity,sql); //手工分配
 	}
 	
 	public void update(TcpinfoYl entity) {
@@ -135,6 +136,21 @@ public class TcpinfoYlDao extends BaseSpringJdbcDao<TcpinfoYl,java.lang.String>{
 					+ " LOCODE=:locode,STATION=:station,STARTDATE=:startdate,ACREAGE=:acreage,ENROLCAPITAL=:enrolcapital,CPNAME=:cpname,CPADDRESS=:cpaddress,PHONE=:phone,FAX=:fax,POSTALCODE=:postalcode,ECONOMY=:economy,CORPCODE=:corpcode,CORPNAME=:corpname,POLICENAME=:policename,POLICEPHONE=:policephone,WORKAREA=:workarea,POLICEUNIT=:policeunit,SCBACKUPNO=:scbackupno,SCBACKUPUNIT=:scbackupunit,LICENCE=:licence,LICENCEUNIT=:licenceunit,BCRETCODE=:bcretcode,BCRETUNIT=:bcretunit,TAXCODE=:taxcode,TAXUNIT=:taxunit,THCODE=:thcode,FJCODE=:fjcode,WORKAREASEC=:workareasec,STOPDATE=:stopdate,HIS=:his,JWDZB=:jwdzb,GDXX=:gdxx,XFZSL=:xfzsl,BXSL=:bxsl,ZAJB=:zajb,CSXJ=:csxj,STATE=:state,POLICELEVELCODE=:policelevelcode,FLAGPACK=:flagpack,AUTHORIZATIONCODE=:authorizationcode,SPJRURL=:spjrurl,CURRENTSCORE=:currentscore,JCJB=:jcjb "
 					+ " where LOCODE=:locode";
 		getNamedParameterJdbcTemplate().update(sql, new BeanPropertySqlParameterSource(entity));
+	}
+	
+	public List getQuery(String sql) {
+	    return getSimpleJdbcTemplate().queryForList(sql);
+	}
+	
+	public void doCancellation(String locode){
+		String sql = "update t_precheck set maccode = '',diskcode = '' where locode = ? ";
+		getSimpleJdbcTemplate().update(sql,locode);
+	}
+	
+	
+	public void doLock(String locode){
+		String sql = "update t_precheck set locktype = '1' where locode = ? ";
+		getSimpleJdbcTemplate().update(sql,locode);
 	}
 	
 	public List findAll() {

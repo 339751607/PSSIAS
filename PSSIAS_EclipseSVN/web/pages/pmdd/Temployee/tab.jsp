@@ -114,7 +114,7 @@ String  picCount ="";
 			                      <%=Temployee.ALIAS_FOLK%>
 		                  </td>
 			              <td>
-			                       <mytag:write property="%{model.folk}"   name="folk"  notEmpty="true"  dictName="nation"/>
+			                       <mytag:write property="%{model.folk}"   name="folk"  notEmpty="true"  dictName="T_DIC_NATION"/>
 		                  </td>
                    </tr>
 		           <tr class="crosscolor_tr">

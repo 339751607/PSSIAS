@@ -63,6 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
 			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/fjy/SsNotice/list.do'"/>
+	                               <input type="button" value="重置" onclick="resitData(document.forms[0])"/>
 	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/pages/fjy/SsNotice/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 			              </td>
 		           </tr>

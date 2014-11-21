@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ include file="/commons/messages.jsp" %>
 
 <div class="queryPanel">
-    <s:form action="/pages/SsGroup/list.do"  theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/SsGroup/list.do"  theme="simple" style="display: inline;" method="post" name="queryForm">
 	    <table cellpadding="0" cellspacing="0" border="0" width="100%" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4">角色组查询</td>
@@ -40,6 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			              <td class="tb_bottom" colspan="4">
 			                      <br>
 			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/SsGroup/list.do'"/>
+	                               <input style="margin-left: 20px" type="button" value="重置" onclick="resitData(document.forms.queryForm)"/>
 	                             <!--  
 	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/pages/SsGroup/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 	                               <input type="button"  value="删除" onclick="doDel();"/>

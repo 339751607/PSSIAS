@@ -7,10 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
 <title>达因治安综合管理信息系统</title> 
 </head>
-<frameset rows="78,36,*,29" frameborder="NO" border="0" framespacing="0" id="top_frame">
+<frameset rows="99,*,29" frameborder="NO" border="0" framespacing="0" id="top_frame">
   <frame src="./top_head.jsp" name="top_head" scrolling="NO" noresize/>
+  
+  <!--           
   <frame src="${ctx}/pages/outlookmenu/topMenu.do" name="topFrame" scrolling="NO" noresize/>
   <frame src="${ctx}/pages/zazh/SsDatasource/loginfo.do" name="bodyFrame">
+  -->
+  <frame src="${ctx}/pages/outlookmenu/new_work_body.jsp" name="bodyFrame">
   <frame src="${ctx}/pages/outlookRight/topRight.do" name="right" scrolling="no" noresize/>
 </frameset>
 

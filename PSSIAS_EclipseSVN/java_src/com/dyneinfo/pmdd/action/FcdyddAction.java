@@ -7,18 +7,14 @@ package com.dyneinfo.pmdd.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import cn.org.rapid_framework.beanutils.BeanUtils;
-
 import com.opensymphony.xwork2.Preparable;
 import com.opensymphony.xwork2.ModelDriven;
-
 import org.security.userdetails.MyUserDetails;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.Authentication;
 import org.springframework.security.context.SecurityContext;
 import org.springframework.security.context.SecurityContextHolder;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -28,26 +24,19 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import net.java.dev.common.util.DateUtil;
 import net.java.dev.common.util.SpringTagFunctions;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
-
 import java.util.*;
-
 import javacommon.base.*;
 import javacommon.util.*;
-
 import cn.org.rapid_framework.util.*;
 import cn.org.rapid_framework.web.util.*;
 import cn.org.rapid_framework.page.*;
 import cn.org.rapid_framework.page.impl.*;
-
-import com.dyneinfo.zazh.service.FileAttachManager;
 import com.dyneinfo.pmdd.dao.*;
 import com.dyneinfo.pmdd.model.*;
 import com.dyneinfo.pmdd.service.*;
-
 import net.java.dev.common.util.IDCard;
 
 /**
@@ -85,8 +74,10 @@ public class FcdyddAction extends BaseStruts2Action implements Preparable,ModelD
 	protected static final String UPDATEPHOTOFAILURE= "/pages/pic/uploadFileFailure.jsp";
 	protected static final String UPDATEPHOTOERROR="/pages/pic/updateFileError.jsp";
 	
+	private FileAttachPmddManager fileAttachManager;
+	private FileAttach fileAttach;
+	
 	private FcdyddManager fcdyddManager;
-	private FileAttachManager fileAttachManager;
 	private PmdwxxbManager pmdwxxbManager;
 	
 	private Fcdydd fcdydd;
@@ -96,18 +87,18 @@ public class FcdyddAction extends BaseStruts2Action implements Preparable,ModelD
 	private TreeMap<String, String> dateSelectMap;// //日期选择
 	
 	// 照片上传 start
-	private List<File> uploads = new ArrayList<File>();
+	private List<File> upload = new ArrayList<File>();
 	private List<String> uploadFileNames = new ArrayList<String>();
 	private List<String> uploadContentTypes = new ArrayList<String>();
 	
 	
 	//身份证扫描
-	private List<File> pics = new ArrayList<File>();
+	private List<File> pic = new ArrayList<File>();
 	private List<String> picFileNames = new ArrayList<String>();
 	private List<String> picContentTypes = new ArrayList<String>();
 	
 	// 附件
-	private List<File> affixs = new ArrayList<File>();
+	private List<File> affix = new ArrayList<File>();
 	private List<String> affixFileNames = new ArrayList<String>();
 	private List<String> affixContentTypes = new ArrayList<String>();
 	
@@ -116,11 +107,11 @@ public class FcdyddAction extends BaseStruts2Action implements Preparable,ModelD
 		this.pmdwxxbManager = manager;
 	}	
 	public List<File> getUpload() {
-		return this.uploads;
+		return this.upload;
 	}
 
 	public void setUpload(List<File> uploads) {
-		this.uploads = uploads;
+		this.upload = uploads;
 	}
 
 	public List<String> getUploadFileName() {
@@ -143,11 +134,23 @@ public class FcdyddAction extends BaseStruts2Action implements Preparable,ModelD
 	
 	
 	public List<File> getPic() {
-		return this.pics;
+		return this.pic;
 	}
 
+	public FileAttachPmddManager getFileAttachPmddManager() {
+		return fileAttachManager;
+	}
+	public void setFileAttachPmddManager(FileAttachPmddManager fileAttachManager) {
+		this.fileAttachManager = fileAttachManager;
+	}
+	public FileAttach getFileAttach() {
+		return fileAttach;
+	}
+	public void setFileAttach(FileAttach fileAttach) {
+		this.fileAttach = fileAttach;
+	}
 	public void setPic(List<File> pics) {
-		this.pics = pics;
+		this.pic = pics;
 	}
 
 	public List<String> getPicFileName() {
@@ -165,16 +168,12 @@ public class FcdyddAction extends BaseStruts2Action implements Preparable,ModelD
 	public void setPicContentType(List<String> picContentTypes) {
 		this.picContentTypes = picContentTypes;
 	}
-	
-	
-	
-	
 	public List<File> getAffix() {
-		return this.affixs;
+		return this.affix;
 	}
 
 	public void setAffix(List<File> affixs) {
-		this.affixs = affixs;
+		this.affix = affixs;
 	}
 
 	public List<String> getAffixFileName() {
@@ -205,11 +204,7 @@ public class FcdyddAction extends BaseStruts2Action implements Preparable,ModelD
 	public void setFcdyddManager(FcdyddManager manager) {
 		this.fcdyddManager = manager;
 	}	
-	
-	public void setFileAttachManager(FileAttachManager manager) {
-		this.fileAttachManager = manager;
-	}
-	
+
 	public Object getModel() {
 		return fcdydd;
 	}
@@ -412,8 +407,8 @@ public class FcdyddAction extends BaseStruts2Action implements Preparable,ModelD
 		fcdydd.setDnumber(start_char+str_emd_char);
 		
 		try {
-			if (uploads != null && uploads.size() > 0) {
-					if (uploads.get(0).length() > updatesMaxSize) {
+			if (upload != null && upload.size() > 0) {
+					if (upload.get(0).length() > updatesMaxSize) {
 						request.setAttribute("message", "申请人照片不能大于"+updatesMaxSize/1024+"KB"); 
 						return	UPDATEPHOTOERROR ;
 					}
@@ -424,8 +419,8 @@ public class FcdyddAction extends BaseStruts2Action implements Preparable,ModelD
 			File uploadFile = null;
 			InputStream uploadIs = null;
 			byte[] uploadBytes= null;
-			if(uploads != null && uploads.size() > 0 ){
-				uploadFile = uploads.get(0);
+			if(upload != null && upload.size() > 0 ){
+				uploadFile = upload.get(0);
 				uploadIs = new FileInputStream(uploadFile);
 			    uploadBytes =  (byte[])IOUtils.toByteArray(uploadIs);
 			}
@@ -440,8 +435,8 @@ public class FcdyddAction extends BaseStruts2Action implements Preparable,ModelD
 			File affixFile = null;
 			InputStream affixIs = null;
 			byte[] affixBytes= null;
-			if(affixs != null && affixs.size() > 0 ){
-				affixFile = affixs.get(0);
+			if(affix != null && affix.size() > 0 ){
+				affixFile = affix.get(0);
 				affixIs = new FileInputStream(affixFile);
 				affixBytes =  (byte[])IOUtils.toByteArray(affixIs);
 				
@@ -463,8 +458,8 @@ public class FcdyddAction extends BaseStruts2Action implements Preparable,ModelD
 			File picFile = null;
 			InputStream picIs = null;
 			byte[] picBytes= null;
-			if(pics != null && pics.size() > 0 ){
-				picFile = pics.get(0);
+			if(pic != null && pic.size() > 0 ){
+				picFile = pic.get(0);
 				picIs = new FileInputStream(picFile);
 				picBytes =  (byte[])IOUtils.toByteArray(picIs);	
 			}
@@ -593,8 +588,8 @@ public class FcdyddAction extends BaseStruts2Action implements Preparable,ModelD
 			File uploadFile = null;
 			InputStream uploadIs = null;
 			byte[] uploadBytes= null;
-			if(uploads != null && uploads.size() > 0 ){
-				uploadFile = uploads.get(0);
+			if(upload != null && upload.size() > 0 ){
+				uploadFile = upload.get(0);
 				uploadIs = new FileInputStream(uploadFile);
 				uploadBytes =  (byte[])IOUtils.toByteArray(uploadIs);
 				
@@ -666,8 +661,8 @@ public class FcdyddAction extends BaseStruts2Action implements Preparable,ModelD
 			File uploadFile = null;
 			InputStream uploadIs = null;
 			byte[] uploadBytes= null;
-			if(uploads != null && uploads.size() > 0 ){
-				uploadFile = uploads.get(0);
+			if(upload != null && upload.size() > 0 ){
+				uploadFile = upload.get(0);
 				uploadIs = new FileInputStream(uploadFile);
 				uploadBytes =  (byte[])IOUtils.toByteArray(uploadIs);
 				
@@ -737,8 +732,8 @@ public class FcdyddAction extends BaseStruts2Action implements Preparable,ModelD
 			File uploadFile = null;
 			InputStream uploadIs = null;
 			byte[] uploadBytes= null;
-			if(uploads != null && uploads.size() > 0 ){
-				uploadFile = uploads.get(0);
+			if(upload != null && upload.size() > 0 ){
+				uploadFile = upload.get(0);
 				uploadIs = new FileInputStream(uploadFile);
 				uploadBytes =  (byte[])IOUtils.toByteArray(uploadIs);
 				

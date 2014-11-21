@@ -121,16 +121,16 @@ public class SsNoticeAction extends BaseStruts2Action implements Preparable,Mode
 	//照片上传 end
 
 	//附件
-	private List<File> affixs = new ArrayList<File>();
+	private List<File> affix = new ArrayList<File>();
 	private List<String> affixFileNames = new ArrayList<String>();
 	private List<String> affixContentTypes = new ArrayList<String>();
 
 	public List<File> getAffix() {
-		return this.affixs;
+		return this.affix;
 	}
 
 	public void setAffix(List<File> affixs) {
-		this.affixs = affixs;
+		this.affix = affixs;
 	}
 
 	public List<String> getAffixFileName() {
@@ -248,7 +248,7 @@ public class SsNoticeAction extends BaseStruts2Action implements Preparable,Mode
 		if(!SpringTagFunctions.ifAnyGranted("ROLE_HT_ADMIN,ROLE_ADMIN")){
 			pageRequest.getFilters().put("deptid",deptid);
 			pageRequest.getFilters().put("deptLength",deptid.length());
-		}	
+		}		
 		dateSelectMap  = DateUtil.getDateSelectData();
 		String dateSelect2 = "";
 		if (request.getParameter("dateSelect2") != null)
@@ -483,9 +483,7 @@ public class SsNoticeAction extends BaseStruts2Action implements Preparable,Mode
 		Date date = new Date();
 		SimpleDateFormat format_inserttime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String str_inserttime = format_inserttime.format(date);
-        
              
-        
         Calendar lastDate = Calendar.getInstance();    
 //        lastDate.set(Calendar.DATE,1);//设为当前月的1号    
 //        lastDate.add(Calendar.MONTH,1);//加一个月，变为下月的1号    
@@ -521,14 +519,14 @@ public class SsNoticeAction extends BaseStruts2Action implements Preparable,Mode
 				"yyyy-MM-dd HH:mm:ss");
 		String str_file_CREATETIME = format_file_CREATETIME.format(date);
 	
-			if (affixs != null) {
+			if (affix != null) {
 				int j = 0;
-				for (; j < affixs.size(); j++) {
-					if (affixs.get(j).length() <= 0) {
+				for (; j < affix.size(); j++) {
+					if (affix.get(j).length() <= 0) {
 						request.setAttribute("message", "上传的文件不能为空！");
 						continue; 
 					}
-					if (maxSize > 0 && affixs.get(j).length() > maxSize) {
+					if (maxSize > 0 && affix.get(j).length() > maxSize) {
 						request.setAttribute("message", "上传的单个文件不能超过" + maxSize/1024/1024
 								+ "M！");
 						return UPDATEPHOTOERROR; 
@@ -567,13 +565,13 @@ public class SsNoticeAction extends BaseStruts2Action implements Preparable,Mode
     					ssNoticeAttendManager.save(ssNoticeAttend);
                     }
         }
-    	if (affixs != null) {
+    	if (affix != null) {
     		try {
-    			for (int j=0; j < affixs.size(); j++) {	
+    			for (int j=0; j < affix.size(); j++) {	
     				String fileName = affixFileNames.get(j);
     				String nameWithoutExt = getNameWithoutExtension(fileName);
     				String ext = getExtension(fileName);
-    				int fileSize = (int) affixs.get(j).length();
+    				int fileSize = (int) affix.get(j).length();
     				Long fileId = fileAttachManager.getSeq();
     				fileAttach = new FileAttach();
     				fileAttach.setFileid(fileId);
@@ -589,7 +587,7 @@ public class SsNoticeAction extends BaseStruts2Action implements Preparable,Mode
     				fileAttach.setFilesize(fileSize);
     				fileAttach.setNote("通知附件");
     				fileAttach.setRelationId(ssNotice.getNoticeid().toString());
-    				fileAttachManager.saveFile(affixs.get(j), fileAttach);
+    				fileAttachManager.saveFile(affix.get(j), fileAttach);
     			}
         	}
     		catch (Exception e) {
@@ -668,14 +666,14 @@ public class SsNoticeAction extends BaseStruts2Action implements Preparable,Mode
 				"yyyy-MM-dd HH:mm:ss");
 		String str_file_CREATETIME = format_file_CREATETIME.format(date);
 	
-			if (affixs != null) {
+			if (affix != null) {
 				int j = 0;
-				for (; j < affixs.size(); j++) {
-					if (affixs.get(j).length() <= 0) {
+				for (; j < affix.size(); j++) {
+					if (affix.get(j).length() <= 0) {
 						request.setAttribute("message", "上传的文件不能为空！");
 						continue; 
 					}
-					if (maxSize > 0 && affixs.get(j).length() > maxSize) {
+					if (maxSize > 0 && affix.get(j).length() > maxSize) {
 						request.setAttribute("message", "上传的单个文件不能超过" + maxSize/1024/1024
 								+ "M！");
 						return UPDATEPHOTOERROR; 
@@ -714,13 +712,13 @@ public class SsNoticeAction extends BaseStruts2Action implements Preparable,Mode
     					ssNoticeAttendManager.save(ssNoticeAttend);
                     }
         }
-        if (affixs != null) {
+        if (affix != null) {
         	try {
-    			for (int j=0; j < affixs.size(); j++) {	
+    			for (int j=0; j < affix.size(); j++) {	
     				String fileName = affixFileNames.get(j);
     				String nameWithoutExt = getNameWithoutExtension(fileName);
     				String ext = getExtension(fileName);
-    				int fileSize = (int) affixs.get(j).length();
+    				int fileSize = (int) affix.get(j).length();
     				Long fileId = fileAttachManager.getSeq();
     				fileAttach = new FileAttach();
     				fileAttach.setFileid(fileId);
@@ -736,7 +734,7 @@ public class SsNoticeAction extends BaseStruts2Action implements Preparable,Mode
     				fileAttach.setFilesize(fileSize);
     				fileAttach.setNote("通知附件");
     				fileAttach.setRelationId(ssNotice.getNoticeid().toString());
-    				fileAttachManager.saveFile(affixs.get(j), fileAttach);
+    				fileAttachManager.saveFile(affix.get(j), fileAttach);
     			}
         	}
     		catch (Exception e) {
@@ -796,12 +794,12 @@ public class SsNoticeAction extends BaseStruts2Action implements Preparable,Mode
 			sqlWhere = " and FILEGROUP = 'SS_NOTICE_FILE' and   relation_id in ( select NOTICEID  from SS_NOTICE  where SENDUNITID = '"+deptid+"' ) ";
 		}
 		
-		if (affixs != null) {
+		if (affix != null) {
 			int j = 0;
-			for (; j < affixs.size(); j++) {
+			for (; j < affix.size(); j++) {
 				HttpServletResponse response = ServletActionContext.getResponse();
 				response.setContentType("text/html;charset=GBK");
-				if (maxSize > 0 && affixs.get(j).length() > maxSize) {
+				if (maxSize > 0 && affix.get(j).length() > maxSize) {
 					
 					try {
 						response.setContentType("text/html;charset=GBK");
@@ -815,8 +813,8 @@ public class SsNoticeAction extends BaseStruts2Action implements Preparable,Mode
 					String nameWithoutExt = getNameWithoutExtension(fileName);
 					String ext = getExtension(fileName);
 					String ContentType = affixContentTypes.get(j);
-					long fileSize = affixs.get(j).length();
-					fileAttachManager.updateFile(affixs.get(j), fileName,
+					long fileSize = affix.get(j).length();
+					fileAttachManager.updateFile(affix.get(j), fileName,
 							ContentType, fileSize, ext, FILEID, sqlWhere);
 					
 					try {

@@ -4,6 +4,7 @@ package com.dyneinfo.zazh.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javacommon.base.BaseSpringJdbcDao;
 
@@ -75,10 +76,13 @@ public class AsecurityMenuDao extends BaseSpringJdbcDao<AsecurityMenu,java.math.
 	
 	
 	 public List findUserByLoginid(String userid) {
-			String sql = "select distinct c.menuLevel,c.displayorder as the_sort,c.menuid as id,c.isLeaf,c.parentid as parent_id,c.menuname as name,c.menuurl as url,c.menulabel as qtip,c.imagepath as image, c.businesscode as businesscode "
+			String sql = "select distinct c.menuLevel,c.displayorder as the_sort,c.menuid as id,c.isLeaf,c.parentid as parent_id,c.menuname as name,decode((select count(1) from t_urllocatemap a where a.menuid=c.menuid and a.status='1'), '0',c.menuurl, 'generalMap.jsp?url=' || c.menuurl) as url,c.menulabel as qtip,c.imagepath as image, c.businesscode as businesscode "
 				+ "   from SS_GROUP_USER a, SS_ROLE_MENU b, SS_menu c, ss_user d ,ss_group g,ss_role_group gr ,ss_role r "
 				+ "  where gr.roleid = b.ROLEID and b.MENUID = c.menuid and a.groupid= g.groupid and g.groupid = gr.groupid  and a.userid= d.userid and d.username = :usname order by c.businesscode, c.menuLevel, c.displayorder";
 
+//			String sql = "select distinct c.menuLevel,c.displayorder as the_sort,c.menuid as id,c.isLeaf,c.parentid as parent_id,c.menuname as name,c.menuurl as url,c.menulabel as qtip,c.imagepath as image, c.businesscode as businesscode "
+//				+ "   from SS_GROUP_USER a, SS_ROLE_MENU b, SS_menu c, ss_user d ,ss_group g,ss_role_group gr ,ss_role r "
+//				+ "  where gr.roleid = b.ROLEID and b.MENUID = c.menuid and a.groupid= g.groupid and g.groupid = gr.groupid  and a.userid= d.userid and d.username = :usname order by c.businesscode, c.menuLevel, c.displayorder";
 	       HashMap   salaryMap = new HashMap();
 	        salaryMap.put("usname",userid);
 	      
@@ -120,7 +124,7 @@ public class AsecurityMenuDao extends BaseSpringJdbcDao<AsecurityMenu,java.math.
 				+ "/~ order by #sortColumns# ~/";
 		return pageQuery(sql,pageRequest);
 	}
-	
+
 public List getUserMenusList(String userName) {
 		
 		//System.out.println(sql);
@@ -182,6 +186,24 @@ public List getUserMenusList(String userName) {
 
 		return topMenus;
 	}
-	
 
+	public List getQuery(String sql) {
+	    return getSimpleJdbcTemplate().queryForList(sql);
+	}
+	
+/**
+ * 描述：查询数据权限开关状态
+ * 作者：刘涛
+ * 日期： 2014-11-3
+ * @return Y-数据权限开关打开/N-数据权限开关打开
+ */
+public String queryDataAuthoritySwitchStatus(){  
+	List list = getJdbcTemplate().queryForList("select code from t_config where key='dataAuthoritySwitch'");
+	if(list.size()>0){
+		return ((Map)(list.get(0))).get("code").toString();
+	}else{
+		return "";
+	}
+	
+}
 }

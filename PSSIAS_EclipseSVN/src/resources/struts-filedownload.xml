@@ -48,6 +48,21 @@
         		<param name="bufferSize">4096</param>
         	</result>
         </action>
+        <action name="downloadDBTZ"
+        	class="com.dyneinfo.zazh.action.FileDownloadDBTZAction">
+        	<!--     <param name="inputPath">/download/aaa.txt</param> -->
+        	<!-- 初始文件名    <param name="fileName">aaa.txt</param>-->
+        	<result name="success" type="stream">
+        		<param name="contentType">${contentTypeName}</param>
+        		<param name="inputName">inputStream</param>
+        		<!-- 使用经过转码的文件名作为下载文件名，downloadFileName属性    
+        			对应action类中的方法 getDownloadFileName() -->
+        		<param name="contentDisposition">
+        			attachment;filename="${downloadFileName}"
+        		</param>
+        		<param name="bufferSize">4096</param>
+        	</result>
+        </action>
         <action name="jxyDownloadDB"
         	class="com.dyneinfo.jxy.action.FileDownloadDBAction">
         	<!--     <param name="inputPath">/download/aaa.txt</param> -->
@@ -63,6 +78,23 @@
         		<param name="bufferSize">4096</param>
         	</result>
         </action>
+        
+                <action name="pmdddownloadDB"
+        	class="com.dyneinfo.pmdd.action.FileDownloadDBAction">
+        	<!--     <param name="inputPath">/download/aaa.txt</param> -->
+        	<!-- 初始文件名    <param name="fileName">aaa.txt</param>-->
+        	<result name="success" type="stream">
+        		<param name="contentType">${contentTypeName}</param>
+        		<param name="inputName">inputStream</param>
+        		<!-- 使用经过转码的文件名作为下载文件名，downloadFileName属性    
+        			对应action类中的方法 getDownloadFileName() -->
+        		<param name="contentDisposition">
+        			attachment;filename="${downloadFileName}"
+        		</param>
+        		<param name="bufferSize">4096</param>
+        	</result>
+        </action>
+        
         <action name="downloadHelp" class="com.dyneinfo.zazh.action.FileDownloadAction">
             <param name="inputPath">/userFiles/download/help.zip</param>
 			<result name="success" type="stream">

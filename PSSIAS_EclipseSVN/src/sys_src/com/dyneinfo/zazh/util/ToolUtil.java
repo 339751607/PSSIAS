@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import sun.net.www.content.audio.x_aiff;
+
 import cn.org.rapid_framework.page.Page;
 import cn.org.rapid_framework.page.PageRequest;
 
@@ -249,5 +251,27 @@ public class ToolUtil {
 		}
 		
 		return rowSB.toString();
+	}
+	
+	public static String getSelect(List<Map> list,String valueKey,String textKey,String selectId,String selectName,String className,String selectedValue){
+		StringBuffer sb=new StringBuffer();
+		sb.append("<select id='"+selectId+"' name='"+selectName+"' class='"+className+"'>");
+		sb.append("<option value=''>请选择...</option>");
+		
+		for(int i=0;i<list.size();i++){
+			Map map=list.get(i);
+            String str="";
+			if(selectedValue.equals(map.get(valueKey))){
+				str="  selected='selected' ";
+			}
+			sb.append("<option value='"+map.get(valueKey)+"' "+str+">"+map.get(textKey)+"</option>");
+			
+		}
+
+		
+		sb.append("</select>");
+		
+		return sb.toString();
+		
 	}
 }

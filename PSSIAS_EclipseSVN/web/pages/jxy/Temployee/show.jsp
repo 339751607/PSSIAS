@@ -18,7 +18,7 @@ String  picCount ="";
 <body>
 <%@ include file="/commons/messages.jsp" %>
 
-<s:form action="/jxy/Temployee/list.do" method="get" theme="simple">
+<s:form action="/pages/jxy/Temployee/list.do" method="get" theme="simple">
 	<s:hidden name="cpempcode" id="cpempcode" value="%{model.cpempcode}"/>
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
@@ -35,7 +35,7 @@ String  picCount ="";
 		                  </td>
                          	<td rowspan="12" width="18%" align="center" >
 						<img
-							src='${ctx}/jxy/Temployee/showPic.do?cpempcode=<s:property value="%{model.cpempcode}" />&cpcode=${model.cpcode}'
+							src='${ctx}/pages/jxy/Temployee/showPic.do?cpempcode=<s:property value="%{model.cpempcode}" />&cpcode=${model.cpcode}'
 							onerror="this.src='${ctx}/images/spacer.gif'" height="150" alt=""
 							width="140" border="0" name="photo">
 					</td>
@@ -188,7 +188,7 @@ String  picCount ="";
 		          
                    <tr>
 						  <td colspan="5" class="tb_bottom">
-						           <input type="button" value="返回" onclick="window.location='${ctx}/jxy/Temployee/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+						           <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/Temployee/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 	                      </td>
 	               </tr>
 	</table>	

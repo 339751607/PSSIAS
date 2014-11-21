@@ -62,7 +62,7 @@
 		                  </td>
 			              <td>
 		                          
-		                 			<mytag:select property="%{model.ptype}" name="ptype" notEmpty="false" styleClass="required validate-selection" dictName="Diccon_cf"></mytag:select>
+		                 			<mytag:select  property="%{model.ptype}" name="ptype" notEmpty="false" styleClass="required validate-selection" dictName="Diccon_cf"></mytag:select>
 		                  </td>
                    </tr>
 		           <tr class="crosscolor_tr">

@@ -13,7 +13,7 @@ String FILEID = request.getParameter("FILEID");
 	<title>文件</title>
 </head>
 <body >	
-<form id="editForm" name="editForm"  action="${ctx}/jxy/FileAttach/editFile.do" enctype="multipart/form-data" action="" method="post">
+<form id="editForm" name="editForm"  action="${ctx}/pages/jxy/FileAttach/editFile.do" enctype="multipart/form-data" action="" method="post">
 <table cellspacing="0" cellpadding="0" border="0" width="100%" class="pg_add">
 	<input type="hidden" name="FILEID" value="<%=FILEID%>" />
 			<tr class="crosscolor_tr">
@@ -42,7 +42,7 @@ function SendFile()
 	   alert('请选取上传的文件！');
 	   return false;
 	}
-	document.editForm.action="${ctx}/jxy/FileAttach/editFile.do?FILEID="+FILEID;
+	document.editForm.action="${ctx}/pages/jxy/FileAttach/editFile.do?FILEID="+FILEID;
 	document.editForm.submit() ;
 }
 

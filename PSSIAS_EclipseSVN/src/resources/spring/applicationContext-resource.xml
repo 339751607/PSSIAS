@@ -59,6 +59,7 @@
 			<aop:before method="setHotelDataSource" pointcut="execution(* com.dyneinfo.hotel.dao.*Dao.*(..))" />
 			<aop:before method="setHotelDataSource" pointcut="execution(* com.dyneinfo.hotel.action.*Action.*(..))" />
 			<aop:before method="setPmddDataSource" pointcut="execution(* com.dyneinfo.pmdd.dao.*Dao.*(..))" />
+			<aop:before method="setZdmwDataSource" pointcut="execution(* com.dyneinfo.zdmw.dao.*Dao.*(..))"/>
 			
 			<aop:before method="setZazhDataSource" pointcut="execution(* com.dyneinfo.zazh.action.*Action.*(..))" />
 			<aop:before method="setGasDataSource" pointcut="execution(* com.dyneinfo.gas.action.*Action.*(..))" />
@@ -67,7 +68,8 @@
 			<aop:before method="setYlcsDataSource" pointcut="execution(* com.dyneinfo.ylcs.action.*Action.*(..))" />
 			<aop:before method="setHotelDataSource" pointcut="execution(* com.dyneinfo.hotel.action.*Action.*(..))" />
 			<aop:before method="setPmddDataSource" pointcut="execution(* com.dyneinfo.pmdd.action.*Action.*(..))" />
-
+			<aop:before method="setZdmwDataSource" pointcut="execution(* com.dyneinfo.zdmw.action.*Action.*(..))" />
+			
 			<aop:before method="setZazhDataSource" pointcut="execution(* org.security.userdetails.jdbc.MySecurityJdbcDaoImpl.*(..))" />
 			<aop:before method="setZazhDataSource" pointcut="execution(* org.springframework.security.ui.AbstractProcessingFilter.*(..))" />
 		</aop:aspect>

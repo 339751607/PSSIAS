@@ -50,5 +50,10 @@ public class BeforeAdvice {
 	public void setHotelDataSource() {
 		DBContextHolder.setDBType("hotel");
 	}
-
+	/**
+	 * 重点门卫数据源
+	 * **/
+	public void setZdmwDataSource(){
+		DBContextHolder.setDBType("zdmw");
+	}
 }

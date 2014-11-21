@@ -18,9 +18,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
  
-<s:form action="/jxy/Tcpinfo/saveiscode.do" theme="simple" name="inputForm"   method="post">
+<s:form action="/pages/jxy/Tcpinfo/saveiscode.do" theme="simple" name="inputForm"   method="post">
 	<table cellpadding="0" cellspacing="0" border="0" class="tb_all">
-	    <input type="hidden" name="returnUrl" value="!/jxy/Tcpinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
+	    <input type="hidden" name="returnUrl" value="!/pages/jxy/Tcpinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>" />
 	    <input type="hidden" name="cptype" id="cptype" value="E02"/>
 	       <tr>
 				<td colspan="4" class="tb_title"> 
@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td colspan="4" class="tb_bottom">
 				<input id="cp" name="cp" type="hidden" value="${cpcode}">
 							<input id="submitButton" name="submitButton" type="submit" value="保存" />
-	                        <input type="button" value="返回" onclick="window.location='${ctx}/jxy/Tcpinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+	                        <input type="button" value="返回" onclick="window.location='${ctx}/pages/jxy/Tcpinfo/list.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
 			    </td>
 	        </tr>
 	</table>

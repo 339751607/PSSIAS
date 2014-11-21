@@ -1,6 +1,9 @@
 <%@page import="com.dyneinfo.hotel.model.*" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/commons/taglibs.jsp" %>
+<%@ include file="/pages/hotel/commons/getHotelName.jsp" %>
+<%@ include file="/pages/hotel/commons/dept.jsp" %>
+<%@ include file="/pages/hotel/commons/xzqh.jsp" %>
 <%
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
 %>
@@ -9,373 +12,128 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 	<%@ include file="/commons/meta.jsp" %>
 	<base href="<%=basePath%>">
-	<title><%=TchAlarminfor.TABLE_ALIAS%>查询</title>
+	<link href="${ctx}/widgets/extremecomponents/extremecomponents.css" type="text/css" rel=stylesheet>
+	<title><%=TchAlarminfor.TABLE_ALIAS%> 维护</title>
+<script type="text/javascript">
+
+
+	function loadSelect(){
+		queryCity();
+		queryCity2();
+	}
+</script>	
 </head>
 
-<body>
+<body onload="loadSelect()" >
 <%@ include file="/commons/messages.jsp" %>
+
 <div class="queryPanel">
-    <s:form action="/pages/hotel/TchAlarminfor/list.do"  theme="simple" style="display: inline;" method="post">
+    <s:form action="/pages/hotel/TchAlarminfor/list.do"  theme="simple" style="display: inline;" method="post" name="form1">
 	    <table cellpadding="0" cellspacing="0" border="0" class="tb_all">
 	               <tr>
 			              <td class="tb_title" colspan="4"><%=TchAlarminfor.TABLE_ALIAS%>查询</td>
 		           </tr>
 		           <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_XH%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.xh}"  name="s_xh"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_SFZH%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.sfzh}"  name="s_sfzh"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_XM%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.xm}"  name="s_xm"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_HM1%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.hm1}"  name="s_hm1"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_HM2%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.hm2}"  name="s_hm2"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_XB%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.xb}"  name="s_xb"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_NL%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.nl}"  name="s_nl"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_JG%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.jg}"  name="s_jg"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_HJD%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.hjd}"  name="s_hjd"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_ZZ%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.zz}"  name="s_zz"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_SG%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.sg}"  name="s_sg"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_TX%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.tx}"  name="s_tx"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_TSTZ%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.tstz}"  name="s_tstz"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_AB%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.ab}"  name="s_ab"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_LADW%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.ladw}"  name="s_ladw"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_LASJ%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.lasj}"  name="s_lasj"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_JYAQ%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.jyaq}"  name="s_jyaq"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_TBDW%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.tbdw}"  name="s_tbdw"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
 			                      <%=TchAlarminfor.ALIAS_NAME%>
 		                  </td>
-			              <td>
+			              <td class="crosscolor_td2">
 		                           <input value="${pageRequest.filters.name}"  name="s_name"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_ID_NAME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.idName}"  name="s_idName"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_ID_CODE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.idCode}"  name="s_idCode"  />
 		                  </td>
                           <td class="crosscolor_td">
 			                      <%=TchAlarminfor.ALIAS_SEX%>
 		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.sex}"  name="s_sex"  />
+			              <td class="crosscolor_td2">
+		                            <mytag:select  name="s_sex" value="${pageRequest.filters.sex}"  notEmpty="false"  dictName="T_DIC_SEX"/>
+		                  </td>		                  
+                          
+                   </tr>
+		           <tr class="crosscolor_tr">
+		           		  <td class="crosscolor_td">
+			                      <%=TchAlarminfor.ALIAS_ID_NAME%>
 		                  </td>
+			              <td class="crosscolor_td2">
+		                           <mytag:select name="s_idName" value="${pageRequest.filters.idName}" notEmpty="false"  dictName="T_ID_NAME"/>
+		                  </td>
+                          <td class="crosscolor_td">
+			                      <%=TchAlarminfor.ALIAS_ID_CODE%>
+		                  </td>
+			              <td class="crosscolor_td2">
+		                           <input value="${pageRequest.filters.idCode}"  name="s_idCode"  />
+		                  </td>
+
                    </tr>
 		           <tr class="crosscolor_tr">
                           <td class="crosscolor_td">
 			                      <%=TchAlarminfor.ALIAS_NATION%>
 		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.nation}"  name="s_nation"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_BDATE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.bdate}"  name="s_bdate"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_ADDRESS%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.address}"  name="s_address"  />
+			              <td class="crosscolor_td2">
+		                            <mytag:select name="s_nation" value="${pageRequest.filters.nation}" notEmpty="false"  dictName="DIC_ITEM_HOTEL_NATION"/>
 		                  </td>
                           <td class="crosscolor_td">
 			                      <%=TchAlarminfor.ALIAS_XZQH%>
+		                  </td>	           
+		                  <td>
+						           <mytag:select onchange="changeprov();" name="s_province" value="${pageRequest.filters.province}" notEmpty="false"  dictName="T_DICT_PROV"/>
+							      <select name="s_xzqh" value="${pageRequest.filters.xzqh}" />
+						          
+		                  </td>			                  
+                   </tr>
+ 					<tr class="crosscolor_tr">
+	           
+                          <td class="crosscolor_td">
+			                      <%=TchAlarminfor.ALIAS_BUR_CODE%>
 		                  </td>
 			              <td>
-		                           <input value="${pageRequest.filters.xzqh}"  name="s_xzqh"  />
+			              		<mytag:select  name="s_burCode" onchange="cleanHotelName();changeprov2();" value="${pageRequest.filters.burCode}" dictName="ssfj"/>
+		                  </td>	
+                          <td class="crosscolor_td">
+			                      <%=TchAlarminfor.ALIAS_STA_CODE%>
+		                  </td>
+			              <td>
+			              			<select onchange="cleanHotelName();" name="s_staCode"  value="${pageRequest.filters.staCode}"  >
+			              			</select>
 		                  </td>
                    </tr>
 		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_NO_ROOM%>
+		           			<td class="crosscolor_td">
+			                      <%=TchAlarminfor.ALIAS_HOTELNAME%>
 		                  </td>
 			              <td>
-		                           <input value="${pageRequest.filters.noRoom}"  name="s_noRoom"  />
+		                           <input size="25" onclick="Click();" onkeyup="getHotelNameByName()" value="${pageRequest.filters.hotelname}"  name="s_hotelname"  />
 		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_IN_TIME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.inTime}"  name="s_inTime"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_FTIME%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.ftime}"  name="s_ftime"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_ALARM%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.alarm}"  name="s_alarm"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_TYPE%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.type}"  name="s_type"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_BKLX%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.bklx}"  name="s_bklx"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_ALARMTJ%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.alarmtj}"  name="s_alarmtj"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_ZHSJ%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.zhsj}"  name="s_zhsj"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_PJDW%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.pjdw}"  name="s_pjdw"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_CLQK%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.clqk}"  name="s_clqk"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
+		                  <div id="search_suggest" style="position:absolute;z-index:1;margin-top:4px;padding-top:20px;"></div>
                           <td class="crosscolor_td">
 			                      <%=TchAlarminfor.ALIAS_PJSJ%>
 		                  </td>
+			              <td class="crosscolor_td2">
+			              <table class="list">
+			               <tr>
 			              <td>
-		                           <input value="${pageRequest.filters.pjsj}"  name="s_pjsj"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_BKID%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.bkid}"  name="s_bkid"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_BKTEL%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.bktel}"  name="s_bktel"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_AUDIT_MARK%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.auditMark}"  name="s_auditMark"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_BKSJ%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.bksj}"  name="s_bksj"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_CZR%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.czr}"  name="s_czr"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_EMPFLAG%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.empflag}"  name="s_empflag"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_SFYX%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.sfyx}"  name="s_sfyx"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_WXYY%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.wxyy}"  name="s_wxyy"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_SFYZH%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.sfyzh}"  name="s_sfyzh"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_ZHDWMC%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.zhdwmc}"  name="s_zhdwmc"  />
-		                  </td>
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_WZHYY%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.wzhyy}"  name="s_wzhyy"  />
-		                  </td>
-                   </tr>
-		           <tr class="crosscolor_tr">
-                          <td class="crosscolor_td">
-			                      <%=TchAlarminfor.ALIAS_CJR%>
-		                  </td>
-			              <td>
-		                           <input value="${pageRequest.filters.cjr}"  name="s_cjr"  />
-		                  </td>
-                          <td>&nbsp;</td>
-                          <td>&nbsp;</td>
-                   </tr>
+				                   <s:select name="dateSelect1" list="dateSelectMap"  onchange="dateselect(this,'s_pjsj_Begin','s_pjsj_End','yyyy-MM-dd HH:mm');"  value="#request.dateSelect1" listKey="key"   listValue="value" theme="simple" label=""  emptyOption="false" ></s:select>
+			               </td>
+			               <td>从</td>
+			               <td>
+			                          <input id="d31310" name="s_pjsj_Begin"  value="${pageRequest.filters.pjsj_Begin}"   maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({startDate:'%y-%M-%d 00:00',dateFmt:'yyyy-MM-dd HH:mm',maxDate:'#F{$dp.$D(\'d31410\')}'})"/>
+			               <td>到</td>
+			               <td>
+			                        <input id="d31410" name="s_pjsj_End"   value="${pageRequest.filters.pjsj_End}"  maxlength="0" size="15" class="Wdate" type="text" onFocus="WdatePicker({startDate:'%y-%M-%d 23:59',dateFmt:'yyyy-MM-dd HH:mm',minDate:'#F{$dp.$D(\'d31310\')}'})"/>
+			               </td>
+			              </tr>
+			              </table>
+		                  </td>			                           
+                   </tr>                      
 		           <tr>
 			              <td class="tb_bottom" colspan="4">
 			                       <input type="submit"  value="查询" onclick="getReferenceForm(this).action='${ctx}/pages/hotel/TchAlarminfor/list.do'"/>
-	                               <input type="submit"  value="新增" onclick="getReferenceForm(this).action='${ctx}/pages/hotel/TchAlarminfor/create.do?<mytag:params includes="ec*,s*" type="queryStringUtf"/>'"/>
+	                               <input style="margin-left: 20px" type="button" value="重置" onclick="resitData(document.forms.form1)"/>
 			              </td>
 		           </tr>
 	    </table>
     </s:form>
 </div>
-			
+
+
 </body>
 
 </html>
